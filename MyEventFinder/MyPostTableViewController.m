@@ -112,7 +112,7 @@
     }
     
     cell.lNameOfEvent.text = event.nameOfEvent;
-    cell.imageOfEvent.image = [UIImage imageWithData:event.imageData];
+    cell.imageOfEvent.image = [UIImage imageWithData:event.imageOfEvent];
     cell.lTimeOfEvent.text = event.timeOfEvent;
     cell.lLocationOfEvent.text = event.locationOfEvent;
     cell.lDateOfEvent.text = event.dateOfEvent;

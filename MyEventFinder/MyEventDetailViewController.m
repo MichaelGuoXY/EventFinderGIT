@@ -35,7 +35,7 @@
     self.dateOfEvent.text = self.event.dateOfEvent;
     self.locationOfEvent.text = self.event.locationOfEvent;
     self.infoOfEvent.text = self.event.introOfEvent;
-    self.imageOfEvent.image = [UIImage imageWithData:self.event.imageData];
+    self.imageOfEvent.image = [UIImage imageWithData:self.event.imageOfEvent];
     self.imageOfPoster.image = [UIImage imageWithData:self.event.imageOfPoster];
     self.imageOfPoster.clipsToBounds = YES;
     self.imageOfPoster.layer.cornerRadius = 27;

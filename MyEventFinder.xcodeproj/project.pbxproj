@@ -53,6 +53,7 @@
 		E08F844B1BD307C9007AC39C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84451BD307C9007AC39C /* settings.png */; settings = {ASSET_TAGS = (); }; };
 		E08F844C1BD307C9007AC39C /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84461BD307C9007AC39C /* calendar.png */; settings = {ASSET_TAGS = (); }; };
 		E0C258731BCB5A8D00CFF08A /* MyNewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C258721BCB5A8D00CFF08A /* MyNewPostViewController.m */; settings = {ASSET_TAGS = (); }; };
+		E0C4AE9C1BDC995800281FA8 /* MyDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */; settings = {ASSET_TAGS = (); }; };
 		E0CCB1391BCC879B0051E303 /* MySearchTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CCB1381BCC879B0051E303 /* MySearchTableTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E0CCB13C1BCC8AD10051E303 /* MyEventInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CCB13B1BCC8AD10051E303 /* MyEventInfo.m */; settings = {ASSET_TAGS = (); }; };
 		E0CCB1451BCC8BB80051E303 /* MyEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CCB1441BCC8BB80051E303 /* MyEventTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -126,6 +127,8 @@
 		E08F84461BD307C9007AC39C /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		E0C258711BCB5A8D00CFF08A /* MyNewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNewPostViewController.h; sourceTree = "<group>"; };
 		E0C258721BCB5A8D00CFF08A /* MyNewPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNewPostViewController.m; sourceTree = "<group>"; };
+		E0C4AE9A1BDC995800281FA8 /* MyDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDataManager.h; sourceTree = "<group>"; };
+		E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDataManager.m; sourceTree = "<group>"; };
 		E0CCB1371BCC879B0051E303 /* MySearchTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySearchTableTableViewController.h; sourceTree = "<group>"; };
 		E0CCB1381BCC879B0051E303 /* MySearchTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySearchTableTableViewController.m; sourceTree = "<group>"; };
 		E0CCB13A1BCC8AD10051E303 /* MyEventInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventInfo.h; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 		E06659321BCA351300DA92A4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E0C4AE9A1BDC995800281FA8 /* MyDataManager.h */,
+				E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */,
 				E02062B81BD1018A00B1325B /* UIViewController+RESideMenu.h */,
 				E02062B91BD1018A00B1325B /* UIViewController+RESideMenu.m */,
 				E076AD181BD4C364006A1D07 /* HideAndShowTabbarFunction.h */,
@@ -454,6 +459,7 @@
 				E0D8C2071BD0452500BEDA42 /* MySearchViewController.m in Sources */,
 				E071CF2F1BD6EAD500163839 /* MyPostTableViewController.m in Sources */,
 				E066594F1BCA398E00DA92A4 /* MyMapViewController.m in Sources */,
+				E0C4AE9C1BDC995800281FA8 /* MyDataManager.m in Sources */,
 				E0CECB511BCA5485000E28C4 /* MyProfileViewController.m in Sources */,
 				E007214E1BD2CCE8005E2668 /* MyLeftMenuViewController.m in Sources */,
 				E071CF2C1BD6E4C400163839 /* MyPostTableViewCell.m in Sources */,

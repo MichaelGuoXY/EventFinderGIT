@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MyTabbarRootViewController.h"
 #import "MyEventInfo.h"
+#import "MyDataManager.h"
 
 @interface ViewController ()
 
@@ -38,8 +39,7 @@
     event1.nameOfEvent = @"Go Big Red";
     event1.timeOfEvent = @"12:00PM";
     event1.dateOfEvent = @"11/20/2015";
-    event1.imageOfEvent = @"bigRed.jpg";
-    event1.imageData = UIImageJPEGRepresentation([UIImage imageNamed:event1.imageOfEvent],0.5);
+    event1.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],0.5);
     event1.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
     event1.locationOfEvent = @"Gates Play Ground";
     event1.posterOfEvent = @"Xiaoyu Guo";
@@ -48,8 +48,7 @@
     event2.nameOfEvent = @"Basketball Match";
     event2.timeOfEvent = @"10:00PM";
     event2.dateOfEvent = @"10/09/2015";
-    event2.imageOfEvent = @"basketball.jpg";
-    event2.imageData = UIImageJPEGRepresentation([UIImage imageNamed:event2.imageOfEvent],0.5);
+    event2.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"basketball.jpg"],0.5);
     event2.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
     event2.locationOfEvent = @"Starter Hall";
     event2.posterOfEvent = @"Yuxin Cao";
@@ -58,8 +57,7 @@
     event3.nameOfEvent = @"Football Game";
     event3.timeOfEvent = @"12:00PM";
     event3.dateOfEvent = @"11/20/2015";
-    event3.imageOfEvent = @"football.jpg";
-    event3.imageData = UIImageJPEGRepresentation([UIImage imageNamed:event3.imageOfEvent],0.5);
+    event3.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"football.jpg"],0.5);
     event3.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
     event3.locationOfEvent = @"Gates Play Ground";
     event3.posterOfEvent = @"Xiaoyu Guo";
@@ -68,8 +66,7 @@
     event4.nameOfEvent = @"Free Food";
     event4.timeOfEvent = @"12:00PM";
     event4.dateOfEvent = @"11/20/2015";
-    event4.imageOfEvent = @"freeFood.jpg";
-    event4.imageData = UIImageJPEGRepresentation([UIImage imageNamed:event4.imageOfEvent],0.5);
+    event4.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"freeFood.jpg"],0.5);
     event4.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
     event4.locationOfEvent = @"Gates Play Ground";
     event4.posterOfEvent = @"Xiaoyu Guo";
@@ -78,32 +75,37 @@
     event5.nameOfEvent = @"Voice of Cornell";
     event5.timeOfEvent = @"12:00PM";
     event5.dateOfEvent = @"11/20/2015";
-    event5.imageOfEvent = @"voiceOfCornell.jpg";
-    event5.imageData = UIImageJPEGRepresentation([UIImage imageNamed:event5.imageOfEvent],0.5);
+    event5.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"voiceOfCornell.jpg"],0.5);
     event5.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
     event5.locationOfEvent = @"Gates Play Ground";
     event5.posterOfEvent = @"Xiaoyu Guo";
     event5.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
     
-    mutableDataArray = [[NSMutableArray alloc] init];
-    [self saveEventArrayData:event1];
-    [self saveEventArrayData:event2];
-    [self saveEventArrayData:event3];
-    [self saveEventArrayData:event4];
-    [self saveEventArrayData:event5];
+//    mutableDataArray = [[NSMutableArray alloc] init];
+//    [self saveEventArrayData:event1];
+//    [self saveEventArrayData:event2];
+//    [self saveEventArrayData:event3];
+//    [self saveEventArrayData:event4];
+//    [self saveEventArrayData:event5];
+    
+    [MyDataManager saveEvent:event1];
+    [MyDataManager saveEvent:event2];
+    [MyDataManager saveEvent:event3];
+    [MyDataManager saveEvent:event4];
+    [MyDataManager saveEvent:event5];
 }
 
-- (void)saveEventArrayData:(MyEventInfo *)eventObject {
-    
-    [mutableDataArray addObject:eventObject];
-    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:mutableDataArray.count];
-    for (MyEventInfo *eventObject in mutableDataArray) {
-        NSData *eventEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:eventObject];
-        [archiveArray addObject:eventEncodedObject];
-    }
-    
-    [self.usrDefault setObject:archiveArray forKey:@"eventDataArray"];
-}
+//- (void)saveEventArrayData:(MyEventInfo *)eventObject {
+//    
+//    [mutableDataArray addObject:eventObject];
+//    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:mutableDataArray.count];
+//    for (MyEventInfo *eventObject in mutableDataArray) {
+//        NSData *eventEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:eventObject];
+//        [archiveArray addObject:eventEncodedObject];
+//    }
+//    
+//    [self.usrDefault setObject:archiveArray forKey:@"eventDataArray"];
+//}
 
 - (IBAction)mySignInButtonPressed:(id)sender {
     NSString *usrname = self.myUsrnameTextField.text;
@@ -122,6 +124,11 @@
     [self.usrDefault setObject:passwprd forKey:@"Password"];
     NSData *usrDefaultProfileImage = [[NSData alloc] initWithData:UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"], 0.5)];
     [self.usrDefault setObject:usrDefaultProfileImage forKey:@"usrProfileImage"];
+//    NSInteger numberOfPost = 0;
+//    [self.usrDefault setObject:numberOfPost forKey:@"numberOfPost"];
+//    NSInteger numberOfAttendance = 0;
+//    [self.usrDefault setObject:numberOfAttendance forKey:@"numberOfAttendance"];
+    
     NSLog([self.usrDefault objectForKey:@"Usrname"]);
     NSLog([self.usrDefault objectForKey:@"Password"]);
 }

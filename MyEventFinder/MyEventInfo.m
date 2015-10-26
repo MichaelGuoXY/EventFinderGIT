@@ -14,10 +14,9 @@
 @synthesize timeOfEvent;
 @synthesize dateOfEvent;
 @synthesize locationOfEvent;
-@synthesize imageOfEvent;
 @synthesize introOfEvent;
 @synthesize posterOfEvent;
-@synthesize imageData;
+@synthesize imageOfEvent;
 @synthesize imageOfPoster;
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -26,10 +25,9 @@
         self.timeOfEvent = [decoder decodeObjectForKey:@"timeOfEvent"];
         self.dateOfEvent = [decoder decodeObjectForKey:@"dateOfEvent"];
         self.locationOfEvent = [decoder decodeObjectForKey:@"locationOfEvent"];
-        self.imageOfEvent = [decoder decodeObjectForKey:@"imageOfEvent"];
         self.introOfEvent = [decoder decodeObjectForKey:@"introOfEvent"];
         self.posterOfEvent = [decoder decodeObjectForKey:@"posterOfEvent"];
-        self.imageData = [decoder decodeObjectForKey:@"imageData"];
+        self.imageOfEvent = [decoder decodeObjectForKey:@"imageOfEvent"];
         self.imageOfPoster = [decoder decodeObjectForKey:@"imageOfPoster"];
     }
     return self;
@@ -40,12 +38,10 @@
     [encoder encodeObject:timeOfEvent forKey:@"timeOfEvent"];
     [encoder encodeObject:dateOfEvent forKey:@"dateOfEvent"];
     [encoder encodeObject:locationOfEvent forKey:@"locationOfEvent"];
-    [encoder encodeObject:imageOfEvent forKey:@"imageOfEvent"];
     [encoder encodeObject:introOfEvent forKey:@"introOfEvent"];
     [encoder encodeObject:posterOfEvent forKey:@"posterOfEvent"];
-    [encoder encodeObject:imageData forKey:@"imageData"];
+    [encoder encodeObject:imageOfEvent forKey:@"imageOfEvent"];
     [encoder encodeObject:imageOfPoster forKey:@"imageOfPoster"];
 }
-
 
 @end

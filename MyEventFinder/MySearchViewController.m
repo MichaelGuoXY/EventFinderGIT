@@ -12,8 +12,11 @@
 #import "MyEventDetailViewController.h"
 #import "UIViewController+RESideMenu.h"
 #import "HideAndShowTabbarFunction.h"
+#import "MyDataManager.h"
 
-@interface MySearchViewController ()
+@interface MySearchViewController () {
+
+}
 
 @property NSUserDefaults *usrDefault;
 
@@ -46,9 +49,14 @@
     self.searchDisplayController.searchResultsTableView.dataSource = self;
 
     self.usrDefault = [NSUserDefaults standardUserDefaults];
-    events = [[NSMutableArray alloc] init];
-    [self extractEventArrayData];
     
+    NSString *notificationName = @"EventDataLoadNotification";
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(useNotificationWithString:)
+     name:notificationName
+     object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,8 +67,15 @@
 
 - (void)reloadView {
     NSLog(@"reloadView");
+//    [self extractEventArrayData];
     events = [[NSMutableArray alloc] init];
-    [self extractEventArrayData];
+    events = [MyDataManager fetchEvent];
+    [self.myTableView reloadData];
+}
+
+- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
+{
+    NSLog(@"useNotification");
     [self.myTableView reloadData];
 }
 
@@ -69,14 +84,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)extractEventArrayData {
-    NSArray *dataArray = [[NSArray alloc] initWithArray:[self.usrDefault objectForKey:@"eventDataArray"]];
-    
-    for (NSData *dataObject in dataArray) {
-        MyEventInfo *eventDecodedObject = [NSKeyedUnarchiver unarchiveObjectWithData:dataObject];
-        [events addObject:eventDecodedObject];
-    }
-}
+//- (void)extractEventArrayData {
+//    NSArray *dataArray = [[NSArray alloc] initWithArray:[self.usrDefault objectForKey:@"eventDataArray"]];
+//    
+//    for (NSData *dataObject in dataArray) {
+//        MyEventInfo *eventDecodedObject = [NSKeyedUnarchiver unarchiveObjectWithData:dataObject];
+//        [events addObject:eventDecodedObject];
+//    }
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (tableView == self.myTableView) {
@@ -134,7 +149,7 @@
     }
     
     cell.nameOfEvent.text = event.nameOfEvent;
-    cell.imageOfEvent.image = [UIImage imageWithData:event.imageData];
+    cell.imageOfEvent.image = [UIImage imageWithData:event.imageOfEvent];
     cell.timeOfEvent.text = event.timeOfEvent;
     cell.locationOfEvent.text = event.locationOfEvent;
     cell.imageOfPoster.image = [UIImage imageWithData:event.imageOfPoster];

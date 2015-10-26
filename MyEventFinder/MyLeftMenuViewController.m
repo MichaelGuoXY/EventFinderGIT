@@ -25,6 +25,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    usrDefault = [NSUserDefaults standardUserDefaults];
+    usrProfileImage = [[NSData alloc] init];
+    
     self.tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 38 * 7) / 2.0f, self.view.frame.size.width, 38 * 7) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
@@ -38,6 +41,7 @@
         tableView.scrollsToTop = NO;
         tableView;
     });
+    
     [self.view addSubview:self.tableView];
     
     profileViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -55,23 +59,24 @@
     labelOfMyPosts.text = @"Posts";
     labelOfMyPosts.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:labelOfMyPosts];
+    
     UILabel *LabelOfMyPostsNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, 160, 60, 20)];
-    int myPostsNumber = 10;
+    int myPostsNumber = [usrDefault objectForKey:@"numberOfPosts"];
     LabelOfMyPostsNumber.text = [[NSString alloc] initWithFormat:@"%d",myPostsNumber];
     LabelOfMyPostsNumber.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:LabelOfMyPostsNumber];
+    
     UILabel *labelOfMyAttendance = [[UILabel alloc] initWithFrame:CGRectMake(70, 140, 100, 20)];
     labelOfMyAttendance.text = @"Attendance";
     labelOfMyAttendance.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:labelOfMyAttendance];
+    
     UILabel *labelOfMyAttendanceNumber = [[UILabel alloc] initWithFrame:CGRectMake(70, 160, 100, 20)];
-    int myAttendanceNumber = 10;
+    int myAttendanceNumber = [usrDefault objectForKey:@"numberOfAttendance"];
     labelOfMyAttendanceNumber.text = [[NSString alloc] initWithFormat:@"%d",myAttendanceNumber];
     labelOfMyAttendanceNumber.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:labelOfMyAttendanceNumber];
     
-    usrDefault = [NSUserDefaults standardUserDefaults];
-    usrProfileImage = [[NSData alloc] init];
 }
 
 - (void)buttonDidPressed{

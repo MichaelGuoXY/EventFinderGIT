@@ -28,8 +28,7 @@
 @implementation MyNewPostViewController {
     NSMutableArray *events;
     HideAndShowTabbarFunction *hideAndShowTabbarFunc;
-    NSData *imageData;
-    NSString *imageOfEvent;
+    NSData *imageOfEvent;
 }
 
 - (void)viewDidLoad {
@@ -42,8 +41,7 @@
     NSLog(@"numberOfEvents : %lu",(unsigned long)events.count);
     // init hideAndSHowTabbarFunc
     hideAndShowTabbarFunc = [[HideAndShowTabbarFunction alloc] init];
-    imageData = [[NSData alloc] init];
-    imageOfEvent = [[NSString alloc] init];
+    imageOfEvent = [[NSData alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -60,11 +58,10 @@
     event.timeOfEvent = self.timeOfEvent.text;
     event.dateOfEvent = self.dateOfEvent.text;
     //event.imageOfEvent = imageOfEvent;
-    if (imageData.bytes == 0) {
-        imageOfEvent = @"usrDefault.jpg";
-        imageData = UIImageJPEGRepresentation([UIImage imageNamed:imageOfEvent],0.5);
+    if (imageOfEvent.bytes == 0) {
+        imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
     }
-    event.imageData = imageData;
+    event.imageOfEvent = imageOfEvent;
     event.imageOfPoster = [self.usrDefault objectForKey:@"usrProfileImage"];
     event.locationOfEvent = self.locationOfEvent.text;
     event.posterOfEvent = [self.usrDefault objectForKey:@"Usrname"];
@@ -142,8 +139,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    imageData = UIImageJPEGRepresentation(chosenImage,0.5);
-    self.imageOfEventSelected.image = [UIImage imageWithData:imageData];
+    imageOfEvent = UIImageJPEGRepresentation(chosenImage,0.5);
+    self.imageOfEventSelected.image = [UIImage imageWithData:imageOfEvent];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
