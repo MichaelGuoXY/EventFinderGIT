@@ -10,7 +10,7 @@
 
 @implementation HideAndShowTabbarFunction
 
-- (void)showTabBar:(UITabBarController*) tabbarController{
++ (void)showTabBar:(UITabBarController*) tabbarController{
     if (tabbarController.tabBar.hidden == NO)
     {
         return;
@@ -29,7 +29,7 @@
 }
 
 
-- (void)hideTabBar:(UITabBarController*) tabbarController {
++ (void)hideTabBar:(UITabBarController*) tabbarController {
     if (tabbarController.tabBar.hidden == YES) {
         return;
     }

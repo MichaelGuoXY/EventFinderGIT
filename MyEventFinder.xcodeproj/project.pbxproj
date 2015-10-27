@@ -16,6 +16,7 @@
 		E004AE341BD3F39200808546 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = E004AE331BD3F39200808546 /* logout.png */; settings = {ASSET_TAGS = (); }; };
 		E004AE361BD3F5F800808546 /* homebgd.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E004AE351BD3F5F800808546 /* homebgd.jpg */; settings = {ASSET_TAGS = (); }; };
 		E007214E1BD2CCE8005E2668 /* MyLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E007214D1BD2CCE8005E2668 /* MyLeftMenuViewController.m */; settings = {ASSET_TAGS = (); }; };
+		E01AD1851BDEB7F900D255EA /* MyUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E01AD1841BDEB7F900D255EA /* MyUserInfo.m */; settings = {ASSET_TAGS = (); }; };
 		E0204B371BCEEAE4007C0BCE /* bgd3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0204B361BCEEAE4007C0BCE /* bgd3.jpg */; settings = {ASSET_TAGS = (); }; };
 		E02062BA1BD1018A00B1325B /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E02062B51BD1018A00B1325B /* RECommonFunctions.m */; settings = {ASSET_TAGS = (); }; };
 		E02062BB1BD1018A00B1325B /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E02062B71BD1018A00B1325B /* RESideMenu.m */; settings = {ASSET_TAGS = (); }; };
@@ -52,6 +53,7 @@
 		E08F844A1BD307C9007AC39C /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84441BD307C9007AC39C /* profile.png */; settings = {ASSET_TAGS = (); }; };
 		E08F844B1BD307C9007AC39C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84451BD307C9007AC39C /* settings.png */; settings = {ASSET_TAGS = (); }; };
 		E08F844C1BD307C9007AC39C /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84461BD307C9007AC39C /* calendar.png */; settings = {ASSET_TAGS = (); }; };
+		E0BE362F1BDF4B6100491AD5 /* MyCheckString.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BE362E1BDF4B6100491AD5 /* MyCheckString.m */; settings = {ASSET_TAGS = (); }; };
 		E0C258731BCB5A8D00CFF08A /* MyNewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C258721BCB5A8D00CFF08A /* MyNewPostViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E0C4AE9C1BDC995800281FA8 /* MyDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */; settings = {ASSET_TAGS = (); }; };
 		E0CCB1391BCC879B0051E303 /* MySearchTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CCB1381BCC879B0051E303 /* MySearchTableTableViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -77,6 +79,8 @@
 		E004AE351BD3F5F800808546 /* homebgd.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homebgd.jpg; sourceTree = "<group>"; };
 		E007214C1BD2CCE8005E2668 /* MyLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLeftMenuViewController.h; sourceTree = "<group>"; };
 		E007214D1BD2CCE8005E2668 /* MyLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLeftMenuViewController.m; sourceTree = "<group>"; };
+		E01AD1831BDEB7F900D255EA /* MyUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUserInfo.h; sourceTree = "<group>"; };
+		E01AD1841BDEB7F900D255EA /* MyUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUserInfo.m; sourceTree = "<group>"; };
 		E0204B361BCEEAE4007C0BCE /* bgd3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bgd3.jpg; sourceTree = "<group>"; };
 		E02062B41BD1018A00B1325B /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		E02062B51BD1018A00B1325B /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 		E08F84441BD307C9007AC39C /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
 		E08F84451BD307C9007AC39C /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		E08F84461BD307C9007AC39C /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		E0BE362D1BDF4B6100491AD5 /* MyCheckString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCheckString.h; sourceTree = "<group>"; };
+		E0BE362E1BDF4B6100491AD5 /* MyCheckString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCheckString.m; sourceTree = "<group>"; };
 		E0C258711BCB5A8D00CFF08A /* MyNewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNewPostViewController.h; sourceTree = "<group>"; };
 		E0C258721BCB5A8D00CFF08A /* MyNewPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNewPostViewController.m; sourceTree = "<group>"; };
 		E0C4AE9A1BDC995800281FA8 /* MyDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDataManager.h; sourceTree = "<group>"; };
@@ -266,8 +272,12 @@
 		E06659321BCA351300DA92A4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E01AD1831BDEB7F900D255EA /* MyUserInfo.h */,
+				E01AD1841BDEB7F900D255EA /* MyUserInfo.m */,
 				E0C4AE9A1BDC995800281FA8 /* MyDataManager.h */,
 				E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */,
+				E0BE362D1BDF4B6100491AD5 /* MyCheckString.h */,
+				E0BE362E1BDF4B6100491AD5 /* MyCheckString.m */,
 				E02062B81BD1018A00B1325B /* UIViewController+RESideMenu.h */,
 				E02062B91BD1018A00B1325B /* UIViewController+RESideMenu.m */,
 				E076AD181BD4C364006A1D07 /* HideAndShowTabbarFunction.h */,
@@ -444,10 +454,12 @@
 			files = (
 				E0CCB13C1BCC8AD10051E303 /* MyEventInfo.m in Sources */,
 				E02062BA1BD1018A00B1325B /* RECommonFunctions.m in Sources */,
+				E01AD1851BDEB7F900D255EA /* MyUserInfo.m in Sources */,
 				E004AE2A1BD3EE4B00808546 /* HomeRootViewController.m in Sources */,
 				E0C258731BCB5A8D00CFF08A /* MyNewPostViewController.m in Sources */,
 				E02062BC1BD1018A00B1325B /* UIViewController+RESideMenu.m in Sources */,
 				E0CCB1451BCC8BB80051E303 /* MyEventTableViewCell.m in Sources */,
+				E0BE362F1BDF4B6100491AD5 /* MyCheckString.m in Sources */,
 				E0CCB1391BCC879B0051E303 /* MySearchTableTableViewController.m in Sources */,
 				E02062BB1BD1018A00B1325B /* RESideMenu.m in Sources */,
 				E066593A1BCA351300DA92A4 /* ViewController.m in Sources */,

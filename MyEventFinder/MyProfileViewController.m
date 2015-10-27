@@ -8,6 +8,8 @@
 
 #import "MyProfileViewController.h"
 #import "HideAndShowTabbarFunction.h"
+#import "MyDataManager.h"
+#import "MyUserInfo.h"
 
 @interface MyProfileViewController ()
 
@@ -17,12 +19,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *myRegionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *myWhatsUpTextField;
 @property NSUserDefaults *usrDefault;
+@property MyUserInfo *user;
 
 @end
 
 @implementation MyProfileViewController {
-    HideAndShowTabbarFunction *hideAndShowTabbarFunc;
-
+    
 }
 
 
@@ -30,8 +32,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
-    // init the hideAndShowTabbarFunc
-    hideAndShowTabbarFunc = [[HideAndShowTabbarFunction alloc] init];
     // init and set the genderPicker
     UIPickerView *genderPicker = [[UIPickerView alloc] init];
     
@@ -41,7 +41,6 @@
     [toolbar setItems:toolbarItems];
     self.myGenderTextField.inputAccessoryView = toolbar;
     
-    
     genderPicker.dataSource = self;
     genderPicker.delegate = self;
     [genderPicker setShowsSelectionIndicator:YES];
@@ -49,38 +48,55 @@
     myGenderArray = @[@"Male",@"Female",@"Transgender"];
     
     
+//    // init swipe
+//    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
+//    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+//    [self.view addGestureRecognizer:swipeLeft];
+//    
+//    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self  action:@selector(didSwipe:)];
+//    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+//    [self.view addGestureRecognizer:swipeRight];
+//    
+//    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc]  initWithTarget:self action:@selector(didSwipe:)];
+//    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
+//    [self.view addGestureRecognizer:swipeUp];
+//    
+//    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
+//    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
+//    [self.view addGestureRecognizer:swipeDown];
     
-    UITabBarController *tabBarController = [self.storyboard instantiateViewControllerWithIdentifier:@"tabbarRootViewController"];
-    tabBarController.tabBar.hidden = YES;
-    // init swipe
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:swipeLeft];
-    
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self  action:@selector(didSwipe:)];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:swipeRight];
-    
-    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc]  initWithTarget:self action:@selector(didSwipe:)];
-    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
-    [self.view addGestureRecognizer:swipeUp];
-    
-    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
-    [self.view addGestureRecognizer:swipeDown];
-    
+//    self.usrDefault = [NSUserDefaults standardUserDefaults];
+//    self.myNicknameTextField.text = [self.usrDefault objectForKey:@"Nickname"];
+//    self.myAgeTextField.text = [self.usrDefault objectForKey:@"Age"];
+//    self.myGenderTextField.text = [self.usrDefault objectForKey:@"Gender"];
+//    self.myRegionTextField.text = [self.usrDefault objectForKey:@"Region"];
+//    self.myWhatsUpTextField.text = [self.usrDefault objectForKey:@"WhatsUp"];
     self.usrDefault = [NSUserDefaults standardUserDefaults];
-    self.myNicknameTextField.text = [self.usrDefault objectForKey:@"Nickname"];
-    self.myAgeTextField.text = [self.usrDefault objectForKey:@"Age"];
-    self.myGenderTextField.text = [self.usrDefault objectForKey:@"Gender"];
-    self.myRegionTextField.text = [self.usrDefault objectForKey:@"Region"];
-    self.myWhatsUpTextField.text = [self.usrDefault objectForKey:@"WhatsUp"];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(useNotificationWithString:)
+     name:@"didFinishFetchUserInfo"
+     object:nil];
     
+    self.user = [MyDataManager fetchUser:[self.usrDefault objectForKey:@"Usrname"]];
+    
+    
+}
+
+- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
+{
+    if ([notification.name isEqual:@"didFinishFetchUserInfo"]) {
+        self.myNicknameTextField.text = self.user.nickname;
+        self.myAgeTextField.text = self.user.age;
+        self.myGenderTextField.text = self.user.gender;
+        self.myRegionTextField.text = self.user.region;
+        self.myWhatsUpTextField.text = self.user.whatsup;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [hideAndShowTabbarFunc hideTabBar:self.tabBarController];
+    [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
 }
 
 -(void)doneButtonPressed{
@@ -89,12 +105,17 @@
 
 - (IBAction)mySaveButtonPressed:(id)sender {
     
-    [self.usrDefault setObject:self.myNicknameTextField.text forKey:@"Nickname"];
-    [self.usrDefault setObject:self.myAgeTextField.text forKey:@"Age"];
-    [self.usrDefault setObject:self.myGenderTextField.text forKey:@"Gender"];
-    [self.usrDefault setObject:self.myRegionTextField.text forKey:@"Region"];
-    [self.usrDefault setObject:self.myWhatsUpTextField.text forKey:@"WhatsUp"];
-
+//    [self.usrDefault setObject:self.myNicknameTextField.text forKey:@"Nickname"];
+//    [self.usrDefault setObject:self.myAgeTextField.text forKey:@"Age"];
+//    [self.usrDefault setObject:self.myGenderTextField.text forKey:@"Gender"];
+//    [self.usrDefault setObject:self.myRegionTextField.text forKey:@"Region"];
+//    [self.usrDefault setObject:self.myWhatsUpTextField.text forKey:@"WhatsUp"];
+    self.user.nickname = self.myNicknameTextField.text;
+    self.user.age = self.myAgeTextField.text;
+    self.user.gender = self.myGenderTextField.text;
+    self.user.region = self.myRegionTextField.text;
+    self.user.whatsup = self.myWhatsUpTextField.text;
+    [MyDataManager saveUser:self.user];
 }
 
 - (void)didReceiveMemoryWarning {

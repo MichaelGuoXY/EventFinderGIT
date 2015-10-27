@@ -9,6 +9,8 @@
 #import "MyNewPostViewController.h"
 #import "MyEventInfo.h"
 #import "HideAndShowTabbarFunction.h"
+#import "MyDataManager.h"
+#import "MyCheckString.h"
 
 @interface MyNewPostViewController ()
 
@@ -22,12 +24,11 @@
 
 
 @property NSUserDefaults *usrDefault;
-
+@property MyUserInfo *user;
 @end
 
 @implementation MyNewPostViewController {
     NSMutableArray *events;
-    HideAndShowTabbarFunction *hideAndShowTabbarFunc;
     NSData *imageOfEvent;
 }
 
@@ -37,61 +38,66 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     self.usrDefault = [NSUserDefaults standardUserDefaults];
     events = [[NSMutableArray alloc] init];
-    [self extractEventArrayData];
-    NSLog(@"numberOfEvents : %lu",(unsigned long)events.count);
-    // init hideAndSHowTabbarFunc
-    hideAndShowTabbarFunc = [[HideAndShowTabbarFunction alloc] init];
+//    [self extractEventArrayData];
+    
     imageOfEvent = [[NSData alloc] init];
+    
+    self.user = [MyDataManager fetchUser:[self.usrDefault objectForKey:@"Usrname"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
-//    self.lImageOfEvent.text = imageOfEvent;
-    [hideAndShowTabbarFunc hideTabBar:self.tabBarController];
+    [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
 }
 
 - (IBAction)myPostButtonPressed:(id)sender {
     
     MyEventInfo *event = [MyEventInfo new];
-    event.nameOfEvent = self.nameOfEvent.text;
-    event.timeOfEvent = self.timeOfEvent.text;
-    event.dateOfEvent = self.dateOfEvent.text;
-    //event.imageOfEvent = imageOfEvent;
-    if (imageOfEvent.bytes == 0) {
-        imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
+    if ([MyCheckString isReadyForStore:self.nameOfEvent.text fromViewController:self]) {
+        event.nameOfEvent = self.nameOfEvent.text;
+        event.timeOfEvent = self.timeOfEvent.text;
+        event.dateOfEvent = self.dateOfEvent.text;
+        //event.imageOfEvent = imageOfEvent;
+        if (imageOfEvent.bytes == 0) {
+            event.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
+        }
+        else {
+            event.imageOfEvent = imageOfEvent;
+        }
+        event.imageOfPoster = self.user.usrProfileImage;
+        event.locationOfEvent = self.locationOfEvent.text;
+        event.posterOfEvent = self.user.username;
+        event.introOfEvent = self.introOfEvent.text;
+        self.user.myPostsNumber = self.user.myPostsNumber + 1;
+        [MyDataManager saveUser:self.user];
+        [MyDataManager saveEvent:event];
     }
-    event.imageOfEvent = imageOfEvent;
-    event.imageOfPoster = [self.usrDefault objectForKey:@"usrProfileImage"];
-    event.locationOfEvent = self.locationOfEvent.text;
-    event.posterOfEvent = [self.usrDefault objectForKey:@"Usrname"];
-    event.introOfEvent = self.introOfEvent.text;
-    
-    [self saveEventArrayData:event];
-    NSLog(@"numberOfEvents : %lu",(unsigned long)events.count);
+//    [self saveEventArrayData:event];
+//    NSLog(@"numberOfEvents : %lu",(unsigned long)events.count);
 }
 
 
-- (void)extractEventArrayData {
-    NSArray *dataArray = [[NSArray alloc] initWithArray:[self.usrDefault objectForKey:@"eventDataArray"]];
-    
-    for (NSData *dataObject in dataArray) {
-        MyEventInfo *eventDecodedObject = [NSKeyedUnarchiver unarchiveObjectWithData:dataObject];
-        [events addObject:eventDecodedObject];
-    }
-}
+//- (void)extractEventArrayData {
+//    NSArray *dataArray = [[NSArray alloc] initWithArray:[self.usrDefault objectForKey:@"eventDataArray"]];
+//    
+//    for (NSData *dataObject in dataArray) {
+//        MyEventInfo *eventDecodedObject = [NSKeyedUnarchiver unarchiveObjectWithData:dataObject];
+//        [events addObject:eventDecodedObject];
+//    }
+//}
 
-- (void)saveEventArrayData:(MyEventInfo *)eventObject {
-    
-    [events addObject:eventObject];
-    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:events.count];
-    for (MyEventInfo *eventObject in events) {
-        NSData *eventEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:eventObject];
-        [archiveArray addObject:eventEncodedObject];
-    }
-    
-    [self.usrDefault setObject:archiveArray forKey:@"eventDataArray"];
-}
+//- (void)saveEventArrayData:(MyEventInfo *)eventObject {
+//    
+//    [events addObject:eventObject];
+//    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:events.count];
+//    for (MyEventInfo *eventObject in events) {
+//        NSData *eventEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:eventObject];
+//        [archiveArray addObject:eventEncodedObject];
+//    }
+//    
+//    [self.usrDefault setObject:archiveArray forKey:@"eventDataArray"];
+//}
 
 - (IBAction)selectPictureButtonPressed:(id)sender {
     NSLog(@"Button Pressed");

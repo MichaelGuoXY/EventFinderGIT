@@ -10,16 +10,20 @@
 #import "MySearchViewController.h"
 #import "MyProfileViewController.h"
 #import "UIViewController+RESideMenu.h"
+#import "MyUserInfo.h"
+#import "MyDataManager.h"
 
 @interface MyLeftMenuViewController ()
 @property (strong, readwrite, nonatomic) UITableView *tableView;
-
+@property MyUserInfo *user;
 @end
 
 @implementation MyLeftMenuViewController {
     UIButton *profileViewButton;
     NSUserDefaults *usrDefault;
     NSData *usrProfileImage;
+    UILabel *LabelOfMyPostsNumber;
+    UILabel *labelOfMyAttendanceNumber;
 }
 
 - (void)viewDidLoad
@@ -60,9 +64,9 @@
     labelOfMyPosts.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:labelOfMyPosts];
     
-    UILabel *LabelOfMyPostsNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, 160, 60, 20)];
-    int myPostsNumber = [usrDefault objectForKey:@"numberOfPosts"];
-    LabelOfMyPostsNumber.text = [[NSString alloc] initWithFormat:@"%d",myPostsNumber];
+    LabelOfMyPostsNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, 160, 60, 20)];
+    
+    LabelOfMyPostsNumber.text = @"0";
     LabelOfMyPostsNumber.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:LabelOfMyPostsNumber];
     
@@ -71,16 +75,32 @@
     labelOfMyAttendance.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:labelOfMyAttendance];
     
-    UILabel *labelOfMyAttendanceNumber = [[UILabel alloc] initWithFrame:CGRectMake(70, 160, 100, 20)];
-    int myAttendanceNumber = [usrDefault objectForKey:@"numberOfAttendance"];
-    labelOfMyAttendanceNumber.text = [[NSString alloc] initWithFormat:@"%d",myAttendanceNumber];
+    labelOfMyAttendanceNumber = [[UILabel alloc] initWithFrame:CGRectMake(70, 160, 100, 20)];
+    
+    labelOfMyAttendanceNumber.text = @"0";
     labelOfMyAttendanceNumber.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:labelOfMyAttendanceNumber];
     
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(useNotificationWithString:)
+     name:@"didFinishFetchUserInfo"
+     object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.user = [MyDataManager fetchUser:[usrDefault objectForKey:@"Usrname"]];
+}
+
+- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
+{
+    [profileViewButton setImage:[UIImage imageWithData:self.user.usrProfileImage] forState:UIControlStateNormal];
+    LabelOfMyPostsNumber.text = [@(self.user.myPostsNumber) stringValue];
+    labelOfMyAttendanceNumber.text = [@(self.user.myAttendanceNumber) stringValue];
 }
 
 - (void)buttonDidPressed{
-    NSLog(@"Button Pressed");
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Change Your Profile Photo?"
                                                                    message:@"Please Choose a Way"
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -108,7 +128,6 @@
                                                               picker.delegate = self;
                                                               picker.allowsEditing = YES;
                                                               picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        
                                                               [self presentViewController:picker animated:YES completion:nil];
                                                           }];
     
@@ -126,7 +145,8 @@
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     [profileViewButton setImage:chosenImage forState:UIControlStateNormal];
     usrProfileImage = UIImageJPEGRepresentation(chosenImage, 0.5);
-    [usrDefault setObject:usrProfileImage forKey:@"usrProfileImage"];
+    self.user.usrProfileImage = usrProfileImage;
+    [MyDataManager saveUser:self.user];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     

@@ -10,6 +10,7 @@
 #import "MyPostTableViewCell.h"
 #import "MyEventInfo.h"
 #import "HideAndShowTabbarFunction.h"
+#import "MyDataManager.h"
 @interface MyPostTableViewController ()
 
 @property NSUserDefaults *usrDefault;
@@ -17,7 +18,6 @@
 @end
 
 @implementation MyPostTableViewController {
-    HideAndShowTabbarFunction *hideAndShowTabbarFunc;
     NSMutableArray *events;
     NSArray *myPosts;
     NSArray *searchResults;
@@ -36,8 +36,23 @@
     self.tableView.separatorColor = [UIColor clearColor];
     self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     self.searchDisplayController.searchResultsTableView.separatorColor = [UIColor clearColor];
-    hideAndShowTabbarFunc = [[HideAndShowTabbarFunction alloc] init];
     
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(useNotificationWithString:)
+     name:@"didFinishFetchEvents"
+     object:nil];
+
+    events = [[NSMutableArray alloc] init];
+    events = [MyDataManager fetchEvent];
+}
+
+- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
+{
+    NSLog(@"useNotification");
+    myPosts = [[NSMutableArray alloc] init];
+    [self filterEvensToMyPosts];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,29 +62,29 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [hideAndShowTabbarFunc hideTabBar:self.tabBarController];
-    [self reloadView];
+    [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
+//    [self reloadView];
 }
 
-- (void)reloadView {
-    NSLog(@"reloadView");
-    events = [[NSMutableArray alloc] init];
-    [self extractEventArrayData];
-    
-    myPosts = [[NSMutableArray alloc] init];
-    [self filterEvensToMyPosts];
-    
-    [self.tableView reloadData];
-}
+//- (void)reloadView {
+//    NSLog(@"reloadView");
+//    events = [[NSMutableArray alloc] init];
+//    [self extractEventArrayData];
+//    
+//    myPosts = [[NSMutableArray alloc] init];
+//    [self filterEvensToMyPosts];
+//    
+//    [self.tableView reloadData];
+//}
 
-- (void)extractEventArrayData {
-    NSArray *dataArray = [[NSArray alloc] initWithArray:[self.usrDefault objectForKey:@"eventDataArray"]];
-    
-    for (NSData *dataObject in dataArray) {
-        MyEventInfo *eventDecodedObject = [NSKeyedUnarchiver unarchiveObjectWithData:dataObject];
-        [events addObject:eventDecodedObject];
-    }
-}
+//- (void)extractEventArrayData {
+//    NSArray *dataArray = [[NSArray alloc] initWithArray:[self.usrDefault objectForKey:@"eventDataArray"]];
+//    
+//    for (NSData *dataObject in dataArray) {
+//        MyEventInfo *eventDecodedObject = [NSKeyedUnarchiver unarchiveObjectWithData:dataObject];
+//        [events addObject:eventDecodedObject];
+//    }
+//}
 
 - (void)filterEvensToMyPosts {
     NSString *searchText = [[NSString alloc] initWithString:[self.usrDefault objectForKey:@"Usrname"]];

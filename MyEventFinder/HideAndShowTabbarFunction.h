@@ -10,7 +10,7 @@
 
 @interface HideAndShowTabbarFunction : NSObject
 
-- (void)showTabBar:(UITabBarController*) tabbarController;
-- (void)hideTabBar:(UITabBarController*) tabbarController;
++ (void)showTabBar:(UITabBarController*) tabbarController;
++ (void)hideTabBar:(UITabBarController*) tabbarController;
 
 @end

@@ -25,7 +25,6 @@
 @implementation MySearchViewController {
     NSMutableArray *events;
     NSArray *searchResults;
-    HideAndShowTabbarFunction *hideAndShowTabbarFunc;
 }
 
 - (void)viewDidLoad {
@@ -40,9 +39,7 @@
     // Initialize the events array
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
-    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd5.png"]];
-    // init hideAndShowTabbarFunc
-    hideAndShowTabbarFunc = [[HideAndShowTabbarFunction alloc] init];
+    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     
     // set delegate and dataSource
     self.searchDisplayController.searchResultsTableView.delegate = self;
@@ -50,33 +47,35 @@
 
     self.usrDefault = [NSUserDefaults standardUserDefaults];
     
-    NSString *notificationName = @"EventDataLoadNotification";
-    
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(useNotificationWithString:)
-     name:notificationName
+     name:@"didFinishFetchEvents"
      object:nil];
+    
+    events = [[NSMutableArray alloc] init];
+    events = [MyDataManager fetchEvent];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [hideAndShowTabbarFunc showTabBar:self.tabBarController];
-    [self reloadView];
+    [HideAndShowTabbarFunction showTabBar:self.tabBarController];
+//    [self reloadView];
 }
 
 - (void)reloadView {
     NSLog(@"reloadView");
 //    [self extractEventArrayData];
-    events = [[NSMutableArray alloc] init];
-    events = [MyDataManager fetchEvent];
-    [self.myTableView reloadData];
+//    events = [[NSMutableArray alloc] init];
+//    events = [MyDataManager fetchEvent];
+//    [self.myTableView reloadData];
 }
 
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
-    NSLog(@"useNotification");
-    [self.myTableView reloadData];
+    if ([notification.name isEqual:@"didFinishFetchEvents"]) {
+        [self.myTableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,6 +9,7 @@
 #import "MyDataManager.h"
 #import "MyEventInfo.h"
 #import <Firebase/Firebase.h>
+#import "MyUserInfo.h"
 
 @implementation MyDataManager
 
@@ -53,16 +54,79 @@
                 event.imageOfPoster = [[NSData alloc] initWithBase64EncodedString:imageOfPoster options:NSDataBase64DecodingIgnoreUnknownCharacters];
                 [events addObject:event];
             }
-            [self postNotificationWithString];
+            [self postNotificationFinishFetchEvents];
         }
     }];
     return events;
 }
 
-+ (void)postNotificationWithString //post notification method and logic
++ (void)saveUser:(MyUserInfo *) user {
+    NSString *usrProfileImage = [user.usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSDictionary *usrDict =   @{@"username" : user.username,
+                                @"password" : user.password,
+                                @"nickname" : user.nickname,
+                                @"age" : user.age,
+                                @"gender" : user.gender,
+                                @"region" : user.region,
+                                @"whatsup" : user.whatsup,
+                                @"usrProfileImage" : usrProfileImage,
+                                @"myPostsNumber" : [@(user.myPostsNumber) stringValue],
+                                @"myAttendanceNumber" : [@(user.myAttendanceNumber) stringValue]
+                                };
+    // Create a reference to a Firebase database URL
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://blistering-inferno-5277.firebaseio.com"];
+    Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
+    Firebase *nameRef = [userRef childByAppendingPath: user.username];
+    [nameRef setValue: usrDict];
+    [self postNotificationFinishSignUp];
+}
+
++ (MyUserInfo *)fetchUser:(NSString *) username{
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://blistering-inferno-5277.firebaseio.com"];
+    Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
+    Firebase *nameRef = [userRef childByAppendingPath:username];
+    MyUserInfo *user = [MyUserInfo new];
+    [nameRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (snapshot.value != [NSNull null]) {
+            NSDictionary *user_dict = snapshot.value;
+            user.username = [user_dict objectForKey:@"username"];
+            user.password = [user_dict objectForKey:@"password"];
+            user.nickname = [user_dict objectForKey:@"nickname"];
+            user.age = [user_dict objectForKey:@"age"];
+            user.gender = [user_dict objectForKey:@"gender"];
+            user.region = [user_dict objectForKey:@"region"];
+            user.whatsup = [user_dict objectForKey:@"whatsup"];
+            NSString *usrProfileImage = [user_dict objectForKey:@"usrProfileImage"];
+            user.usrProfileImage = [[NSData alloc] initWithBase64EncodedString:usrProfileImage options:NSDataBase64DecodingIgnoreUnknownCharacters];
+            user.myPostsNumber = [[user_dict objectForKey:@"myPostsNumber"] integerValue];
+            user.myAttendanceNumber = [[user_dict objectForKey:@"myAttendanceNumber"] integerValue];
+            [self postNotificationFinishFetchUserInfo];
+        }
+        else {
+            [self postNotificationUsernameNotFound];
+        }
+    }];
+    return user;
+}
+
++ (void)postNotificationFinishFetchEvents //post notification method and logic
 {
-    NSString *notificationName = @"EventDataLoadNotification";
+    NSString *notificationName = @"didFinishFetchEvents";
     [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
 }
 
++ (void)postNotificationFinishSignUp {
+    NSString *notificationName = @"didFinishSignUp";
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
+}
+
++ (void)postNotificationFinishFetchUserInfo {
+    NSString *notificationName = @"didFinishFetchUserInfo";
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
+}
+
++ (void)postNotificationUsernameNotFound {
+    NSString *notificationName = @"usernameNotFound";
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
+}
 @end
