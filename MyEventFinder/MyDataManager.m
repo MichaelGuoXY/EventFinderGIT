@@ -23,7 +23,9 @@
                                 @"introOfEvent" : event.introOfEvent,
                                 @"posterOfEvent" : event.posterOfEvent,
                                 @"imageOfEvent" : imageOfEvent,
-                                @"imageOfPoster" : imageOfPoster
+                                @"imageOfPoster" : imageOfPoster,
+                                @"lngOfEvent"   : event.lngOfEvent,
+                                @"latOfEvent"   : event.latOfEvent
                                 };
     // Create a reference to a Firebase database URL
     Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://blistering-inferno-5277.firebaseio.com"];
@@ -48,6 +50,8 @@
                 event.locationOfEvent = [event_dict objectForKey:@"locationOfEvent"];
                 event.introOfEvent = [event_dict objectForKey:@"introOfEvent"];
                 event.posterOfEvent = [event_dict objectForKey:@"posterOfEvent"];
+                event.lngOfEvent = [event_dict objectForKey:@"lngOfEvent"];
+                event.latOfEvent = [event_dict objectForKey:@"latOfEvent"];
                 NSString *imageOfEvent = [event_dict objectForKey:@"imageOfEvent"];
                 NSString *imageOfPoster = [event_dict objectForKey:@"imageOfPoster"];
                 event.imageOfEvent = [[NSData alloc] initWithBase64EncodedString:imageOfEvent options:NSDataBase64DecodingIgnoreUnknownCharacters];

@@ -11,8 +11,9 @@
 #import "HideAndShowTabbarFunction.h"
 #import "MyDataManager.h"
 #import "MyCheckString.h"
+#import <GoogleMaps/GoogleMaps.h>
 
-@interface MyNewPostViewController ()
+@interface MyNewPostViewController () <GMSMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameOfEvent;
 @property (weak, nonatomic) IBOutlet UITextField *timeOfEvent;
@@ -21,7 +22,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *introOfEvent;
 //@property (weak, nonatomic) IBOutlet UILabel *lImageOfEvent;
 @property (weak, nonatomic) IBOutlet UIImageView *imageOfEventSelected;
-
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (weak, nonatomic) IBOutlet UIView *mapViewContainer;
+@property (weak, nonatomic) IBOutlet UIButton *selectPictureButton;
+@property (nonatomic, strong) GMSMapView *mapView;
 
 @property NSUserDefaults *usrDefault;
 @property MyUserInfo *user;
@@ -30,11 +34,17 @@
 @implementation MyNewPostViewController {
     NSMutableArray *events;
     NSData *imageOfEvent;
+    double longtitude;
+    double latitude;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    longtitude = 0;
+    latitude = 0;
+    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     self.usrDefault = [NSUserDefaults standardUserDefaults];
     events = [[NSMutableArray alloc] init];
@@ -43,12 +53,59 @@
     imageOfEvent = [[NSData alloc] init];
     
     self.user = [MyDataManager fetchUser:[self.usrDefault objectForKey:@"Usrname"]];
+    [self.scroller setScrollEnabled:YES];
+    [self.scroller setContentSize:CGSizeMake(320, 920)];
+    
+    self.introOfEvent.frame = CGRectMake(17, 351, self.scroller.frame.size.width-34, 86);
+    self.imageOfEventSelected.frame = CGRectMake(17, 483, self.scroller.frame.size.width-34, 169);
+    self.mapViewContainer.frame = CGRectMake(17, 660, self.scroller.frame.size.width-34, 214);
+    self.selectPictureButton.frame = CGRectMake(40, 445, 285, 30);
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:42.444782
+                                                            longitude:-76.484174
+                                                                 zoom:16
+                                                              bearing:0
+                                                         viewingAngle:0];
+    
+    self.mapView = [GMSMapView mapWithFrame:self.mapViewContainer.bounds camera:camera];
+    self.mapView.delegate = self;
+    self.mapView.mapType = kGMSTypeNormal;
+    self.mapView.myLocationEnabled = YES;
+    self.mapView.settings.compassButton = YES;
+    self.mapView.settings.myLocationButton = YES;
+    [self.mapView setMinZoom:10 maxZoom:30];
+    
+    [self.mapViewContainer addSubview:self.mapView];
+    
+
+}
+
+- (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate {
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    [self.mapView clear];
+    marker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude);
+    marker.title = self.nameOfEvent.text;
+    marker.snippet = self.locationOfEvent.text;
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.map = self.mapView;
+    longtitude = coordinate.longitude;
+    latitude = coordinate.latitude;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
     [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
+}
+
+- (IBAction)myClearButtonPressed:(id)sender {
+    self.nameOfEvent.text = @"";
+    self.timeOfEvent.text = @"";
+    self.dateOfEvent.text = @"";
+    self.locationOfEvent.text = @"";
+    self.introOfEvent.text = @"";
+    imageOfEvent = [[NSData alloc] init];
+    self.imageOfEventSelected.image = [UIImage imageWithData:imageOfEvent];
 }
 
 - (IBAction)myPostButtonPressed:(id)sender {
@@ -69,9 +126,19 @@
         event.locationOfEvent = self.locationOfEvent.text;
         event.posterOfEvent = self.user.username;
         event.introOfEvent = self.introOfEvent.text;
-        self.user.myPostsNumber = self.user.myPostsNumber + 1;
-        [MyDataManager saveUser:self.user];
-        [MyDataManager saveEvent:event];
+        if (longtitude == 0 && latitude == 0) {
+            UIAlertController* alertNoLocation = [UIAlertController alertControllerWithTitle:@"Alert!" message:@"Please long press in the map to mark a location!!!" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action) {}];
+            [alertNoLocation addAction:alertAction];
+            [self presentViewController:alertNoLocation animated:YES completion:nil];
+        }
+        else {
+            event.lngOfEvent = [NSNumber numberWithDouble:longtitude];
+            event.latOfEvent = [NSNumber numberWithDouble:latitude];
+            self.user.myPostsNumber = self.user.myPostsNumber + 1;
+            [MyDataManager saveUser:self.user];
+            [MyDataManager saveEvent:event];
+        }
     }
 //    [self saveEventArrayData:event];
 //    NSLog(@"numberOfEvents : %lu",(unsigned long)events.count);
@@ -149,13 +216,11 @@
     self.imageOfEventSelected.image = [UIImage imageWithData:imageOfEvent];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 - (void)didReceiveMemoryWarning {

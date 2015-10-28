@@ -15,6 +15,8 @@
     NSString *locationOfEvent;
     NSString *introOfEvent;
     NSString *posterOfEvent;
+    NSNumber *lngOfEvent;
+    NSNumber *latOfEvent;
     NSData *imageOfEvent;
     NSData *imageOfPoster;
 }
@@ -25,6 +27,8 @@
 @property (nonatomic, strong) NSString *locationOfEvent;
 @property (nonatomic, strong) NSString *introOfEvent;
 @property (nonatomic, strong) NSString *posterOfEvent;
+@property (nonatomic, strong) NSNumber *lngOfEvent;
+@property (nonatomic, strong) NSNumber *latOfEvent;
 @property (nonatomic, strong) NSData *imageOfEvent;
 @property (nonatomic, strong) NSData *imageOfPoster;
 

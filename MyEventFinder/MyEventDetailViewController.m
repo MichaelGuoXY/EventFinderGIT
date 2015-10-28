@@ -7,9 +7,12 @@
 //
 
 #import "MyEventDetailViewController.h"
+#import <GoogleMaps/GoogleMaps.h>
 
-@interface MyEventDetailViewController ()
+@interface MyEventDetailViewController () <GMSMapViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UINavigationItem *myNGIT;
+@property (nonatomic, strong) GMSMapView *mapView;
 
 @end
 
@@ -27,7 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self.scroller setScrollEnabled:YES];
+    [self.scroller setContentSize:CGSizeMake(320, 900)];
     self.myNGIT.title = self.event.nameOfEvent;
     self.posterOfEvent.text = self.event.posterOfEvent;
     self.nameOfEvent.text = self.event.nameOfEvent;
@@ -40,16 +44,37 @@
     self.imageOfPoster.clipsToBounds = YES;
     self.imageOfPoster.layer.cornerRadius = 27;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
-                                 
-}
-
-- (void) returnSearch: (id) sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.event.latOfEvent doubleValue]
+                                                            longitude:[self.event.lngOfEvent doubleValue]
+                                                                 zoom:16
+                                                              bearing:0
+                                                         viewingAngle:0];
+    
+    self.mapView = [GMSMapView mapWithFrame:self.mapViewContainer.bounds camera:camera];
+    self.mapView.delegate = self;
+    self.mapView.mapType = kGMSTypeNormal;
+    self.mapView.myLocationEnabled = YES;
+    self.mapView.settings.compassButton = YES;
+    self.mapView.settings.myLocationButton = YES;
+    [self.mapView setMinZoom:10 maxZoom:30];
+    
+    [self.mapViewContainer addSubview:self.mapView];
+    // Creates a marker in the center of the map.
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake([self.event.latOfEvent doubleValue], [self.event.lngOfEvent doubleValue]);
+    marker.title = self.event.nameOfEvent;
+    marker.snippet = self.event.locationOfEvent;
+    marker.map = self.mapView;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 /*
