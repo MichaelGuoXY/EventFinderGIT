@@ -49,11 +49,22 @@
 		E071CF2C1BD6E4C400163839 /* MyPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E071CF2B1BD6E4C400163839 /* MyPostTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		E071CF2F1BD6EAD500163839 /* MyPostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E071CF2E1BD6EAD500163839 /* MyPostTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E076AD1A1BD4C364006A1D07 /* HideAndShowTabbarFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = E076AD191BD4C364006A1D07 /* HideAndShowTabbarFunction.m */; settings = {ASSET_TAGS = (); }; };
+		E08C9B831BE29D1E00023F4D /* tag.png in Resources */ = {isa = PBXBuildFile; fileRef = E08C9B821BE29D1E00023F4D /* tag.png */; settings = {ASSET_TAGS = (); }; };
+		E08C9B891BE31CCD00023F4D /* MyCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E08C9B881BE31CCD00023F4D /* MyCategoryTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		E08C9B8C1BE3211000023F4D /* MyCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E08C9B8B1BE3211000023F4D /* MyCategoryTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		E08C9B8F1BE3226E00023F4D /* MyCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E08C9B8E1BE3226E00023F4D /* MyCategorySearchViewController.m */; settings = {ASSET_TAGS = (); }; };
+		E08C9B961BE32E0D00023F4D /* Political.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E08C9B901BE32E0D00023F4D /* Political.jpg */; settings = {ASSET_TAGS = (); }; };
+		E08C9B971BE32E0D00023F4D /* Seminar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E08C9B911BE32E0D00023F4D /* Seminar.jpg */; settings = {ASSET_TAGS = (); }; };
+		E08C9B981BE32E0D00023F4D /* Social.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E08C9B921BE32E0D00023F4D /* Social.jpg */; settings = {ASSET_TAGS = (); }; };
+		E08C9B991BE32E0D00023F4D /* Cornell Sponsored.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E08C9B931BE32E0D00023F4D /* Cornell Sponsored.jpg */; settings = {ASSET_TAGS = (); }; };
+		E08C9B9A1BE32E0D00023F4D /* Athletic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E08C9B941BE32E0D00023F4D /* Athletic.jpg */; settings = {ASSET_TAGS = (); }; };
+		E08C9B9B1BE32E0D00023F4D /* Professional.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E08C9B951BE32E0D00023F4D /* Professional.jpg */; settings = {ASSET_TAGS = (); }; };
 		E08F84471BD307C9007AC39C /* category.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84411BD307C9007AC39C /* category.png */; settings = {ASSET_TAGS = (); }; };
 		E08F84481BD307C9007AC39C /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84421BD307C9007AC39C /* map.png */; settings = {ASSET_TAGS = (); }; };
 		E08F844A1BD307C9007AC39C /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84441BD307C9007AC39C /* profile.png */; settings = {ASSET_TAGS = (); }; };
 		E08F844B1BD307C9007AC39C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84451BD307C9007AC39C /* settings.png */; settings = {ASSET_TAGS = (); }; };
 		E08F844C1BD307C9007AC39C /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = E08F84461BD307C9007AC39C /* calendar.png */; settings = {ASSET_TAGS = (); }; };
+		E0AC1D651BE3F6440075FA94 /* Free Food.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0AC1D641BE3F6440075FA94 /* Free Food.jpg */; settings = {ASSET_TAGS = (); }; };
 		E0BE362F1BDF4B6100491AD5 /* MyCheckString.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BE362E1BDF4B6100491AD5 /* MyCheckString.m */; settings = {ASSET_TAGS = (); }; };
 		E0C258731BCB5A8D00CFF08A /* MyNewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C258721BCB5A8D00CFF08A /* MyNewPostViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E0C4AE9C1BDC995800281FA8 /* MyDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */; settings = {ASSET_TAGS = (); }; };
@@ -127,11 +138,25 @@
 		E071CF2E1BD6EAD500163839 /* MyPostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPostTableViewController.m; sourceTree = "<group>"; };
 		E076AD181BD4C364006A1D07 /* HideAndShowTabbarFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HideAndShowTabbarFunction.h; sourceTree = "<group>"; };
 		E076AD191BD4C364006A1D07 /* HideAndShowTabbarFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HideAndShowTabbarFunction.m; sourceTree = "<group>"; };
+		E08C9B821BE29D1E00023F4D /* tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag.png; sourceTree = "<group>"; };
+		E08C9B871BE31CCD00023F4D /* MyCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCategoryTableViewController.h; sourceTree = "<group>"; };
+		E08C9B881BE31CCD00023F4D /* MyCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCategoryTableViewController.m; sourceTree = "<group>"; };
+		E08C9B8A1BE3211000023F4D /* MyCategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCategoryTableViewCell.h; sourceTree = "<group>"; };
+		E08C9B8B1BE3211000023F4D /* MyCategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCategoryTableViewCell.m; sourceTree = "<group>"; };
+		E08C9B8D1BE3226E00023F4D /* MyCategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCategorySearchViewController.h; sourceTree = "<group>"; };
+		E08C9B8E1BE3226E00023F4D /* MyCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCategorySearchViewController.m; sourceTree = "<group>"; };
+		E08C9B901BE32E0D00023F4D /* Political.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Political.jpg; sourceTree = "<group>"; };
+		E08C9B911BE32E0D00023F4D /* Seminar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Seminar.jpg; sourceTree = "<group>"; };
+		E08C9B921BE32E0D00023F4D /* Social.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Social.jpg; sourceTree = "<group>"; };
+		E08C9B931BE32E0D00023F4D /* Cornell Sponsored.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Cornell Sponsored.jpg"; sourceTree = "<group>"; };
+		E08C9B941BE32E0D00023F4D /* Athletic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Athletic.jpg; sourceTree = "<group>"; };
+		E08C9B951BE32E0D00023F4D /* Professional.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Professional.jpg; sourceTree = "<group>"; };
 		E08F84411BD307C9007AC39C /* category.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = category.png; sourceTree = "<group>"; };
 		E08F84421BD307C9007AC39C /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		E08F84441BD307C9007AC39C /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
 		E08F84451BD307C9007AC39C /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		E08F84461BD307C9007AC39C /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		E0AC1D641BE3F6440075FA94 /* Free Food.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Free Food.jpg"; sourceTree = "<group>"; };
 		E0BE362D1BDF4B6100491AD5 /* MyCheckString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCheckString.h; sourceTree = "<group>"; };
 		E0BE362E1BDF4B6100491AD5 /* MyCheckString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCheckString.m; sourceTree = "<group>"; };
 		E0C258711BCB5A8D00CFF08A /* MyNewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNewPostViewController.h; sourceTree = "<group>"; };
@@ -187,6 +212,14 @@
 		E062BE671BD9BF9B00093106 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				E0AC1D641BE3F6440075FA94 /* Free Food.jpg */,
+				E08C9B901BE32E0D00023F4D /* Political.jpg */,
+				E08C9B911BE32E0D00023F4D /* Seminar.jpg */,
+				E08C9B921BE32E0D00023F4D /* Social.jpg */,
+				E08C9B931BE32E0D00023F4D /* Cornell Sponsored.jpg */,
+				E08C9B941BE32E0D00023F4D /* Athletic.jpg */,
+				E08C9B951BE32E0D00023F4D /* Professional.jpg */,
+				E08C9B821BE29D1E00023F4D /* tag.png */,
 				E05A23A61BDABEEB00CA5026 /* star2.png */,
 				E05A23A21BDABB8B00CA5026 /* date.png */,
 				E05A239C1BDABA1300CA5026 /* star.png */,
@@ -260,10 +293,14 @@
 				E071CF2D1BD6EAD500163839 /* MyPostTableViewController.h */,
 				E071CF2E1BD6EAD500163839 /* MyPostTableViewController.m */,
 				E00644A81BE04DD70065443D /* Main.storyboard */,
+				E08C9B871BE31CCD00023F4D /* MyCategoryTableViewController.h */,
+				E08C9B881BE31CCD00023F4D /* MyCategoryTableViewController.m */,
 				E004AE281BD3EE4B00808546 /* HomeRootViewController.h */,
 				E004AE291BD3EE4B00808546 /* HomeRootViewController.m */,
 				E007214C1BD2CCE8005E2668 /* MyLeftMenuViewController.h */,
 				E007214D1BD2CCE8005E2668 /* MyLeftMenuViewController.m */,
+				E08C9B8D1BE3226E00023F4D /* MyCategorySearchViewController.h */,
+				E08C9B8E1BE3226E00023F4D /* MyCategorySearchViewController.m */,
 				E066593E1BCA351300DA92A4 /* Assets.xcassets */,
 				E06659401BCA351300DA92A4 /* LaunchScreen.storyboard */,
 				E06659431BCA351300DA92A4 /* Info.plist */,
@@ -289,6 +326,8 @@
 				E0CCB1471BCC9EE70051E303 /* MyEventDetailViewController.m */,
 				E00644AA1BE051590065443D /* MyMapEventDetailViewController.h */,
 				E00644AB1BE051590065443D /* MyMapEventDetailViewController.m */,
+				E08C9B8A1BE3211000023F4D /* MyCategoryTableViewCell.h */,
+				E08C9B8B1BE3211000023F4D /* MyCategoryTableViewCell.m */,
 				E071CF2A1BD6E4C400163839 /* MyPostTableViewCell.h */,
 				E071CF2B1BD6E4C400163839 /* MyPostTableViewCell.m */,
 				E0CCB1431BCC8BB80051E303 /* MyEventTableViewCell.h */,
@@ -366,17 +405,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E08C9B9A1BE32E0D00023F4D /* Athletic.jpg in Resources */,
 				E004AE2F1BD3F2E900808546 /* myattendance.png in Resources */,
+				E08C9B961BE32E0D00023F4D /* Political.jpg in Resources */,
+				E0AC1D651BE3F6440075FA94 /* Free Food.jpg in Resources */,
 				E066594C1BCA35F600DA92A4 /* myProfile.png in Resources */,
+				E08C9B9B1BE32E0D00023F4D /* Professional.jpg in Resources */,
 				E0D83E781BD9CBE400075460 /* bgd5.png in Resources */,
 				E06F42BC1BCD01360095D63A /* football.jpg in Resources */,
 				E06F42BA1BCD01270095D63A /* freeFood.jpg in Resources */,
 				E06659421BCA351300DA92A4 /* LaunchScreen.storyboard in Resources */,
 				E025336F1BD9D945006F60C2 /* bgd6.png in Resources */,
 				E02B094F1BCE3CED00C77700 /* bgd2.jpg in Resources */,
+				E08C9B831BE29D1E00023F4D /* tag.png in Resources */,
 				E02B094B1BCE393B00C77700 /* myLogo.png in Resources */,
 				E08F844B1BD307C9007AC39C /* settings.png in Resources */,
 				E0204B371BCEEAE4007C0BCE /* bgd3.jpg in Resources */,
+				E08C9B971BE32E0D00023F4D /* Seminar.jpg in Resources */,
 				E066593F1BCA351300DA92A4 /* Assets.xcassets in Resources */,
 				E0D83E761BD9C71700075460 /* bgd4.jpg in Resources */,
 				E08F84481BD307C9007AC39C /* map.png in Resources */,
@@ -385,9 +430,11 @@
 				E06F42BE1BCD013F0095D63A /* basketball.jpg in Resources */,
 				E08F844A1BD307C9007AC39C /* profile.png in Resources */,
 				E06F42C41BCD8CD10095D63A /* usrDefault.jpg in Resources */,
+				E08C9B981BE32E0D00023F4D /* Social.jpg in Resources */,
 				E06F42C01BCD014A0095D63A /* voiceOfCornell.jpg in Resources */,
 				E004AE301BD3F2E900808546 /* myposts.png in Resources */,
 				E08F844C1BD307C9007AC39C /* calendar.png in Resources */,
+				E08C9B991BE32E0D00023F4D /* Cornell Sponsored.jpg in Resources */,
 				E05A23A01BDABA1300CA5026 /* location.png in Resources */,
 				E004AE321BD3F2E900808546 /* home.png in Resources */,
 				E08F84471BD307C9007AC39C /* category.png in Resources */,
@@ -463,16 +510,19 @@
 				E004AE2A1BD3EE4B00808546 /* HomeRootViewController.m in Sources */,
 				E0C258731BCB5A8D00CFF08A /* MyNewPostViewController.m in Sources */,
 				E02062BC1BD1018A00B1325B /* UIViewController+RESideMenu.m in Sources */,
+				E08C9B891BE31CCD00023F4D /* MyCategoryTableViewController.m in Sources */,
 				E00644AC1BE051590065443D /* MyMapEventDetailViewController.m in Sources */,
 				E0CCB1451BCC8BB80051E303 /* MyEventTableViewCell.m in Sources */,
 				E0BE362F1BDF4B6100491AD5 /* MyCheckString.m in Sources */,
 				E0CCB1391BCC879B0051E303 /* MySearchTableTableViewController.m in Sources */,
 				E02062BB1BD1018A00B1325B /* RESideMenu.m in Sources */,
 				E066593A1BCA351300DA92A4 /* ViewController.m in Sources */,
+				E08C9B8C1BE3211000023F4D /* MyCategoryTableViewCell.m in Sources */,
 				E0CCB1481BCC9EE70051E303 /* MyEventDetailViewController.m in Sources */,
 				E06659371BCA351300DA92A4 /* AppDelegate.m in Sources */,
 				E06F42C71BCDAC4A0095D63A /* MyTabbarRootViewController.m in Sources */,
 				E06659341BCA351300DA92A4 /* main.m in Sources */,
+				E08C9B8F1BE3226E00023F4D /* MyCategorySearchViewController.m in Sources */,
 				E076AD1A1BD4C364006A1D07 /* HideAndShowTabbarFunction.m in Sources */,
 				E0D8C2071BD0452500BEDA42 /* MySearchViewController.m in Sources */,
 				E071CF2F1BD6EAD500163839 /* MyPostTableViewController.m in Sources */,

@@ -10,6 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "MyDataManager.h"
 #import "MyEventDetailViewController.h"
+#import "HideAndShowTabbarFunction.h"
 
 @interface MyMapViewController () <GMSMapViewDelegate>
 @property (nonatomic, strong) GMSMapView *mapView;
@@ -53,13 +54,17 @@
      selector:@selector(useNotificationWithString:)
      name:@"didFinishFetchEvents"
      object:nil];
-    
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [HideAndShowTabbarFunction showTabBar:self.tabBarController];
     // load events
     events = [[NSMutableArray alloc] init];
     events = [MyDataManager fetchEvent];
     
 }
-
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
     if ([notification.name isEqualToString:@"didFinishFetchEvents"]) {

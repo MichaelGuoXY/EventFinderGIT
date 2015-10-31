@@ -7,7 +7,7 @@
 //
 
 #import "MyMapEventDetailViewController.h"
-
+#import "HideAndShowTabbarFunction.h"
 @interface MyMapEventDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *myNI;
@@ -26,6 +26,7 @@
     self.dateOfEvent.text = self.event.dateOfEvent;
     self.locationOfEvent.text = self.event.locationOfEvent;
     self.infoOfEvent.text = self.event.introOfEvent;
+    self.tagOfEvent.text = self.event.tagOfEvent;
     self.imageOfEvent.image = [UIImage imageWithData:self.event.imageOfEvent];
     self.imageOfPoster.image = [UIImage imageWithData:self.event.imageOfPoster];
     self.imageOfPoster.clipsToBounds = YES;
@@ -39,6 +40,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
+}
+
 
 - (void)returnMap: (id) sender{
     [self dismissViewControllerAnimated:YES completion:nil];

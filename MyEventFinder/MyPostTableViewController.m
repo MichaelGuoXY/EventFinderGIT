@@ -43,16 +43,23 @@
      name:@"didFinishFetchEvents"
      object:nil];
 
-    events = [[NSMutableArray alloc] init];
-    events = [MyDataManager fetchEvent];
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                  action:@selector(reloadView)
+        forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
-    NSLog(@"useNotification");
-    myPosts = [[NSMutableArray alloc] init];
-    [self filterEvensToMyPosts];
-    [self.tableView reloadData];
+    if ([notification.name isEqualToString:@"didFinishFetchEvents"]) {
+        myPosts = [[NSArray alloc] init];
+        [self filterEvensToMyPosts];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,19 +70,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
-//    [self reloadView];
+    [self reloadView];
 }
 
-//- (void)reloadView {
-//    NSLog(@"reloadView");
-//    events = [[NSMutableArray alloc] init];
-//    [self extractEventArrayData];
-//    
-//    myPosts = [[NSMutableArray alloc] init];
-//    [self filterEvensToMyPosts];
-//    
-//    [self.tableView reloadData];
-//}
+- (void)reloadView {
+    events = [[NSMutableArray alloc] init];
+    events = [MyDataManager fetchEvent];
+}
 
 //- (void)extractEventArrayData {
 //    NSArray *dataArray = [[NSArray alloc] initWithArray:[self.usrDefault objectForKey:@"eventDataArray"]];

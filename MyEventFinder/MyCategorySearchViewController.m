@@ -1,12 +1,12 @@
 //
-//  MySearchViewController.m
+//  MyCategorySearchViewController.m
 //  MyEventFinder
 //
-//  Created by Guo Xiaoyu on 10/15/15.
+//  Created by Guo Xiaoyu on 10/29/15.
 //  Copyright © 2015 Xiaoyu Guo. All rights reserved.
 //
 
-#import "MySearchViewController.h"
+#import "MyCategorySearchViewController.h"
 #import "MyEventInfo.h"
 #import "MyEventTableViewCell.h"
 #import "MyEventDetailViewController.h"
@@ -14,18 +14,16 @@
 #import "HideAndShowTabbarFunction.h"
 #import "MyDataManager.h"
 
-@interface MySearchViewController () {
-
-}
+@interface MyCategorySearchViewController ()
 
 @property NSUserDefaults *usrDefault;
-@property UIRefreshControl *myRC;
 
 @end
 
-@implementation MySearchViewController {
+@implementation MyCategorySearchViewController {
     NSMutableArray *events;
     NSArray *searchResults;
+    NSArray *tagEvents;
 }
 
 - (void)viewDidLoad {
@@ -38,48 +36,43 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     // Initialize the events array
-
+    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     
     // set delegate and dataSource
     self.searchDisplayController.searchResultsTableView.delegate = self;
     self.searchDisplayController.searchResultsTableView.dataSource = self;
-
+    
     self.usrDefault = [NSUserDefaults standardUserDefaults];
     
-    // Initialize the refresh control.
-    self.myRC = [[UIRefreshControl alloc] init];
-    self.myRC.backgroundColor = [UIColor purpleColor];
-    self.myRC.tintColor = [UIColor whiteColor];
-    [self.myRC addTarget:self
-                  action:@selector(reloadView)
-        forControlEvents:UIControlEventValueChanged];
-    [self.myTableView addSubview:self.myRC];
-
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(useNotificationWithString:)
      name:@"didFinishFetchEvents"
      object:nil];
+    
+    events = [[NSMutableArray alloc] init];
+    events = [MyDataManager fetchEvent];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [HideAndShowTabbarFunction showTabBar:self.tabBarController];
-//    [self reloadView];
+    [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
+    //    [self reloadView];
 }
 
-- (void)reloadView {
-    events = [[NSMutableArray alloc] init];
-    events = [MyDataManager fetchEvent];
+- (void)filterEvensToTag {
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"tagOfEvent == %@", self.tag];
+    tagEvents = [events filteredArrayUsingPredicate:resultPredicate];
 }
 
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
     if ([notification.name isEqual:@"didFinishFetchEvents"]) {
+        tagEvents = [[NSArray alloc] init];
+        [self filterEvensToTag];
         [self.myTableView reloadData];
-        [self.myRC endRefreshing];
     }
 }
 
@@ -90,16 +83,17 @@
 
 //- (void)extractEventArrayData {
 //    NSArray *dataArray = [[NSArray alloc] initWithArray:[self.usrDefault objectForKey:@"eventDataArray"]];
-//    
+//
 //    for (NSData *dataObject in dataArray) {
 //        MyEventInfo *eventDecodedObject = [NSKeyedUnarchiver unarchiveObjectWithData:dataObject];
 //        [events addObject:eventDecodedObject];
 //    }
 //}
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (tableView == self.myTableView) {
-        return [events count];
+        return [tagEvents count];
     } else {
         return [searchResults count];
     }
@@ -126,12 +120,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"CustomTableCell";
-//    MyEventTableViewCell *cell;
-//    if (tableView == self.searchDisplayController.searchResultsTableView) {
-//        cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    }else{
-//        cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    }
+    //    MyEventTableViewCell *cell;
+    //    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    //        cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //    }else{
+    //        cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    //    }
     
     MyEventTableViewCell *cell = (MyEventTableViewCell *)[self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell.imageOfEvent.clipsToBounds = YES;
@@ -147,7 +141,7 @@
     // Display MyEventTableViewCell in the table cell
     MyEventInfo *event = nil;
     if (tableView == self.myTableView) {
-        event = [events objectAtIndex:indexPath.section];
+        event = [tagEvents objectAtIndex:indexPath.section];
     } else {
         event = [searchResults objectAtIndex:indexPath.section];
     }
@@ -173,7 +167,7 @@
             event = [searchResults objectAtIndex:indexPath.section];
         } else {
             indexPath = [self.myTableView indexPathForSelectedRow];
-            event = [events objectAtIndex:indexPath.section];
+            event = [tagEvents objectAtIndex:indexPath.section];
         }
         
         MyEventDetailViewController *destViewController = segue.destinationViewController;
@@ -184,7 +178,7 @@
 - (void)filterContentForSearchText:(NSString*)searchText
 {
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"nameOfEvent contains[c] %@", searchText];
-    searchResults = [events filteredArrayUsingPredicate:resultPredicate];
+    searchResults = [tagEvents filteredArrayUsingPredicate:resultPredicate];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -194,13 +188,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

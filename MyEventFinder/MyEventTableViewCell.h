@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageOfEvent;
 @property (weak, nonatomic) IBOutlet UIImageView *imageOfPoster;
 @property (weak, nonatomic) IBOutlet UILabel *posterOfEvent;
+@property (weak, nonatomic) IBOutlet UILabel *tagOfEvent;
 
 
 @end

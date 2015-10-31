@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyNewPostViewController : UIViewController
+@interface MyNewPostViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
+{
+    NSArray *myTagOfEventArray;
+}
+
 
 @end

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationOfEvent;
 @property (weak, nonatomic) IBOutlet UITextView *infoOfEvent;
 @property (weak, nonatomic) IBOutlet UIImageView *imageOfPoster;
+@property (weak, nonatomic) IBOutlet UILabel *tagOfEvent;
 
 @property (nonatomic, strong) MyEventInfo *event;
 

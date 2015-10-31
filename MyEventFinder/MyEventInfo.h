@@ -19,6 +19,7 @@
     NSNumber *latOfEvent;
     NSData *imageOfEvent;
     NSData *imageOfPoster;
+    NSString *tagOfEvent;
 }
 
 @property (nonatomic, strong) NSString *nameOfEvent;
@@ -31,5 +32,6 @@
 @property (nonatomic, strong) NSNumber *latOfEvent;
 @property (nonatomic, strong) NSData *imageOfEvent;
 @property (nonatomic, strong) NSData *imageOfPoster;
+@property (nonatomic, strong) NSString *tagOfEvent;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MyEventDetailViewController.h"
+#import "HideAndShowTabbarFunction.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @interface MyEventDetailViewController () <GMSMapViewDelegate>
@@ -39,6 +40,7 @@
     self.dateOfEvent.text = self.event.dateOfEvent;
     self.locationOfEvent.text = self.event.locationOfEvent;
     self.infoOfEvent.text = self.event.introOfEvent;
+    self.tagOfEvent.text = self.event.tagOfEvent;
     self.imageOfEvent.image = [UIImage imageWithData:self.event.imageOfEvent];
     self.imageOfPoster.image = [UIImage imageWithData:self.event.imageOfPoster];
     self.imageOfPoster.clipsToBounds = YES;
@@ -66,6 +68,11 @@
     marker.title = self.event.nameOfEvent;
     marker.snippet = self.event.locationOfEvent;
     marker.map = self.mapView;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
 }
 
 - (void)didReceiveMemoryWarning {

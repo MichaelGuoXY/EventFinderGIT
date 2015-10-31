@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageOfPoster;
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 @property (weak, nonatomic) IBOutlet UIView *mapViewContainer;
+@property (weak, nonatomic) IBOutlet UILabel *tagOfEvent;
 
 @property (nonatomic, strong) MyEventInfo *event;
 

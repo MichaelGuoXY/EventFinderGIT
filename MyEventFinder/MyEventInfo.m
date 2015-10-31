@@ -20,6 +20,7 @@
 @synthesize imageOfPoster;
 @synthesize lngOfEvent;
 @synthesize latOfEvent;
+@synthesize tagOfEvent;
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
@@ -33,6 +34,7 @@
         self.imageOfPoster = [decoder decodeObjectForKey:@"imageOfPoster"];
         self.latOfEvent = [decoder decodeObjectForKey:@"latOfEvent"];
         self.lngOfEvent = [decoder decodeObjectForKey:@"lngOfEvent"];
+        self.tagOfEvent = [decoder decodeObjectForKey:@"tagOfEvent"];
     }
     return self;
 }
@@ -48,6 +50,7 @@
     [encoder encodeObject:imageOfPoster forKey:@"imageOfPoster"];
     [encoder encodeObject:latOfEvent forKey:@"latOfEvent"];
     [encoder encodeObject:lngOfEvent forKey:@"lngOfEvent"];
+    [encoder encodeObject:tagOfEvent forKey:@"tagOfEvent"];
 }
 
 @end

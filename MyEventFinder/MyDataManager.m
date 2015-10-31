@@ -25,17 +25,18 @@
                                 @"imageOfEvent" : imageOfEvent,
                                 @"imageOfPoster" : imageOfPoster,
                                 @"lngOfEvent"   : event.lngOfEvent,
-                                @"latOfEvent"   : event.latOfEvent
+                                @"latOfEvent"   : event.latOfEvent,
+                                @"tagOfEvent"   : event.tagOfEvent
                                 };
     // Create a reference to a Firebase database URL
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://blistering-inferno-5277.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
     Firebase *eventRef = [myRootRef childByAppendingPath:@"events"];
     Firebase *nameRef = [eventRef childByAppendingPath: event.nameOfEvent];
     [nameRef setValue: eventDict];
 }
 
 + (NSMutableArray *)fetchEvent{
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://blistering-inferno-5277.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
     Firebase *eventRef = [myRootRef childByAppendingPath:@"events"];
     NSMutableArray *events = [[NSMutableArray alloc] init];
     [eventRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -52,6 +53,7 @@
                 event.posterOfEvent = [event_dict objectForKey:@"posterOfEvent"];
                 event.lngOfEvent = [event_dict objectForKey:@"lngOfEvent"];
                 event.latOfEvent = [event_dict objectForKey:@"latOfEvent"];
+                event.tagOfEvent = [event_dict objectForKey:@"tagOfEvent"];
                 NSString *imageOfEvent = [event_dict objectForKey:@"imageOfEvent"];
                 NSString *imageOfPoster = [event_dict objectForKey:@"imageOfPoster"];
                 event.imageOfEvent = [[NSData alloc] initWithBase64EncodedString:imageOfEvent options:NSDataBase64DecodingIgnoreUnknownCharacters];
@@ -78,7 +80,7 @@
                                 @"myAttendanceNumber" : [@(user.myAttendanceNumber) stringValue]
                                 };
     // Create a reference to a Firebase database URL
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://blistering-inferno-5277.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
     Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
     Firebase *nameRef = [userRef childByAppendingPath: user.username];
     [nameRef setValue: usrDict];
@@ -86,7 +88,7 @@
 }
 
 + (MyUserInfo *)fetchUser:(NSString *) username{
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://blistering-inferno-5277.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
     Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
     Firebase *nameRef = [userRef childByAppendingPath:username];
     MyUserInfo *user = [MyUserInfo new];
