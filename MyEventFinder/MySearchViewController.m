@@ -62,6 +62,8 @@
      selector:@selector(useNotificationWithString:)
      name:@"didFinishFetchEvents"
      object:nil];
+    
+    [self reloadView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

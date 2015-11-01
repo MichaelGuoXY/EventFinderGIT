@@ -159,6 +159,10 @@
             self.user.myPostsNumber = self.user.myPostsNumber + 1;
             [MyDataManager saveUser:self.user];
             [MyDataManager saveEvent:event];
+            UIAlertController* alertEventPostedSuccess = [UIAlertController alertControllerWithTitle:@"Congratulations!" message:@"New Event Has Been Posted Successfully!!!" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* alertAction = [UIAlertAction actionWithTitle:@"Cool" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action) {}];
+            [alertEventPostedSuccess addAction:alertAction];
+            [self presentViewController:alertEventPostedSuccess animated:YES completion:nil];
         }
     }
 //    [self saveEventArrayData:event];

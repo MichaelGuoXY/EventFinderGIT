@@ -211,7 +211,7 @@
 
 - (IBAction)mySignUpButtonPressed:(id)sender {
     isSignIn = false;
-    if ([MyCheckString isReadyForStore:self.myUsrnameTextField.text fromViewController:self]) {
+    if ([MyCheckString isReadyForStore:self.myUsrnameTextField.text fromViewController:self] && [MyCheckString isReadyForStore:self.myPasswordTextField.text fromViewController:self]) {
         NSString *username = self.myUsrnameTextField.text;
         
         [MyDataManager fetchUser:username];
