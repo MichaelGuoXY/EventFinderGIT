@@ -17,6 +17,7 @@
 @interface MyCategorySearchViewController ()
 
 @property NSUserDefaults *usrDefault;
+@property (weak, nonatomic) IBOutlet UINavigationItem *myNI;
 
 @end
 
@@ -34,9 +35,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    self.myNI.title = self.tag;
     // Initialize the events array
-    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     

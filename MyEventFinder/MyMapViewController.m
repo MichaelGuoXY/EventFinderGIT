@@ -11,6 +11,7 @@
 #import "MyDataManager.h"
 #import "MyEventDetailViewController.h"
 #import "HideAndShowTabbarFunction.h"
+#import "MyHelpFunction.h"
 
 @interface MyMapViewController () <GMSMapViewDelegate>
 @property (nonatomic, strong) GMSMapView *mapView;
@@ -121,7 +122,8 @@
     [self filterEvensToMarker:marker.title];
     MyEventDetailViewController *myEDVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MapEventDetailViewController"];
     myEDVC.event =filterResult;
-    [self presentViewController:myEDVC animated:YES completion:nil];
+    
+    [MyHelpFunction segueModalWithRandomTransition:self viewController:myEDVC];
 }
 
 - (BOOL)prefersStatusBarHidden {

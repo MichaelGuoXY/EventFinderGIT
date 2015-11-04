@@ -51,7 +51,6 @@
     profileViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [profileViewButton setImage:[UIImage imageNamed:@"usrDefault.jpg"] forState:UIControlStateNormal];
     [profileViewButton addTarget:self action:@selector(buttonDidPressed) forControlEvents:UIControlEventTouchUpInside];
-    [profileViewButton setTitle:@"Show View" forState:UIControlStateNormal];
     profileViewButton.frame = CGRectMake(50.0, 50.0, 80.0, 80.0);//width and height should be same value
     profileViewButton.clipsToBounds = YES;
     profileViewButton.layer.cornerRadius = 40;//half of the width

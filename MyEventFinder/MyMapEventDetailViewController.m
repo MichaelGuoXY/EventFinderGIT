@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    self.myNI.title = self.event.nameOfEvent;
     self.posterOfEvent.text = self.event.posterOfEvent;
     self.nameOfEvent.text = self.event.nameOfEvent;
     self.timeOfEvent.text = self.event.timeOfEvent;

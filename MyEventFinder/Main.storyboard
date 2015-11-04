@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,14 +16,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myLogo.png" id="9cX-Ia-Enp">
-                                <rect key="frame" x="66" y="48" width="213" height="173"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jb9-HR-8zi">
-                                <rect key="frame" x="66" y="335" width="63" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <rect key="frame" x="51" y="345" width="87" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                 <size key="titleShadowOffset" width="1" height="2.2250738585072014e-308"/>
                                 <state key="normal" title="Sign up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,30 +30,21 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="q4z-dY-TOS">
-                                <rect key="frame" x="66" y="291" width="188" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="51" y="297" width="218" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Finder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B5f-sd-zNi">
-                                <rect key="frame" x="85" y="203" width="151" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="shadowOffset" width="-1" height="-1"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" id="v2c-Ot-WyZ">
-                                <rect key="frame" x="66" y="253" width="188" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="51" y="249" width="218" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wPQ-R7-Tpb">
-                                <rect key="frame" x="191" y="335" width="63" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <rect key="frame" x="182" y="345" width="87" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                 <size key="titleShadowOffset" width="1" height="2.2250738585072014e-308"/>
                                 <state key="normal" title="Sign in">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,6 +54,19 @@
                                     <action selector="mySignInButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PzT-LE-CEd"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Finder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B5f-sd-zNi">
+                                <rect key="frame" x="79" y="219" width="163" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="-1" height="-1"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myLogo.png" id="9cX-Ia-Enp">
+                                <rect key="frame" x="20" y="4" width="290" height="236"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -93,7 +93,7 @@
             </objects>
             <point key="canvasLocation" x="-1058" y="-134"/>
         </scene>
-        <!--My New Post View Controller-->
+        <!--New Post-->
         <scene sceneID="uXG-7H-NTw">
             <objects>
                 <viewController storyboardIdentifier="newPostViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gzf-Qs-aIK" customClass="MyNewPostViewController" sceneMemberID="viewController">
@@ -187,7 +187,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="tM8-we-S9N">
-                                        <rect key="frame" x="17" y="660" width="285" height="214"/>
+                                        <rect key="frame" x="17" y="660.00000291791571" width="285" height="214"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -232,7 +232,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="F4d-Uc-XZ3">
+                    <navigationItem key="navigationItem" title="New Post" id="F4d-Uc-XZ3">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="63n-Ib-Gnb">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="Gzf-Qs-aIK" id="KUL-DE-mJz"/>
@@ -258,7 +258,7 @@
             </objects>
             <point key="canvasLocation" x="376" y="-2235"/>
         </scene>
-        <!--My Post Table View Controller-->
+        <!--My Posts-->
         <scene sceneID="Y3r-hj-H5l">
             <objects>
                 <tableViewController storyboardIdentifier="myPostViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q0S-8Q-YFH" customClass="MyPostTableViewController" sceneMemberID="viewController">
@@ -289,7 +289,7 @@
                             <outlet property="delegate" destination="Q0S-8Q-YFH" id="kFn-jI-7Yl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="oSw-fR-6rA">
+                    <navigationItem key="navigationItem" title="My Posts" id="oSw-fR-6rA">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="YXP-sC-TtS">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="Q0S-8Q-YFH" id="vIX-yp-YdO"/>
@@ -379,7 +379,7 @@
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="top" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTableCell" rowHeight="263" id="gc7-T6-v0a" customClass="MyEventTableViewCell">
-                                        <rect key="frame" x="0.0" y="157.5" width="320" height="263"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="320" height="263"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gc7-T6-v0a" id="mz0-Bt-iQk">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="262.5"/>
@@ -480,6 +480,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="myMenuButton" destination="HPx-fH-Tdk" id="n7M-24-fhR"/>
                         <outlet property="myTableView" destination="XSz-f7-NIC" id="XDH-iH-4qM"/>
                         <outlet property="searchDisplayController" destination="iWR-7m-04a" id="Dsw-GG-cIH"/>
                     </connections>
@@ -617,28 +618,28 @@
             </objects>
             <point key="canvasLocation" x="942" y="-787"/>
         </scene>
-        <!--Category-->
+        <!--Categories-->
         <scene sceneID="Udz-2G-bs0">
             <objects>
                 <tableViewController id="jbh-xE-aK6" customClass="MyCategoryTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="113" sectionHeaderHeight="28" sectionFooterHeight="28" id="2yh-uD-rhq">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="281" sectionHeaderHeight="28" sectionFooterHeight="28" id="2yh-uD-rhq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="113" id="GKu-y9-qYV" customClass="MyCategoryTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="320" height="113"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="281" id="GKu-y9-qYV" customClass="MyCategoryTableViewCell">
+                                <rect key="frame" x="0.0" y="28" width="320" height="281"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GKu-y9-qYV" id="ZxI-t3-vIy">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="112.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="280.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wJ2-2z-ZXZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="112.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="330.5"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dAy-eA-wad">
-                                            <rect key="frame" x="8" y="13" width="235" height="28"/>
+                                            <rect key="frame" x="8" y="39" width="235" height="28"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -659,7 +660,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Category" image="category.png" selectedImage="category.png" id="Deu-3k-XCB"/>
-                    <navigationItem key="navigationItem" id="QPU-9M-6Hf"/>
+                    <navigationItem key="navigationItem" title="Categories" id="QPU-9M-6Hf"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="llo-Mb-vn4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -727,7 +728,7 @@
             </objects>
             <point key="canvasLocation" x="-540" y="510"/>
         </scene>
-        <!--My Profile View Controller-->
+        <!--My Profile-->
         <scene sceneID="wK7-0h-nif">
             <objects>
                 <viewController storyboardIdentifier="profileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="d50-xl-zkk" customClass="MyProfileViewController" sceneMemberID="viewController">
@@ -812,7 +813,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="UWK-bS-xmg">
+                    <navigationItem key="navigationItem" title="My Profile" id="UWK-bS-xmg">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="YAy-jA-4IS">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="d50-xl-zkk" id="pqu-Rz-w7u"/>
@@ -839,6 +840,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" id="iHo-Cj-7gQ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="eLJ-l8-hMN"/>
+                                </items>
+                            </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xcy-Gk-3xV">
                                 <rect key="frame" x="0.0" y="44" width="320" height="209"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -905,13 +913,6 @@
                                 <rect key="frame" x="170" y="351" width="14" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <navigationBar contentMode="scaleToFill" id="iHo-Cj-7gQ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="eLJ-l8-hMN"/>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="peg-ad-N19">
                                 <rect key="frame" x="20" y="322" width="130" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -967,7 +968,7 @@
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="top" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTableCell" rowHeight="263" id="Mch-Jx-T5c" customClass="MyEventTableViewCell">
-                                        <rect key="frame" x="0.0" y="157.5" width="320" height="263"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="320" height="263"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mch-Jx-T5c" id="YVR-Ae-TLs">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="262.5"/>
@@ -1062,6 +1063,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="7LJ-5e-zZk"/>
                     <connections>
+                        <outlet property="myNI" destination="7LJ-5e-zZk" id="Gyr-jN-p2X"/>
                         <outlet property="myTableView" destination="Xoo-xI-1xH" id="5OU-Ci-WKF"/>
                         <outlet property="searchDisplayController" destination="iWR-7m-04a" id="QQC-jR-IdH"/>
                     </connections>

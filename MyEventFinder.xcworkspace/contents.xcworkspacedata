@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:MyEventFinder.xcodeproj">
+      location = "group:/Users/guoxiaoyu/Desktop/EventFinderGIT/EventFinder.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

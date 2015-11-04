@@ -20,6 +20,7 @@
 
 @property NSUserDefaults *usrDefault;
 @property UIRefreshControl *myRC;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *myMenuButton;
 
 @end
 
@@ -37,8 +38,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    // Initialize the events array
-
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     
