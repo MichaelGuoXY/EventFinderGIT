@@ -8,11 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyProfileViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
-{
-    NSArray *myGenderArray;
-}
+@interface MyProfileViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITabBar  *myTB;
+@property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
 @end

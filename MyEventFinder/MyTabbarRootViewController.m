@@ -7,7 +7,6 @@
 //
 
 #import "MyTabbarRootViewController.h"
-#import "MySearchTableTableViewController.h"
 
 @interface MyTabbarRootViewController ()
 

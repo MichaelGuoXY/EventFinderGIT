@@ -38,6 +38,11 @@
         self.timeImg.image = [UIImage imageNamed:@"time.png"];
         [self.contentView addSubview:self.timeImg];
         
+        self.imageOfParticipants = [[UIImageView alloc] initWithFrame:CGRectMake(260, 170, 44, 44)];
+        self.imageOfParticipants.clipsToBounds = YES;
+        self.imageOfParticipants.layer.cornerRadius = 22;
+        [self.contentView addSubview:self.imageOfParticipants];
+        
         self.lDateOfEvent = [[UILabel alloc] initWithFrame:CGRectMake(137, 289, 175, 21)];
         [self.contentView addSubview:self.lDateOfEvent];
         self.dateImg = [[UIImageView alloc] initWithFrame:CGRectMake(120, 289, 14, 14)];

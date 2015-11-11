@@ -13,6 +13,7 @@
 #import "UIViewController+RESideMenu.h"
 #import "HideAndShowTabbarFunction.h"
 #import "MyDataManager.h"
+#import "MyEventTableViewAddCell.h"
 
 @interface MyCategorySearchViewController ()
 
@@ -37,8 +38,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.myNI.title = self.tag;
     // Initialize the events array
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
-    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
+//    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     
     // set delegate and dataSource
     self.searchDisplayController.searchResultsTableView.delegate = self;
@@ -101,60 +102,98 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 263;
+    if (indexPath.row == 0) {
+        return 301;
+    }
+    else {
+        return 29;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    return 2.5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return 2.5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CustomTableCell";
+    static NSString *CellIdentifier1 = @"CustomTableCell";
+    static NSString *CellIdentifier2= @"CustomCellAddition";
     //    MyEventTableViewCell *cell;
     //    if (tableView == self.searchDisplayController.searchResultsTableView) {
     //        cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     //    }else{
     //        cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     //    }
-    
-    MyEventTableViewCell *cell = (MyEventTableViewCell *)[self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.imageOfEvent.clipsToBounds = YES;
-    cell.imageOfEvent.layer.cornerRadius = 50;
-    cell.imageOfPoster.clipsToBounds = YES;
-    cell.imageOfPoster.layer.cornerRadius = 20;
-    
-    // Configure the cell...
-    if (cell == nil) {
-        cell = [[MyEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    if (indexPath.row == 0) {
+        MyEventTableViewCell *cell = (MyEventTableViewCell *)[self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier1];
+        cell.imgviewOfEvent.clipsToBounds = YES;
+        cell.imgviewOfEvent.layer.cornerRadius = 40;
+        cell.authorProfileImgView.clipsToBounds = YES;
+        cell.authorProfileImgView.layer.cornerRadius = 20;
+        
+        // Configure the cell...
+        if (cell == nil) {
+            cell = [[MyEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier1];
+        }
+        
+        // Display MyEventTableViewCell in the table cell
+        MyEventInfo *event = nil;
+        if (tableView == self.myTableView) {
+            event = [tagEvents objectAtIndex:indexPath.section];
+        } else {
+            event = [searchResults objectAtIndex:indexPath.section];
+        }
+        
+        cell.nameOfEvent.text = event.nameOfEvent;
+        if (event.imageOfEvent != nil)
+            cell.imgviewOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+        cell.timeOfEvent.text = [[event.startingTime stringValue] stringByAppendingString:[event.endingTime stringValue]];
+        cell.locationOfEvent.text = event.locationOfEvent;
+        if (event.authorProfileImg != nil)
+            cell.authorProfileImgView.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:event.authorProfileImg options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+        cell.authorOfEvent.text = event.authorName;
+        cell.tagOfEvent.text = event.primaryTag;
+        return cell;
     }
-    
-    // Display MyEventTableViewCell in the table cell
-    MyEventInfo *event = nil;
-    if (tableView == self.myTableView) {
-        event = [tagEvents objectAtIndex:indexPath.section];
-    } else {
-        event = [searchResults objectAtIndex:indexPath.section];
+    else {
+        
+        MyEventTableViewAddCell *cell = (MyEventTableViewAddCell *)[self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier2];
+        // Configure the cell...
+        if (cell == nil) {
+            cell = [[MyEventTableViewAddCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
+        }
+        
+        cell.joinBtn.tag = indexPath.row;
+        [cell.joinBtn addTarget:self action:@selector(joinBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+        // Display MyEventTableViewCell in the table cell
+        MyEventInfo *event = nil;
+        if (tableView == self.myTableView) {
+            event = [tagEvents objectAtIndex:indexPath.section];
+        } else {
+            event = [searchResults objectAtIndex:indexPath.section];
+        }
+        
+        return cell;
     }
-    
-    cell.nameOfEvent.text = event.nameOfEvent;
-    cell.imageOfEvent.image = [UIImage imageWithData:event.imageOfEvent];
-    cell.timeOfEvent.text = event.timeOfEvent;
-    cell.locationOfEvent.text = event.locationOfEvent;
-    cell.imageOfPoster.image = [UIImage imageWithData:event.imageOfPoster];
-    cell.dateOfEvent.text = event.dateOfEvent;
-    cell.posterOfEvent.text = event.posterOfEvent;
-    cell.tagOfEvent.text = event.tagOfEvent;
-    return cell;
+}
+
+- (void)joinBtnPressed: (id)sender{
+    UIButton *joinBtn = (UIButton *)sender;
+    if (joinBtn.currentTitleColor == [UIColor redColor]) {
+        [joinBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+    else {
+        [joinBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

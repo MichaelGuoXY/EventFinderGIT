@@ -10,112 +10,75 @@
 #import "HideAndShowTabbarFunction.h"
 #import "MyDataManager.h"
 #import "MyUserInfo.h"
+#import "MyNicknameViewController.h"
+#import "MyAgeViewController.h"
+#import "MyGenderTableViewController.h"
+#import "MyWhatsupViewController.h"
+#import "MyInterestsTableViewController.h"
 
 @interface MyProfileViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *myNicknameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *myAgeTextField;
-@property (weak, nonatomic) IBOutlet UITextField *myGenderTextField;
-@property (weak, nonatomic) IBOutlet UITextField *myRegionTextField;
-@property (weak, nonatomic) IBOutlet UITextField *myWhatsUpTextField;
 @property NSUserDefaults *usrDefault;
 @property MyUserInfo *user;
 
 @end
 
 @implementation MyProfileViewController {
-    
+    MyNicknameViewController *myNVC;
+    MyAgeViewController *myAVC;
+    MyGenderTableViewController *myGTVC;
+    MyWhatsupViewController *myWVC;
+    MyInterestsTableViewController *myITVC;
+    BOOL didFetchUser;
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
-    // init and set the genderPicker
-    UIPickerView *genderPicker = [[UIPickerView alloc] init];
-    
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonPressed)];
-    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-genderPicker.frame.size.height-50, 320, 50)];
-    NSArray *toolbarItems = [NSArray arrayWithObjects:doneButton,nil];
-    [toolbar setItems:toolbarItems];
-    self.myGenderTextField.inputAccessoryView = toolbar;
-    
-    genderPicker.dataSource = self;
-    genderPicker.delegate = self;
-    [genderPicker setShowsSelectionIndicator:YES];
-    [self.myGenderTextField setInputView:genderPicker];
-    myGenderArray = @[@"Male",@"Female",@"Transgender"];
-    
-    
-//    // init swipe
-//    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-//    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-//    [self.view addGestureRecognizer:swipeLeft];
-//    
-//    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self  action:@selector(didSwipe:)];
-//    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-//    [self.view addGestureRecognizer:swipeRight];
-//    
-//    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc]  initWithTarget:self action:@selector(didSwipe:)];
-//    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
-//    [self.view addGestureRecognizer:swipeUp];
-//    
-//    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-//    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
-//    [self.view addGestureRecognizer:swipeDown];
-    
-//    self.usrDefault = [NSUserDefaults standardUserDefaults];
-//    self.myNicknameTextField.text = [self.usrDefault objectForKey:@"Nickname"];
-//    self.myAgeTextField.text = [self.usrDefault objectForKey:@"Age"];
-//    self.myGenderTextField.text = [self.usrDefault objectForKey:@"Gender"];
-//    self.myRegionTextField.text = [self.usrDefault objectForKey:@"Region"];
-//    self.myWhatsUpTextField.text = [self.usrDefault objectForKey:@"WhatsUp"];
+    didFetchUser = false;
     self.usrDefault = [NSUserDefaults standardUserDefaults];
+    self.myTableView.delegate = self;
+    self.myTableView.dataSource = self;
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(useNotificationWithString:)
      name:@"didFinishFetchUserInfo"
      object:nil];
-    
-    self.user = [MyDataManager fetchUser:[self.usrDefault objectForKey:@"Usrname"]];
-    
-    
-}
-
-- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
-{
-    if ([notification.name isEqual:@"didFinishFetchUserInfo"]) {
-        self.myNicknameTextField.text = self.user.nickname;
-        self.myAgeTextField.text = self.user.age;
-        self.myGenderTextField.text = self.user.gender;
-        self.myRegionTextField.text = self.user.region;
-        self.myWhatsUpTextField.text = self.user.whatsup;
-    }
+    self.user = [MyDataManager fetchUser:[self.usrDefault objectForKey:@"username"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
+    [self.myTableView reloadData];
 }
 
--(void)doneButtonPressed{
-    [self.view endEditing:YES];
-}
-
-- (IBAction)mySaveButtonPressed:(id)sender {
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
     
-//    [self.usrDefault setObject:self.myNicknameTextField.text forKey:@"Nickname"];
-//    [self.usrDefault setObject:self.myAgeTextField.text forKey:@"Age"];
-//    [self.usrDefault setObject:self.myGenderTextField.text forKey:@"Gender"];
-//    [self.usrDefault setObject:self.myRegionTextField.text forKey:@"Region"];
-//    [self.usrDefault setObject:self.myWhatsUpTextField.text forKey:@"WhatsUp"];
-    self.user.nickname = self.myNicknameTextField.text;
-    self.user.age = self.myAgeTextField.text;
-    self.user.gender = self.myGenderTextField.text;
-    self.user.region = self.myRegionTextField.text;
-    self.user.whatsup = self.myWhatsUpTextField.text;
-    [MyDataManager saveUser:self.user];
+    self.user.nickname = [self.usrDefault objectForKey:@"nickname"];
+    self.user.age = [self.usrDefault objectForKey:@"age"];
+    self.user.gender = [self.usrDefault objectForKey:@"gender"];
+    self.user.whatsup = [self.usrDefault objectForKey:@"whatsup"];
+    self.user.interests = [self.usrDefault objectForKey:@"interests"];
+    
+    if (didFetchUser) {
+        [MyDataManager updateUser:self.user];
+    }
+}
+
+- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
+{
+    if ([notification.name isEqualToString:@"didFinishFetchUserInfo"]) {
+        [self.usrDefault setObject:self.user.nickname forKey:@"nickname"];
+        [self.usrDefault setObject:self.user.age forKey:@"age"];
+        [self.usrDefault setObject:self.user.gender forKey:@"gender"];
+        [self.usrDefault setObject:self.user.whatsup forKey:@"whatsup"];
+        [self.usrDefault setObject:self.user.interests forKey:@"interests"];
+        didFetchUser = true;
+        [self.myTableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -123,30 +86,78 @@
     // Dispose of any resources that can be recreated.
 }
 
-// The number of columns of data
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-// The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [myGenderArray count];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
 }
 
-// The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return [myGenderArray objectAtIndex:row];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"ProfileCell";
+    UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    switch (indexPath.row) {
+        case 0:
+            cell.textLabel.text = @"nickname";
+            if ([self.usrDefault objectForKey:@"nickname"])
+                cell.detailTextLabel.text = [self.usrDefault objectForKey:@"nickname"];
+            break;
+        case 1:
+            cell.textLabel.text = @"age";
+            if ([self.usrDefault objectForKey:@"age"])
+                cell.detailTextLabel.text = [[self.usrDefault objectForKey:@"age"] stringValue];
+            break;
+        case 2:
+            cell.textLabel.text = @"gender";
+            if ([self.usrDefault objectForKey:@"gender"])
+                cell.detailTextLabel.text = [self.usrDefault objectForKey:@"gender"];
+            break;
+        case 3:
+            cell.textLabel.text = @"whatsup";
+            if ([self.usrDefault objectForKey:@"whatsup"])
+                 cell.detailTextLabel.text = [self.usrDefault objectForKey:@"whatsup"];
+            break;
+        case 4:
+            cell.textLabel.text = @"interests";
+            NSString *interests = @"";
+            for (NSString *interest in [self.usrDefault objectForKey:@"interests"]) {
+                interests = [interests stringByAppendingFormat:@" %@",interest];
+            }
+            cell.detailTextLabel.text = interests;
+            break;
+    }
+    return cell;
 }
 
-// Catpure the picker view selection
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    // This method is triggered whenever the user makes a change to the picker selection.
-    // The parameter named row and component represents what was selected.
-    self.myGenderTextField.text = [myGenderArray objectAtIndex:row];
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0:
+            myNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"NicknameVC"];
+            [self.navigationController pushViewController:myNVC animated:YES];
+            break;
+        case 1:
+            myAVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AgeVC"];
+            [self.navigationController pushViewController:myAVC animated:YES];
+            break;
+        case 2:
+            myGTVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GenderTVC"];
+            [self.navigationController pushViewController:myGTVC animated:YES];
+            break;
+        case 3:
+            myWVC = [self.storyboard instantiateViewControllerWithIdentifier:@"WhatsupVC"];
+            [self.navigationController pushViewController:myWVC animated:YES];
+            break;
+        case 4:
+            myITVC = [self.storyboard instantiateViewControllerWithIdentifier:@"InterestsTVC"];
+            [self.navigationController pushViewController:myITVC animated:YES];
+            break;
+        default:
+            break;
+    }
 }
 
 /*

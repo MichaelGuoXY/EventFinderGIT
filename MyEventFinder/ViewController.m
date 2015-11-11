@@ -26,6 +26,9 @@
 @implementation ViewController {
     NSMutableArray *mutableDataArray;
     bool isSignIn;
+    MyEventInfo *event1;
+    MyUserInfo *user1;
+    MyUserInfo *user2;
 }
 
 - (void)viewDidLoad {
@@ -50,6 +53,10 @@
      selector:@selector(useNotificationWithString:)
      name:@"usernameNotFound"
      object:nil];
+    
+//    [MyDataManager downloadDataCompleted:^(NSString *output, NSNumber *count) {
+//        NSLog(@"String downloaded is %@, number downloaded is %@", output, count);
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -60,36 +67,36 @@
 
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
-    if ([notification.name isEqual:@"didFinishSignUp"]) {
+    if ([notification.name isEqualToString:@"didFinishSignUp"]) {
         UIAlertController* alertDidFinishSignUp = [UIAlertController alertControllerWithTitle:@"Cool!" message:@"Sign Up Successfully!!!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action) {}];
         [alertDidFinishSignUp addAction:alertAction];
         [self presentViewController:alertDidFinishSignUp animated:YES completion:nil];
     }
-    if ([notification.name isEqual:@"didFinishFetchUserInfo"]) {
+    if ([notification.name isEqualToString:@"didFinishFetchUserInfo"]) {
         if (isSignIn) {
             if (self.myPasswordTextField.text == self.user.password) {
-                [self.usrDefault setObject:self.user.username forKey:@"Usrname"];
+                [self.usrDefault setObject:self.user.username forKey:@"username"];
                 self.myTRC = [self.storyboard instantiateViewControllerWithIdentifier:@"tabbarRootViewController"];
                 [self presentViewController:self.myTRC animated:YES completion:nil];
             }
             else {
-                UIAlertController* alertIncorrectPassword = [UIAlertController alertControllerWithTitle:@"Alert!" message:@"incorrect password!!!" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController* alertIncorrectPassword = [UIAlertController alertControllerWithTitle:@"Alert!" message:@"incorrect password !!!" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction* alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action) {}];
                 [alertIncorrectPassword addAction:alertAction];
                 [self presentViewController:alertIncorrectPassword animated:YES completion:nil];
             }
         }
         else {
-            UIAlertController* alertUsernameDuplicate = [UIAlertController alertControllerWithTitle:@"Alert!" message:@"username duplicate!!!" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController* alertUsernameDuplicate = [UIAlertController alertControllerWithTitle:@"Alert!" message:@"username already exits !!!" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action) {}];
             [alertUsernameDuplicate addAction:alertAction];
             [self presentViewController:alertUsernameDuplicate animated:YES completion:nil];
         }
     }
-    if ([notification.name isEqual:@"usernameNotFound"]) {
+    if ([notification.name isEqualToString:@"usernameNotFound"]) {
         if (isSignIn) {
-            UIAlertController* alertUsernameNotFound = [UIAlertController alertControllerWithTitle:@"Alert!" message:@"username not found!!!" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController* alertUsernameNotFound = [UIAlertController alertControllerWithTitle:@"Alert!" message:@"username not found !!!" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action) {}];
             [alertUsernameNotFound addAction:alertAction];
             [self presentViewController:alertUsernameNotFound animated:YES completion:nil];
@@ -99,13 +106,14 @@
             user.username = self.myUsrnameTextField.text;
             user.password = self.myPasswordTextField.text;
             user.nickname = @"";
-            user.age = @"";
+            user.age = @0;
             user.gender = @"";
-            user.region = @"";
             user.whatsup = @"";
-            user.myPostsNumber = 0;
-            user.myAttendanceNumber = 0;
-            user.usrProfileImage = [[NSData alloc] initWithData:UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"], 0.5)];
+            user.myPostsNumber = @0;
+            user.myAttendanceNumber = @0;
+            user.interests = @[@"None"];
+            user.usrProfileImage = [[[NSData alloc] initWithData:UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"], 1)] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+            
             [MyDataManager saveUser:user];
         }
     }
@@ -113,67 +121,66 @@
 
 - (void)loadData {
     
-    MyEventInfo *event1 = [MyEventInfo new];
+    event1 = [MyEventInfo new];
     event1.nameOfEvent = @"Go Big Red";
-    event1.timeOfEvent = @"12:00PM";
-    event1.dateOfEvent = @"11/20/2015";
-    event1.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],0.5);
-    event1.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
-    event1.locationOfEvent = @"Carpentar Library";
-    event1.latOfEvent = [NSNumber numberWithDouble:42.444782];
-    event1.lngOfEvent = [NSNumber numberWithDouble:-76.484174];
-    event1.posterOfEvent = @"Xiaoyu Guo";
+    event1.startingTime = @201511201200;
+    event1.endingTime = @201511201200;
+    event1.latOfEvent = @42.444782;
+    event1.lngOfEvent = @(-76.484174);
+    event1.locationOfEvent = @"Olin";
+    event1.primaryTag = @"Professional";
+    event1.secondaryTag = @[@"Free food", @"Seminor"];
     event1.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
-    event1.tagOfEvent = @"Cornell Sponsored";
-    MyEventInfo *event2 = [MyEventInfo new];
-    event2.nameOfEvent = @"Basketball Match";
-    event2.timeOfEvent = @"10:00PM";
-    event2.dateOfEvent = @"10/09/2015";
-    event2.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"basketball.jpg"],0.5);
-    event2.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
-    event2.locationOfEvent = @"Starter Hall";
-    event2.latOfEvent = [NSNumber numberWithDouble:42.445605];
-    event2.lngOfEvent = [NSNumber numberWithDouble:-76.482425];
-    event2.posterOfEvent = @"Yuxin Cao";
-    event2.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
-    event2.tagOfEvent = @"Athletic";
-    MyEventInfo *event3 = [MyEventInfo new];
-    event3.nameOfEvent = @"Football Game";
-    event3.timeOfEvent = @"12:00PM";
-    event3.dateOfEvent = @"11/20/2015";
-    event3.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"football.jpg"],0.5);
-    event3.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
-    event3.locationOfEvent = @"Uris Library";
-    event3.latOfEvent = [NSNumber numberWithDouble:42.447782];
-    event3.lngOfEvent = [NSNumber numberWithDouble:-76.485301];
-    event3.posterOfEvent = @"Xiaoyu Guo";
-    event3.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
-    event3.tagOfEvent = @"Athletic";
-    MyEventInfo *event4 = [MyEventInfo new];
-    event4.nameOfEvent = @"Free Food";
-    event4.timeOfEvent = @"12:00PM";
-    event4.dateOfEvent = @"11/20/2015";
-    event4.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"freeFood.jpg"],0.5);
-    event4.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
-    event4.locationOfEvent = @"Sage Hall";
-    event4.latOfEvent = [NSNumber numberWithDouble:42.445914];
-    event4.lngOfEvent = [NSNumber numberWithDouble:-76.483222];
-    event4.posterOfEvent = @"Xiaoyu Guo";
-    event4.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
-    event4.tagOfEvent = @"Free Food";
-    MyEventInfo *event5 = [MyEventInfo new];
-    event5.nameOfEvent = @"Voice of Cornell";
-    event5.timeOfEvent = @"12:00PM";
-    event5.dateOfEvent = @"11/20/2015";
-    event5.imageOfEvent = UIImageJPEGRepresentation([UIImage imageNamed:@"voiceOfCornell.jpg"],0.5);
-    event5.imageOfPoster = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],0.5);
-    event5.locationOfEvent = @"Olin Library";
-    event5.latOfEvent = [NSNumber numberWithDouble:42.447880];
-    event5.lngOfEvent = [NSNumber numberWithDouble:-76.484282];
-    event5.posterOfEvent = @"Xiaoyu Guo";
-    event5.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
-    event5.tagOfEvent = @"Cornell Sponsored";
+    event1.restricttionOfEvent = @"restriction";
+    event1.imageOfEvent = @[[UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+    event1.postDate = @11122015;
+    event1.postTime = @1212;
+    event1.authorName = @"Xiaoyu";
+    event1.authorProfileImg = [UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
+    MyEventInfo *event2 = [MyEventInfo new];
+    event2.nameOfEvent = @"Hello World";
+    event2.startingTime = @201511200300;
+    event2.endingTime = @201509091200;
+    event2.latOfEvent = @42.444782;
+    event2.lngOfEvent = @(-76.484174);
+    event2.locationOfEvent = @"Olin";
+    event2.primaryTag = @"Professional";
+    event2.secondaryTag = @[@"Free food", @"Seminor"];
+    event2.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
+    event2.restricttionOfEvent = @"restriction";
+    event2.imageOfEvent = @[[UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+    event2.postDate = @11122015;
+    event2.postTime = @1212;
+    event2.authorName = @"Xiaoyu";
+    event2.authorProfileImg = [UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    user1 = [MyUserInfo new];
+    user1.username = @"Xiaoyu";
+    user1.password = @"123";
+    user1.nickname = @"Michael";
+    user1.age = @21;
+    user1.gender = @"male";
+    user1.whatsup = @"";
+    user1.usrProfileImage = [UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    user1.myPostsNumber = @12;
+    user1.myAttendanceNumber = @12;
+    user1.interests = @[@"Professional", @"Free food"];
+//    [MyDataManager saveUser:user];
+
+    user2 = [MyUserInfo new];
+    user2.username = @"Yuxin";
+    user2.password = @"123";
+    user2.nickname = @"Michael";
+    user2.age = @21;
+    user2.gender = @"male";
+    user2.whatsup = @"";
+    user2.usrProfileImage = [UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    user2.myPostsNumber = @12;
+    user2.myAttendanceNumber = @12;
+    user2.interests = @[@"Professional", @"Free food"];
+//    [MyDataManager saveUser:user2];
+
 //    mutableDataArray = [[NSMutableArray alloc] init];
 //    [self saveEventArrayData:event1];
 //    [self saveEventArrayData:event2];
@@ -181,11 +188,9 @@
 //    [self saveEventArrayData:event4];
 //    [self saveEventArrayData:event5];
     
-    [MyDataManager saveEvent:event1];
-    [MyDataManager saveEvent:event2];
-    [MyDataManager saveEvent:event3];
-    [MyDataManager saveEvent:event4];
-    [MyDataManager saveEvent:event5];
+//    [MyDataManager saveEvent:event1];
+//    [MyDataManager saveEvent:event2];
+    
 }
 
 //- (void)saveEventArrayData:(MyEventInfo *)eventObject {
@@ -207,6 +212,7 @@
 
         self.user = [MyDataManager fetchUser:username];
     }
+    
 }
 
 - (IBAction)mySignUpButtonPressed:(id)sender {
@@ -223,8 +229,6 @@
 //    NSInteger numberOfAttendance = 0;
 //    [self.usrDefault setObject:numberOfAttendance forKey:@"numberOfAttendance"];
     
-    NSLog([self.usrDefault objectForKey:@"Usrname"]);
-    NSLog([self.usrDefault objectForKey:@"Password"]);
 }
 
 - (BOOL)prefersStatusBarHidden {

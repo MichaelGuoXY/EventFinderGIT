@@ -31,22 +31,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // things for scroller view
     [self.scroller setScrollEnabled:YES];
     [self.scroller setContentSize:CGSizeMake(320, 900)];
+    // init all elements
     self.myNGIT.title = self.event.nameOfEvent;
-    self.posterOfEvent.text = self.event.posterOfEvent;
+    self.authorOfEvent.text = self.event.authorName;
     self.nameOfEvent.text = self.event.nameOfEvent;
-    self.timeOfEvent.text = self.event.timeOfEvent;
-    self.dateOfEvent.text = self.event.dateOfEvent;
+    self.startingTime.text = [self.event.startingTime stringValue];
+    self.endingTime.text = [self.event.endingTime stringValue];
     self.locationOfEvent.text = self.event.locationOfEvent;
-    self.infoOfEvent.text = self.event.introOfEvent;
-    self.tagOfEvent.text = self.event.tagOfEvent;
-    self.imageOfEvent.image = [UIImage imageWithData:self.event.imageOfEvent];
-    self.imageOfPoster.image = [UIImage imageWithData:self.event.imageOfPoster];
-    self.imageOfPoster.clipsToBounds = YES;
-    self.imageOfPoster.layer.cornerRadius = 27;
+    self.introOfEvent.text = self.event.introOfEvent;
+    NSString *string = self.event.primaryTag;
+    for (NSString *str in self.event.secondaryTag) {
+        string = [string stringByAppendingFormat:@", %@", str];
+    }
+    self.tagOfEvent.text = string;
+    self.imgviewOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[self.event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+    self.authorProfileImg.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:self.event.authorProfileImg options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+    self.authorProfileImg.clipsToBounds = YES;
+    self.authorProfileImg.layer.cornerRadius = 27;
+    // set background
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
-    
+    // init camera with google map
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.event.latOfEvent doubleValue]
                                                             longitude:[self.event.lngOfEvent doubleValue]
                                                                  zoom:16
@@ -60,7 +68,6 @@
     self.mapView.settings.compassButton = YES;
     self.mapView.settings.myLocationButton = YES;
     [self.mapView setMinZoom:10 maxZoom:30];
-    
     [self.mapViewContainer addSubview:self.mapView];
     // Creates a marker in the center of the map.
     GMSMarker *marker = [[GMSMarker alloc] init];

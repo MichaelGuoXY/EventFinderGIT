@@ -19,5 +19,6 @@
 @property UIImageView *timeImg;
 @property UIImageView *dateImg;
 @property UIImageView *nameImg;
+@property UIImageView *imageOfParticipants;
 
 @end

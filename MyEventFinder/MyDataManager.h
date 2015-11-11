@@ -15,5 +15,8 @@
 + (NSMutableArray *)fetchEvent;
 + (void)saveUser:(MyUserInfo *) user;
 + (MyUserInfo *)fetchUser:(NSString *) username;
++ (void)saveParticipantToEvent:(MyEventInfo *)event withUser:(MyUserInfo *)user;
++ (void)removeParticipantFromEvent:(MyEventInfo *)event withUser:(MyUserInfo *)user;
++ (void)updateUser:(MyUserInfo *) user;
 
 @end

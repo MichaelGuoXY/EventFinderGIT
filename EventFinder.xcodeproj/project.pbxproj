@@ -18,6 +18,11 @@
 		E00644A91BE04DD80065443D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E00644A81BE04DD70065443D /* Main.storyboard */; };
 		E00644AC1BE051590065443D /* MyMapEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E00644AB1BE051590065443D /* MyMapEventDetailViewController.m */; };
 		E007214E1BD2CCE8005E2668 /* MyLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E007214D1BD2CCE8005E2668 /* MyLeftMenuViewController.m */; };
+		E00BD0E71BF1CE24009A47DF /* MyNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E00BD0E61BF1CE24009A47DF /* MyNicknameViewController.m */; };
+		E00BD0EA1BF1CE3C009A47DF /* MyAgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E00BD0E91BF1CE3C009A47DF /* MyAgeViewController.m */; };
+		E00BD0F01BF1CE93009A47DF /* MyWhatsupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E00BD0EF1BF1CE93009A47DF /* MyWhatsupViewController.m */; };
+		E00BD0F31BF1CEB4009A47DF /* MyInterestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E00BD0F21BF1CEB4009A47DF /* MyInterestsTableViewController.m */; };
+		E00BD0F61BF1CFCB009A47DF /* MyGenderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E00BD0F51BF1CFCB009A47DF /* MyGenderTableViewController.m */; };
 		E01AD1851BDEB7F900D255EA /* MyUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E01AD1841BDEB7F900D255EA /* MyUserInfo.m */; };
 		E0204B371BCEEAE4007C0BCE /* bgd3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0204B361BCEEAE4007C0BCE /* bgd3.jpg */; };
 		E02062BA1BD1018A00B1325B /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E02062B51BD1018A00B1325B /* RECommonFunctions.m */; };
@@ -26,6 +31,7 @@
 		E025336F1BD9D945006F60C2 /* bgd6.png in Resources */ = {isa = PBXBuildFile; fileRef = E025336E1BD9D945006F60C2 /* bgd6.png */; };
 		E02B094B1BCE393B00C77700 /* myLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E02B094A1BCE393B00C77700 /* myLogo.png */; };
 		E02B094F1BCE3CED00C77700 /* bgd2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E02B094E1BCE3CED00C77700 /* bgd2.jpg */; };
+		E041F42D1BEAFF720075651E /* MyEventTableViewAddCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E041F42C1BEAFF720075651E /* MyEventTableViewAddCell.m */; };
 		E05A239F1BDABA1300CA5026 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = E05A239C1BDABA1300CA5026 /* star.png */; };
 		E05A23A01BDABA1300CA5026 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = E05A239D1BDABA1300CA5026 /* location.png */; };
 		E05A23A31BDABB8B00CA5026 /* date.png in Resources */ = {isa = PBXBuildFile; fileRef = E05A23A21BDABB8B00CA5026 /* date.png */; };
@@ -69,7 +75,6 @@
 		E0C3D0FF1BEA072F0069ECE5 /* MyHelpFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C3D0FE1BEA072F0069ECE5 /* MyHelpFunction.m */; };
 		E0C3D1011BEA0E240069ECE5 /* time.png in Resources */ = {isa = PBXBuildFile; fileRef = E0C3D1001BEA0E240069ECE5 /* time.png */; };
 		E0C4AE9C1BDC995800281FA8 /* MyDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */; };
-		E0CCB1391BCC879B0051E303 /* MySearchTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CCB1381BCC879B0051E303 /* MySearchTableTableViewController.m */; };
 		E0CCB13C1BCC8AD10051E303 /* MyEventInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CCB13B1BCC8AD10051E303 /* MyEventInfo.m */; };
 		E0CCB1451BCC8BB80051E303 /* MyEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CCB1441BCC8BB80051E303 /* MyEventTableViewCell.m */; };
 		E0CCB1481BCC9EE70051E303 /* MyEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CCB1471BCC9EE70051E303 /* MyEventDetailViewController.m */; };
@@ -95,6 +100,16 @@
 		E00644AB1BE051590065443D /* MyMapEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMapEventDetailViewController.m; sourceTree = "<group>"; };
 		E007214C1BD2CCE8005E2668 /* MyLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLeftMenuViewController.h; sourceTree = "<group>"; };
 		E007214D1BD2CCE8005E2668 /* MyLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLeftMenuViewController.m; sourceTree = "<group>"; };
+		E00BD0E51BF1CE24009A47DF /* MyNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNicknameViewController.h; sourceTree = "<group>"; };
+		E00BD0E61BF1CE24009A47DF /* MyNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNicknameViewController.m; sourceTree = "<group>"; };
+		E00BD0E81BF1CE3C009A47DF /* MyAgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAgeViewController.h; sourceTree = "<group>"; };
+		E00BD0E91BF1CE3C009A47DF /* MyAgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAgeViewController.m; sourceTree = "<group>"; };
+		E00BD0EE1BF1CE93009A47DF /* MyWhatsupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWhatsupViewController.h; sourceTree = "<group>"; };
+		E00BD0EF1BF1CE93009A47DF /* MyWhatsupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWhatsupViewController.m; sourceTree = "<group>"; };
+		E00BD0F11BF1CEB4009A47DF /* MyInterestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInterestsTableViewController.h; sourceTree = "<group>"; };
+		E00BD0F21BF1CEB4009A47DF /* MyInterestsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInterestsTableViewController.m; sourceTree = "<group>"; };
+		E00BD0F41BF1CFCB009A47DF /* MyGenderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGenderTableViewController.h; sourceTree = "<group>"; };
+		E00BD0F51BF1CFCB009A47DF /* MyGenderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGenderTableViewController.m; sourceTree = "<group>"; };
 		E01AD1831BDEB7F900D255EA /* MyUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUserInfo.h; sourceTree = "<group>"; };
 		E01AD1841BDEB7F900D255EA /* MyUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUserInfo.m; sourceTree = "<group>"; };
 		E0204B361BCEEAE4007C0BCE /* bgd3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bgd3.jpg; sourceTree = "<group>"; };
@@ -107,6 +122,8 @@
 		E025336E1BD9D945006F60C2 /* bgd6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgd6.png; sourceTree = "<group>"; };
 		E02B094A1BCE393B00C77700 /* myLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myLogo.png; sourceTree = "<group>"; };
 		E02B094E1BCE3CED00C77700 /* bgd2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bgd2.jpg; sourceTree = "<group>"; };
+		E041F42B1BEAFF720075651E /* MyEventTableViewAddCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventTableViewAddCell.h; sourceTree = "<group>"; };
+		E041F42C1BEAFF720075651E /* MyEventTableViewAddCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEventTableViewAddCell.m; sourceTree = "<group>"; };
 		E05A239C1BDABA1300CA5026 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		E05A239D1BDABA1300CA5026 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		E05A23A21BDABB8B00CA5026 /* date.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date.png; sourceTree = "<group>"; };
@@ -166,8 +183,6 @@
 		E0C3D1001BEA0E240069ECE5 /* time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = time.png; sourceTree = "<group>"; };
 		E0C4AE9A1BDC995800281FA8 /* MyDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDataManager.h; sourceTree = "<group>"; };
 		E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDataManager.m; sourceTree = "<group>"; };
-		E0CCB1371BCC879B0051E303 /* MySearchTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySearchTableTableViewController.h; sourceTree = "<group>"; };
-		E0CCB1381BCC879B0051E303 /* MySearchTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySearchTableTableViewController.m; sourceTree = "<group>"; };
 		E0CCB13A1BCC8AD10051E303 /* MyEventInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventInfo.h; sourceTree = "<group>"; };
 		E0CCB13B1BCC8AD10051E303 /* MyEventInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEventInfo.m; sourceTree = "<group>"; };
 		E0CCB1431BCC8BB80051E303 /* MyEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventTableViewCell.h; sourceTree = "<group>"; };
@@ -210,6 +225,23 @@
 				9FC24F1B978B86759D3AD22D /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E00BD0E11BF1CD6A009A47DF /* ProfileItemTVC */ = {
+			isa = PBXGroup;
+			children = (
+				E00BD0E51BF1CE24009A47DF /* MyNicknameViewController.h */,
+				E00BD0E61BF1CE24009A47DF /* MyNicknameViewController.m */,
+				E00BD0E81BF1CE3C009A47DF /* MyAgeViewController.h */,
+				E00BD0E91BF1CE3C009A47DF /* MyAgeViewController.m */,
+				E00BD0F41BF1CFCB009A47DF /* MyGenderTableViewController.h */,
+				E00BD0F51BF1CFCB009A47DF /* MyGenderTableViewController.m */,
+				E00BD0EE1BF1CE93009A47DF /* MyWhatsupViewController.h */,
+				E00BD0EF1BF1CE93009A47DF /* MyWhatsupViewController.m */,
+				E00BD0F11BF1CEB4009A47DF /* MyInterestsTableViewController.h */,
+				E00BD0F21BF1CEB4009A47DF /* MyInterestsTableViewController.m */,
+			);
+			name = ProfileItemTVC;
 			sourceTree = "<group>";
 		};
 		E062BE671BD9BF9B00093106 /* image */ = {
@@ -307,6 +339,7 @@
 				E066593E1BCA351300DA92A4 /* Assets.xcassets */,
 				E06659401BCA351300DA92A4 /* LaunchScreen.storyboard */,
 				E06659431BCA351300DA92A4 /* Info.plist */,
+				E00BD0E11BF1CD6A009A47DF /* ProfileItemTVC */,
 				E06659321BCA351300DA92A4 /* Supporting Files */,
 			);
 			path = MyEventFinder;
@@ -337,14 +370,14 @@
 				E071CF2B1BD6E4C400163839 /* MyPostTableViewCell.m */,
 				E0CCB1431BCC8BB80051E303 /* MyEventTableViewCell.h */,
 				E0CCB1441BCC8BB80051E303 /* MyEventTableViewCell.m */,
+				E041F42B1BEAFF720075651E /* MyEventTableViewAddCell.h */,
+				E041F42C1BEAFF720075651E /* MyEventTableViewAddCell.m */,
 				E0CCB13A1BCC8AD10051E303 /* MyEventInfo.h */,
 				E0CCB13B1BCC8AD10051E303 /* MyEventInfo.m */,
 				E02062B41BD1018A00B1325B /* RECommonFunctions.h */,
 				E02062B51BD1018A00B1325B /* RECommonFunctions.m */,
 				E02062B61BD1018A00B1325B /* RESideMenu.h */,
 				E02062B71BD1018A00B1325B /* RESideMenu.m */,
-				E0CCB1371BCC879B0051E303 /* MySearchTableTableViewController.h */,
-				E0CCB1381BCC879B0051E303 /* MySearchTableTableViewController.m */,
 				E06659331BCA351300DA92A4 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -384,6 +417,7 @@
 				TargetAttributes = {
 					E066592E1BCA351300DA92A4 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 6PA6N75D4X;
 					};
 				};
 			};
@@ -514,12 +548,13 @@
 				E01AD1851BDEB7F900D255EA /* MyUserInfo.m in Sources */,
 				E004AE2A1BD3EE4B00808546 /* HomeRootViewController.m in Sources */,
 				E0C258731BCB5A8D00CFF08A /* MyNewPostViewController.m in Sources */,
+				E00BD0F01BF1CE93009A47DF /* MyWhatsupViewController.m in Sources */,
 				E02062BC1BD1018A00B1325B /* UIViewController+RESideMenu.m in Sources */,
 				E08C9B891BE31CCD00023F4D /* MyCategoryTableViewController.m in Sources */,
+				E00BD0F61BF1CFCB009A47DF /* MyGenderTableViewController.m in Sources */,
 				E00644AC1BE051590065443D /* MyMapEventDetailViewController.m in Sources */,
 				E0CCB1451BCC8BB80051E303 /* MyEventTableViewCell.m in Sources */,
 				E0BE362F1BDF4B6100491AD5 /* MyCheckString.m in Sources */,
-				E0CCB1391BCC879B0051E303 /* MySearchTableTableViewController.m in Sources */,
 				E02062BB1BD1018A00B1325B /* RESideMenu.m in Sources */,
 				E0C3D0FF1BEA072F0069ECE5 /* MyHelpFunction.m in Sources */,
 				E066593A1BCA351300DA92A4 /* ViewController.m in Sources */,
@@ -530,11 +565,15 @@
 				E06659341BCA351300DA92A4 /* main.m in Sources */,
 				E08C9B8F1BE3226E00023F4D /* MyCategorySearchViewController.m in Sources */,
 				E076AD1A1BD4C364006A1D07 /* HideAndShowTabbarFunction.m in Sources */,
+				E041F42D1BEAFF720075651E /* MyEventTableViewAddCell.m in Sources */,
 				E0D8C2071BD0452500BEDA42 /* MySearchViewController.m in Sources */,
 				E071CF2F1BD6EAD500163839 /* MyPostTableViewController.m in Sources */,
 				E066594F1BCA398E00DA92A4 /* MyMapViewController.m in Sources */,
+				E00BD0EA1BF1CE3C009A47DF /* MyAgeViewController.m in Sources */,
+				E00BD0E71BF1CE24009A47DF /* MyNicknameViewController.m in Sources */,
 				E0C4AE9C1BDC995800281FA8 /* MyDataManager.m in Sources */,
 				E0CECB511BCA5485000E28C4 /* MyProfileViewController.m in Sources */,
+				E00BD0F31BF1CEB4009A47DF /* MyInterestsTableViewController.m in Sources */,
 				E007214E1BD2CCE8005E2668 /* MyLeftMenuViewController.m in Sources */,
 				E071CF2C1BD6E4C400163839 /* MyPostTableViewCell.m in Sources */,
 			);
@@ -641,11 +680,14 @@
 			baseConfigurationReference = EF614F77D78CCE6C7915A1DA /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MyEventFinder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.xg229.MyEventFinder;
 				PRODUCT_NAME = EventFinder;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -654,11 +696,14 @@
 			baseConfigurationReference = 9FC24F1B978B86759D3AD22D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MyEventFinder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.xg229.MyEventFinder;
 				PRODUCT_NAME = EventFinder;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

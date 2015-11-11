@@ -1,23 +1,18 @@
 //
-//  MyCategoryTableViewController.m
-//  MyEventFinder
+//  MyGenderTableViewController.m
+//  EventFinder
 //
-//  Created by Guo Xiaoyu on 10/29/15.
+//  Created by Guo Xiaoyu on 11/10/15.
 //  Copyright © 2015 Xiaoyu Guo. All rights reserved.
 //
 
-#import "MyCategoryTableViewController.h"
-#import "MyCategoryTableViewCell.h"
-#import "MyCategorySearchViewController.h"
-#import "HideAndShowTabbarFunction.h"
+#import "MyGenderTableViewController.h"
 
-@interface MyCategoryTableViewController ()
-
+@interface MyGenderTableViewController ()
+@property NSUserDefaults *usrDefault;
 @end
 
-@implementation MyCategoryTableViewController {
-    NSArray *titles;
-    NSArray *images;
+@implementation MyGenderTableViewController {
 }
 
 - (void)viewDidLoad {
@@ -28,15 +23,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    titles = @[@"Free Food", @"Professional", @"Athletic", @"Social", @"Political", @"Seminar", @"Cornell Sponsored"];
-    images = @[@"Free Food.jpg", @"Professional.jpg", @"Athletic.jpg", @"Social.jpg", @"Political.jpg", @"Seminar.jpg", @"Cornell Sponsored.jpg"];
-
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    [HideAndShowTabbarFunction showTabBar:self.tabBarController];
+    self.usrDefault = [NSUserDefaults standardUserDefaults];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,39 +32,71 @@
 }
 
 #pragma mark - Table view data source
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 251;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+
+    return 2;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"GenderCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    static NSString *CellIdentifier = @"CategoryCell";
-    MyCategoryTableViewCell *cell = (MyCategoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
     if (cell == nil) {
-        cell = [[MyCategoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    cell.nameOfCategory.text = titles[indexPath.row];
-    if (indexPath.row == 6) {
-        cell.nameOfCategory.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:41];
-        //Helvetica Neue Bold 45.0
+    
+    if ([[self.usrDefault objectForKey:@"gender"] isEqualToString:@"male"]) {
+        if (indexPath.row == 0) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
-    cell.imageOfCategory.image = [UIImage imageNamed:images[indexPath.row]];
-
+    else if ([[self.usrDefault objectForKey:@"gender"] isEqualToString:@"female"]) {
+        if (indexPath.row == 0) {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        else {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+    }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    switch (indexPath.row) {
+        case 0:
+            cell.textLabel.text = @"male";
+            break;
+        case 1:
+            cell.textLabel.text = @"female";
+            break;
+        default:
+            break;
+    }
+    
     return cell;
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        [self.usrDefault setObject:@"male" forKey:@"gender"];
+    }
+    else if (indexPath.row == 1) {
+        [self.usrDefault setObject:@"female" forKey:@"gender"];
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView reloadData];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -112,25 +131,14 @@
 }
 */
 
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"showCategoryEvent"]) {
-        NSIndexPath *indexPath = nil;
-        
-        indexPath = [self.tableView indexPathForSelectedRow];
-        NSString *tagSelected = [titles objectAtIndex:indexPath.row];
-
-
-        MyCategorySearchViewController *destViewController = segue.destinationViewController;
-        destViewController.tag = tagSelected;
-    }
-
 }
-
+*/
 
 @end

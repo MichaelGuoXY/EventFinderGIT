@@ -13,6 +13,7 @@
 #import "UIViewController+RESideMenu.h"
 #import "HideAndShowTabbarFunction.h"
 #import "MyDataManager.h"
+#import "MyEventTableViewAddCell.h"
 
 @interface MySearchViewController () {
 
@@ -21,12 +22,15 @@
 @property NSUserDefaults *usrDefault;
 @property UIRefreshControl *myRC;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *myMenuButton;
+@property MyUserInfo *user;
 
 @end
 
 @implementation MySearchViewController {
     NSMutableArray *events;
     NSArray *searchResults;
+    MyEventInfo *thisEvent;
+    int flag;
 }
 
 - (void)viewDidLoad {
@@ -38,8 +42,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
-    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
+//    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     
     // set delegate and dataSource
     self.searchDisplayController.searchResultsTableView.delegate = self;
@@ -62,6 +66,12 @@
      name:@"didFinishFetchEvents"
      object:nil];
     
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(useNotificationWithString:)
+     name:@"didFinishFetchUserInfo"
+     object:nil];
+    
     [self reloadView];
 }
 
@@ -78,9 +88,20 @@
 
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
-    if ([notification.name isEqual:@"didFinishFetchEvents"]) {
+    if ([notification.name isEqualToString:@"didFinishFetchEvents"]) {
         [self.myTableView reloadData];
         [self.myRC endRefreshing];
+    }
+    if ([notification.name isEqualToString:@"didFinishFetchUserInfo"]) {
+        if (flag == 1) {
+            flag = 0;
+            [MyDataManager saveParticipantToEvent:thisEvent withUser:self.user];
+
+        }
+        if (flag == 2) {
+            flag = 0;
+            [MyDataManager removeParticipantFromEvent:thisEvent withUser:self.user];
+        }
     }
 }
 
@@ -108,60 +129,109 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 263;
+    if (indexPath.row == 0) {
+        return 342;
+    }
+    else {
+        return 29;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    return 2.5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return 2.5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CustomTableCell";
+    static NSString *CellIdentifier1 = @"CustomTableCell";
+    static NSString *CellIdentifier2= @"CustomCellAddition";
 //    MyEventTableViewCell *cell;
 //    if (tableView == self.searchDisplayController.searchResultsTableView) {
 //        cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
 //    }else{
 //        cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 //    }
-    
-    MyEventTableViewCell *cell = (MyEventTableViewCell *)[self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.imageOfEvent.clipsToBounds = YES;
-    cell.imageOfEvent.layer.cornerRadius = 50;
-    cell.imageOfPoster.clipsToBounds = YES;
-    cell.imageOfPoster.layer.cornerRadius = 20;
-    
-    // Configure the cell...
-    if (cell == nil) {
-        cell = [[MyEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    if (indexPath.row == 0) {
+        MyEventTableViewCell *cell = (MyEventTableViewCell *)[self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier1];
+        cell.imgviewOfEvent.clipsToBounds = YES;
+        cell.imgviewOfEvent.layer.cornerRadius = 40;
+        cell.authorProfileImgView.clipsToBounds = YES;
+        cell.authorProfileImgView.layer.cornerRadius = 20;
+        
+        // Configure the cell...
+        if (cell == nil) {
+            cell = [[MyEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier1];
+        }
+        
+        // Display MyEventTableViewCell in the table cell
+        MyEventInfo *event = nil;
+        if (tableView == self.myTableView) {
+            event = [events objectAtIndex:indexPath.section];
+        } else {
+            event = [searchResults objectAtIndex:indexPath.section];
+        }
+        
+        cell.nameOfEvent.text = event.nameOfEvent;
+        if (event.imageOfEvent != nil)
+            cell.imgviewOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+        cell.timeOfEvent.text = [[event.startingTime stringValue] stringByAppendingString:[event.endingTime stringValue]];
+        cell.locationOfEvent.text = event.locationOfEvent;
+        if (event.authorProfileImg != nil)
+            cell.authorProfileImgView.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:event.authorProfileImg options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+        cell.authorOfEvent.text = event.authorName;
+        cell.tagOfEvent.text = event.primaryTag;
+        return cell;
     }
-    
-    // Display MyEventTableViewCell in the table cell
-    MyEventInfo *event = nil;
-    if (tableView == self.myTableView) {
-        event = [events objectAtIndex:indexPath.section];
-    } else {
-        event = [searchResults objectAtIndex:indexPath.section];
+    else {
+        
+        MyEventTableViewAddCell *cell = (MyEventTableViewAddCell *)[self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier2];
+        // Configure the cell...
+        if (cell == nil) {
+            cell = [[MyEventTableViewAddCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
+        }
+        
+        // Display MyEventTableViewCell in the table cell
+        MyEventInfo *event = nil;
+        if (tableView == self.myTableView) {
+            event = [events objectAtIndex:indexPath.section];
+        } else {
+            event = [searchResults objectAtIndex:indexPath.section];
+        }
+        
+        cell.joinBtn.tag = indexPath.section;
+        [cell.joinBtn addTarget:self action:@selector(joinBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
     }
-    
-    cell.nameOfEvent.text = event.nameOfEvent;
-    cell.imageOfEvent.image = [UIImage imageWithData:event.imageOfEvent];
-    cell.timeOfEvent.text = event.timeOfEvent;
-    cell.locationOfEvent.text = event.locationOfEvent;
-    cell.imageOfPoster.image = [UIImage imageWithData:event.imageOfPoster];
-    cell.dateOfEvent.text = event.dateOfEvent;
-    cell.posterOfEvent.text = event.posterOfEvent;
-    cell.tagOfEvent.text = event.tagOfEvent;
-    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.myTableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)joinBtnPressed: (id)sender{
+    UIButton *joinBtn = (UIButton *)sender;
+    thisEvent = [events objectAtIndex:joinBtn.tag];
+    if (joinBtn.currentTitleColor == [UIColor redColor]) {
+        [joinBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        flag = 2;
+        self.user = [MyDataManager fetchUser:[self.usrDefault objectForKey:@"username"]];
+    }
+    else {
+        [joinBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        // fetch user info then save it to this event;
+        flag = 1;
+        self.user = [MyDataManager fetchUser:[self.usrDefault objectForKey:@"username"]];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

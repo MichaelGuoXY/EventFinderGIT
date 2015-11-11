@@ -85,18 +85,21 @@
      selector:@selector(useNotificationWithString:)
      name:@"didFinishFetchUserInfo"
      object:nil];
+    self.user = [MyDataManager fetchUser:[usrDefault objectForKey:@"username"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    self.user = [MyDataManager fetchUser:[usrDefault objectForKey:@"Usrname"]];
+    
 }
 
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
-    [profileViewButton setImage:[UIImage imageWithData:self.user.usrProfileImage] forState:UIControlStateNormal];
-    LabelOfMyPostsNumber.text = [@(self.user.myPostsNumber) stringValue];
-    labelOfMyAttendanceNumber.text = [@(self.user.myAttendanceNumber) stringValue];
+    if ([notification.name isEqualToString:@"didFinishFetchUserInfo"]) {
+        [profileViewButton setImage:[UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:self.user.usrProfileImage options:NSDataBase64DecodingIgnoreUnknownCharacters]] forState:UIControlStateNormal];
+        LabelOfMyPostsNumber.text = [self.user.myPostsNumber stringValue];
+        labelOfMyAttendanceNumber.text = [self.user.myAttendanceNumber stringValue];
+    }
 }
 
 - (void)buttonDidPressed{
@@ -143,12 +146,11 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     [profileViewButton setImage:chosenImage forState:UIControlStateNormal];
-    usrProfileImage = UIImageJPEGRepresentation(chosenImage, 0.5);
-    self.user.usrProfileImage = usrProfileImage;
-    [MyDataManager saveUser:self.user];
+    usrProfileImage = UIImageJPEGRepresentation(chosenImage, 1);
+    self.user.usrProfileImage = [usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [MyDataManager updateUser:self.user];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
