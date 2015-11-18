@@ -29,8 +29,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    titles = @[@"Free Food", @"Professional", @"Athletic", @"Social", @"Political", @"Seminar", @"Cornell Sponsored"];
-    images = @[@"Free Food.jpg", @"Professional.jpg", @"Athletic.jpg", @"Social.jpg", @"Political.jpg", @"Seminar.jpg", @"Cornell Sponsored.jpg"];
+    titles = @[@"Free Food", @"Professional Events", @"Athletics", @"Social Events", @"Political Events", @"Seminars", @"Performance Events", @"Cornell Sponsored"];
+    images = @[@"Free Food.jpg", @"Professional.jpg", @"Athletics.jpg", @"Social.jpg", @"Political.jpg", @"Seminars.jpg", @"Performance.jpg", @"Cornell Sponsored.jpg"];
 
 }
 
@@ -54,7 +54,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 8;
 }
 
 
@@ -68,7 +68,10 @@
         cell = [[MyCategoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.nameOfCategory.text = titles[indexPath.row];
-    if (indexPath.row == 6) {
+    if (indexPath.row == 1 || indexPath.row == 6 ) {
+        cell.nameOfCategory.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:38];
+    }
+    if (indexPath.row == 7) {
         cell.nameOfCategory.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:41];
         //Helvetica Neue Bold 45.0
     }

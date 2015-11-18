@@ -1,0 +1,111 @@
+//
+//  MyCalendarEventDetailViewController.m
+//  CampusConqueror
+//
+//  Created by Guo Xiaoyu on 11/15/15.
+//  Copyright © 2015 Xiaoyu Guo. All rights reserved.
+//
+
+#import "MyCalendarEventDetailViewController.h"
+#import "HideAndShowTabbarFunction.h"
+#import <GoogleMaps/GoogleMaps.h>
+#import "MyHelpFunction.h"
+@interface MyCalendarEventDetailViewController () <GMSMapViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UINavigationItem *myNGIT;
+@property (nonatomic, strong) GMSMapView *mapView;
+
+@end
+
+@implementation MyCalendarEventDetailViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    // things for scroller view
+    [self.scroller setScrollEnabled:YES];
+    [self.scroller setContentSize:CGSizeMake(320, 900)];
+    // init all elements
+    self.myNGIT.title = self.event.nameOfEvent;
+    self.myNGIT.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"< Calendar" style:UIBarButtonItemStylePlain target:self action:@selector(returnCalendar:)];
+    self.authorOfEvent.text = self.event.authorName;
+    self.nameOfEvent.text = self.event.nameOfEvent;
+    self.startingTime.text = [MyHelpFunction parseTimeFromOrigin:self.event.startingTime];
+    self.endingTime.text = [MyHelpFunction parseTimeFromOrigin:self.event.endingTime];
+    self.locationOfEvent.text = self.event.locationOfEvent;
+    self.introOfEvent.text = self.event.introOfEvent;
+    self.timeOfPost.text = [MyHelpFunction parseTimeFromOrigin:self.event.postTime];
+    NSString *string = self.event.primaryTag;
+    for (NSString *str in self.event.secondaryTag) {
+        string = [string stringByAppendingFormat:@", %@", str];
+    }
+    self.tagOfEvent.text = string;
+    self.imgviewOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[self.event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+    self.authorProfileImg.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:self.event.authorProfileImg options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+    self.authorProfileImg.clipsToBounds = YES;
+    self.authorProfileImg.layer.cornerRadius = 27;
+    // set background
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
+    // init camera with google map
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.event.latOfEvent doubleValue]
+                                                            longitude:[self.event.lngOfEvent doubleValue]
+                                                                 zoom:16
+                                                              bearing:0
+                                                         viewingAngle:0];
+    
+    self.mapView = [GMSMapView mapWithFrame:self.mapViewContainer.bounds camera:camera];
+    self.mapView.delegate = self;
+    self.mapView.mapType = kGMSTypeNormal;
+    self.mapView.myLocationEnabled = YES;
+    self.mapView.settings.compassButton = YES;
+    self.mapView.settings.myLocationButton = YES;
+    [self.mapView setMinZoom:10 maxZoom:30];
+    [self.mapViewContainer addSubview:self.mapView];
+    // Creates a marker in the center of the map.
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake([self.event.latOfEvent doubleValue], [self.event.lngOfEvent doubleValue]);
+    marker.title = self.event.nameOfEvent;
+    marker.snippet = self.event.locationOfEvent;
+    marker.map = self.mapView;
+}
+
+- (void)returnCalendar: (id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
+    [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
+
+@end

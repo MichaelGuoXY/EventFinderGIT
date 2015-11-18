@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/guoxiaoyu/Desktop/EventFinderGIT/EventFinder.xcodeproj">
+      location = "group:/Users/guoxiaoyu/Desktop/EventFinderGIT/CampusConqueror.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

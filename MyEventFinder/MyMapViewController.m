@@ -10,12 +10,18 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "MyDataManager.h"
 #import "MyEventDetailViewController.h"
+#import "MyMapEventDetailViewController.h"
 #import "HideAndShowTabbarFunction.h"
 #import "MyHelpFunction.h"
+#import <CoreLocation/CoreLocation.h>
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
-@interface MyMapViewController () <GMSMapViewDelegate>
+@interface MyMapViewController () <GMSMapViewDelegate, CLLocationManagerDelegate>
+
 @property (nonatomic, strong) GMSMapView *mapView;
 @property (nonatomic, strong) NSMutableSet *markers;
+@property(nonatomic,retain) CLLocationManager *locationManager;
+
 @end
 
 @implementation MyMapViewController {
@@ -42,12 +48,18 @@
     [self.mapView setMinZoom:10 maxZoom:30];
     
     [self.view addSubview:self.mapView];
-//    // Creates a marker in the center of the map.
-//    GMSMarker *marker = [[GMSMarker alloc] init];
-//    marker.position = CLLocationCoordinate2DMake(42.444782, -76.484174);
-//    marker.title = @"Free Food";
-//    marker.snippet = @"Carpentar Library";
-//    marker.map = self.mapView;
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+#ifdef __IPHONE_8_0
+    if(IS_OS_8_OR_LATER) {
+        // Use one or the other, not both. Depending on what you put in info.plist
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+#endif
     
     // init notification
     [[NSNotificationCenter defaultCenter]
@@ -55,17 +67,32 @@
      selector:@selector(useNotificationWithString:)
      name:@"didFinishFetchEvents"
      object:nil];
+}
 
+- (BOOL)didTapMyLocationButtonForMapView:(GMSMapView *)mapView {
+    if (self.mapView.isMyLocationEnabled) {
+        self.mapView.myLocationEnabled = NO;
+        [self.locationManager stopUpdatingLocation];
+    }
+    else {
+        self.mapView.myLocationEnabled = YES;
+        [self.locationManager startUpdatingLocation];
+    }
+    return YES;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    [self.mapView animateToLocation:CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [HideAndShowTabbarFunction showTabBar:self.tabBarController];
     // load events
-    events = [[NSMutableArray alloc] init];
+    [self.mapView clear];
     events = [MyDataManager fetchEvent];
-    
 }
+
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
     if ([notification.name isEqualToString:@"didFinishFetchEvents"]) {
@@ -120,10 +147,10 @@
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker {
     [self filterEvensToMarker:marker.title];
-    MyEventDetailViewController *myEDVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MapEventDetailViewController"];
-    myEDVC.event =filterResult;
+    MyMapEventDetailViewController *myMEDVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MapEventDetailViewController"];
+    myMEDVC.event =filterResult;
     
-    [MyHelpFunction segueModalWithRandomTransition:self viewController:myEDVC];
+    [MyHelpFunction segueModalWithRandomTransition:self viewController:myMEDVC];
 }
 
 - (BOOL)prefersStatusBarHidden {

@@ -32,6 +32,10 @@
     usrDefault = [NSUserDefaults standardUserDefaults];
     usrProfileImage = [[NSData alloc] init];
     
+    NSData *defaultProfileImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"], 1);
+    NSString *defaultProfileImageString = [defaultProfileImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [usrDefault setObject:defaultProfileImageString forKey:@"usrProfileImage"];
+    
     self.tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 38 * 7) / 2.0f, self.view.frame.size.width, 38 * 7) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
@@ -85,12 +89,12 @@
      selector:@selector(useNotificationWithString:)
      name:@"didFinishFetchUserInfo"
      object:nil];
-    self.user = [MyDataManager fetchUser:[usrDefault objectForKey:@"username"]];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    
+    self.user = [MyDataManager fetchUser:[usrDefault objectForKey:@"username"]];
 }
 
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
@@ -99,6 +103,7 @@
         [profileViewButton setImage:[UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:self.user.usrProfileImage options:NSDataBase64DecodingIgnoreUnknownCharacters]] forState:UIControlStateNormal];
         LabelOfMyPostsNumber.text = [self.user.myPostsNumber stringValue];
         labelOfMyAttendanceNumber.text = [self.user.myAttendanceNumber stringValue];
+        [usrDefault setObject:self.user.usrProfileImage forKey:@"usrProfileImage"];
     }
 }
 
@@ -148,6 +153,7 @@
     [profileViewButton setImage:chosenImage forState:UIControlStateNormal];
     usrProfileImage = UIImageJPEGRepresentation(chosenImage, 1);
     self.user.usrProfileImage = [usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [usrDefault setObject:self.user.usrProfileImage forKey:@"usrProfileImage"];
     [MyDataManager updateUser:self.user];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];

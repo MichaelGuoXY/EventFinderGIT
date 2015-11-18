@@ -33,5 +33,41 @@
     [thisVC presentViewController:nextVC animated:YES completion:nil];
 }
 
++ (NSString *)parseTimeFromOrigin: (NSNumber *) inputTime{
+    NSInteger time = [inputTime integerValue];
+    NSString *minutes = [NSString stringWithFormat:@"%ld",(time % 100)];
+    minutes = [self forceToBe2Digits:minutes];
+    time /= 100;
+    NSInteger _hours = time % 100;
+    NSString *AM_PM;
+    if (_hours > 12) {
+        AM_PM = @"PM";
+        _hours -= 12;
+    }
+    else {
+        AM_PM = @"AM";
+    }
+    NSString *hours = [NSString stringWithFormat:@"%ld",(long)_hours];
+    hours = [self forceToBe2Digits:hours];
+    time /= 100;
+    NSString *day = [NSString stringWithFormat:@"%ld",time % 100];
+    day = [self forceToBe2Digits:day];
+    time /= 100;
+    NSString *month = [NSString stringWithFormat:@"%ld",time % 100];
+    month = [self forceToBe2Digits:month];
+    time /= 100;
+    NSString *year = [NSString stringWithFormat:@"%ld",(long)time];
+    NSString *result = [month stringByAppendingFormat:@"/%@/%@ %@:%@ %@", day,year,hours,minutes,AM_PM];
+    return result;
+}
+
++ (NSString *)forceToBe2Digits: (NSString *) inputString{
+    if ([inputString integerValue] < 10) {
+        return [NSString stringWithFormat:@"0%@",inputString];
+    }
+    else {
+        return inputString;
+    }
+}
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MyInterestsTableViewController.h"
+#import "EventTagCell.h"
 
 @interface MyInterestsTableViewController ()
 @property NSUserDefaults *usrDefault;
@@ -55,46 +56,60 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 7;
+    return 8;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 65;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"InterestCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    EventTagCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[EventTagCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"Free Food";
+            cell.tagLabelOfEvent.text = @"Free Food";
+            cell.imageViewOfEvent.image = [UIImage imageNamed:@"Free Food.jpg"];
             break;
         case 1:
-            cell.textLabel.text = @"Professional";
+            cell.tagLabelOfEvent.text = @"Professional Events";
+            cell.imageViewOfEvent.image = [UIImage imageNamed:@"Professional.jpg"];
             break;
         case 2:
-            cell.textLabel.text = @"Athletic";
+            cell.tagLabelOfEvent.text = @"Athletics";
+            cell.imageViewOfEvent.image = [UIImage imageNamed:@"Athletics.jpg"];
             break;
         case 3:
-            cell.textLabel.text = @"Social";
+            cell.tagLabelOfEvent.text = @"Social Events";
+            cell.imageViewOfEvent.image = [UIImage imageNamed:@"Social.jpg"];
             break;
         case 4:
-            cell.textLabel.text = @"Political";
+            cell.tagLabelOfEvent.text = @"Political Events";
+            cell.imageViewOfEvent.image = [UIImage imageNamed:@"Political.jpg"];
             break;
         case 5:
-            cell.textLabel.text = @"Seminar";
+            cell.tagLabelOfEvent.text = @"Seminars";
+            cell.imageViewOfEvent.image = [UIImage imageNamed:@"Seminars.jpg"];
             break;
         case 6:
-            cell.textLabel.text = @"Cornell Sponsored";
+            cell.tagLabelOfEvent.text = @"Performance Events";
+            cell.imageViewOfEvent.image = [UIImage imageNamed:@"Performance.jpg"];
+            break;
+        case 7:
+            cell.tagLabelOfEvent.text = @"Cornell Sponsored";
+            cell.imageViewOfEvent.image = [UIImage imageNamed:@"Cornell Sponsored.jpg"];
             break;
         default:
             break;
     }
     
-    if ([interestsArray containsObject:cell.textLabel.text]) {
+    if ([interestsArray containsObject:cell.tagLabelOfEvent.text]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else {
@@ -116,46 +131,54 @@
             }
             break;
         case 1:
-            if ([interestsArray containsObject:@"Professional"]) {
-                [interestsArray removeObject:@"Professional"];
+            if ([interestsArray containsObject:@"Professional Events"]) {
+                [interestsArray removeObject:@"Professional Events"];
             }
             else {
-                [interestsArray addObject:@"Professional"];
+                [interestsArray addObject:@"Professional Events"];
             }
             break;
         case 2:
-            if ([interestsArray containsObject:@"Athletic"]) {
-                [interestsArray removeObject:@"Athletic"];
+            if ([interestsArray containsObject:@"Athletics"]) {
+                [interestsArray removeObject:@"Athletics"];
             }
             else {
-                [interestsArray addObject:@"Athletic"];
+                [interestsArray addObject:@"Athletics"];
             }
             break;
         case 3:
-            if ([interestsArray containsObject:@"Social"]) {
-                [interestsArray removeObject:@"Social"];
+            if ([interestsArray containsObject:@"Social Events"]) {
+                [interestsArray removeObject:@"Social Events"];
             }
             else {
-                [interestsArray addObject:@"Social"];
+                [interestsArray addObject:@"Social Events"];
             }
             break;
         case 4:
-            if ([interestsArray containsObject:@"Political"]) {
-                [interestsArray removeObject:@"Political"];
+            if ([interestsArray containsObject:@"Political Events"]) {
+                [interestsArray removeObject:@"Political Events"];
             }
             else {
-                [interestsArray addObject:@"Political"];
+                [interestsArray addObject:@"Political Events"];
             }
             break;
         case 5:
-            if ([interestsArray containsObject:@"Seminar"]) {
-                [interestsArray removeObject:@"Seminar"];
+            if ([interestsArray containsObject:@"Seminars"]) {
+                [interestsArray removeObject:@"Seminars"];
             }
             else {
-                [interestsArray addObject:@"Seminar"];
+                [interestsArray addObject:@"Seminars"];
             }
             break;
         case 6:
+            if ([interestsArray containsObject:@"Performance Events"]) {
+                [interestsArray removeObject:@"Performance Events"];
+            }
+            else {
+                [interestsArray addObject:@"Performance Events"];
+            }
+            break;
+        case 7:
             if ([interestsArray containsObject:@"Cornell Sponsored"]) {
                 [interestsArray removeObject:@"Cornell Sponsored"];
             }

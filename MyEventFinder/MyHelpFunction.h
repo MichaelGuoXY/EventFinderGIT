@@ -12,6 +12,6 @@
 @interface MyHelpFunction : NSObject
 
 + (void) segueModalWithRandomTransition:(UIViewController *) thisVC viewController:(UIViewController *) nextVC;
-
++ (NSString *)parseTimeFromOrigin: (NSNumber *) inputTime;
 
 @end

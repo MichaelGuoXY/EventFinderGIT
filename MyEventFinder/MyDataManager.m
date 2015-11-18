@@ -13,8 +13,6 @@
 
 @implementation MyDataManager
 
-static int numberOfParticipants = 0;
-
 + (void)saveEvent:(MyEventInfo *) event {
     /*
      nameOfEvent: String,
@@ -49,11 +47,10 @@ static int numberOfParticipants = 0;
                                 @"introOfEvent" : event.introOfEvent,
                                 @"restrictionOfEvent" : event.restricttionOfEvent,
                                 @"imageOfEvent" : event.imageOfEvent,
-                                @"postDate" : event.postDate,
                                 @"postTime" : event.postTime,
                                 @"authorName" : event.authorName,
                                 @"authorProfileImg" : event.authorProfileImg,
-                                @"numberOfViewed" : event.numberOfViewed
+                                @"numberOfViewed" : @0
                                 };
     // Create a reference to a Firebase database URL
     Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
@@ -75,6 +72,8 @@ static int numberOfParticipants = 0;
                 event.nameOfEvent = [event_dict objectForKey:@"nameOfEvent"];
                 event.startingTime = [event_dict objectForKey:@"startingTime"];
                 event.endingTime = [event_dict objectForKey:@"endingTime"];
+                event.startingTimeString = [event.startingTime stringValue];
+                event.endingTimeString = [event.endingTime stringValue];
                 event.locationOfEvent = [event_dict objectForKey:@"locationOfEvent"];
                 event.introOfEvent = [event_dict objectForKey:@"introOfEvent"];
                 event.restricttionOfEvent = [event_dict objectForKey:@"restrictionOfEvent"];
@@ -86,7 +85,6 @@ static int numberOfParticipants = 0;
                 // array
                 event.imageOfEvent = [event_dict objectForKey:@"imageOfEvent"];
                 event.postTime = [event_dict objectForKey:@"postTime"];
-                event.postDate = [event_dict objectForKey:@"postDate"];
                 event.authorName = [event_dict objectForKey:@"authorName"];
                 event.authorProfileImg = [event_dict objectForKey:@"authorProfileImg"];
                 event.numberOfViewed = [event_dict objectForKey:@"numberOfViewed"];

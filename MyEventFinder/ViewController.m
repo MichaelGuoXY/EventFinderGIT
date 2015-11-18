@@ -27,8 +27,6 @@
     NSMutableArray *mutableDataArray;
     bool isSignIn;
     MyEventInfo *event1;
-    MyUserInfo *user1;
-    MyUserInfo *user2;
 }
 
 - (void)viewDidLoad {
@@ -129,14 +127,13 @@
     event1.lngOfEvent = @(-76.484174);
     event1.locationOfEvent = @"Olin";
     event1.primaryTag = @"Professional";
-    event1.secondaryTag = @[@"Free food", @"Seminor"];
+    event1.secondaryTag = @[@"Free Food", @"Seminar"];
     event1.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
     event1.restricttionOfEvent = @"restriction";
     event1.imageOfEvent = @[[UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-    event1.postDate = @11122015;
     event1.postTime = @1212;
-    event1.authorName = @"Xiaoyu";
-    event1.authorProfileImg = [UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    event1.authorName = @"Yuxin";
+    event1.authorProfileImg = [UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     MyEventInfo *event2 = [MyEventInfo new];
     event2.nameOfEvent = @"Hello World";
@@ -144,42 +141,15 @@
     event2.endingTime = @201509091200;
     event2.latOfEvent = @42.444782;
     event2.lngOfEvent = @(-76.484174);
-    event2.locationOfEvent = @"Olin";
-    event2.primaryTag = @"Professional";
-    event2.secondaryTag = @[@"Free food", @"Seminor"];
+    event2.locationOfEvent = @"Uris";
+    event2.primaryTag = @"Athletic";
+    event2.secondaryTag = @[@"Free Food", @"Cornell Sponsored"];
     event2.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
     event2.restricttionOfEvent = @"restriction";
-    event2.imageOfEvent = @[[UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-    event2.postDate = @11122015;
+    event2.imageOfEvent = @[[UIImageJPEGRepresentation([UIImage imageNamed:@"voiceOfCornell.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
     event2.postTime = @1212;
     event2.authorName = @"Xiaoyu";
-    event2.authorProfileImg = [UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    
-    user1 = [MyUserInfo new];
-    user1.username = @"Xiaoyu";
-    user1.password = @"123";
-    user1.nickname = @"Michael";
-    user1.age = @21;
-    user1.gender = @"male";
-    user1.whatsup = @"";
-    user1.usrProfileImage = [UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    user1.myPostsNumber = @12;
-    user1.myAttendanceNumber = @12;
-    user1.interests = @[@"Professional", @"Free food"];
-//    [MyDataManager saveUser:user];
-
-    user2 = [MyUserInfo new];
-    user2.username = @"Yuxin";
-    user2.password = @"123";
-    user2.nickname = @"Michael";
-    user2.age = @21;
-    user2.gender = @"male";
-    user2.whatsup = @"";
-    user2.usrProfileImage = [UIImageJPEGRepresentation([UIImage imageNamed:@"bigRed.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    user2.myPostsNumber = @12;
-    user2.myAttendanceNumber = @12;
-    user2.interests = @[@"Professional", @"Free food"];
-//    [MyDataManager saveUser:user2];
+    event2.authorProfileImg = [UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 
 //    mutableDataArray = [[NSMutableArray alloc] init];
 //    [self saveEventArrayData:event1];
@@ -188,8 +158,8 @@
 //    [self saveEventArrayData:event4];
 //    [self saveEventArrayData:event5];
     
-//    [MyDataManager saveEvent:event1];
-//    [MyDataManager saveEvent:event2];
+    [MyDataManager saveEvent:event1];
+    [MyDataManager saveEvent:event2];
     
 }
 
@@ -212,7 +182,6 @@
 
         self.user = [MyDataManager fetchUser:username];
     }
-    
 }
 
 - (IBAction)mySignUpButtonPressed:(id)sender {

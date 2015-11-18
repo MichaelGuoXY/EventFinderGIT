@@ -56,16 +56,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
-    
-    self.user.nickname = [self.usrDefault objectForKey:@"nickname"];
-    self.user.age = [self.usrDefault objectForKey:@"age"];
-    self.user.gender = [self.usrDefault objectForKey:@"gender"];
-    self.user.whatsup = [self.usrDefault objectForKey:@"whatsup"];
-    self.user.interests = [self.usrDefault objectForKey:@"interests"];
-    
-    if (didFetchUser) {
-        [MyDataManager updateUser:self.user];
-    }
 }
 
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
@@ -76,7 +66,7 @@
         [self.usrDefault setObject:self.user.gender forKey:@"gender"];
         [self.usrDefault setObject:self.user.whatsup forKey:@"whatsup"];
         [self.usrDefault setObject:self.user.interests forKey:@"interests"];
-        didFetchUser = true;
+        didFetchUser = YES;
         [self.myTableView reloadData];
     }
 }
@@ -87,77 +77,109 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    if (section == 0) {
+        return 5;
+    }
+    else if(section == 1) {
+        return 1;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"ProfileCell";
-    UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    if (indexPath.section == 0) {
+        static NSString *CellIdentifier = @"ProfileCell";
+        UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        switch (indexPath.row) {
+            case 0:
+                cell.textLabel.text = @"Nickname";
+                if ([self.usrDefault objectForKey:@"nickname"])
+                    cell.detailTextLabel.text = [self.usrDefault objectForKey:@"nickname"];
+                break;
+            case 1:
+                cell.textLabel.text = @"Age";
+                if ([self.usrDefault objectForKey:@"age"])
+                    cell.detailTextLabel.text = [[self.usrDefault objectForKey:@"age"] stringValue];
+                break;
+            case 2:
+                cell.textLabel.text = @"Gender";
+                if ([self.usrDefault objectForKey:@"gender"])
+                    cell.detailTextLabel.text = [self.usrDefault objectForKey:@"gender"];
+                break;
+            case 3:
+                cell.textLabel.text = @"Whatsup";
+                if ([self.usrDefault objectForKey:@"whatsup"])
+                    cell.detailTextLabel.text = [self.usrDefault objectForKey:@"whatsup"];
+                break;
+            case 4:
+                cell.textLabel.text = @"Interests";
+                NSString *interests = @"";
+                for (NSString *interest in [self.usrDefault objectForKey:@"interests"]) {
+                    interests = [interests stringByAppendingFormat:@" %@",interest];
+                }
+                cell.detailTextLabel.text = [interests stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                break;
+        }
+        return cell;
     }
-    switch (indexPath.row) {
-        case 0:
-            cell.textLabel.text = @"nickname";
-            if ([self.usrDefault objectForKey:@"nickname"])
-                cell.detailTextLabel.text = [self.usrDefault objectForKey:@"nickname"];
-            break;
-        case 1:
-            cell.textLabel.text = @"age";
-            if ([self.usrDefault objectForKey:@"age"])
-                cell.detailTextLabel.text = [[self.usrDefault objectForKey:@"age"] stringValue];
-            break;
-        case 2:
-            cell.textLabel.text = @"gender";
-            if ([self.usrDefault objectForKey:@"gender"])
-                cell.detailTextLabel.text = [self.usrDefault objectForKey:@"gender"];
-            break;
-        case 3:
-            cell.textLabel.text = @"whatsup";
-            if ([self.usrDefault objectForKey:@"whatsup"])
-                 cell.detailTextLabel.text = [self.usrDefault objectForKey:@"whatsup"];
-            break;
-        case 4:
-            cell.textLabel.text = @"interests";
-            NSString *interests = @"";
-            for (NSString *interest in [self.usrDefault objectForKey:@"interests"]) {
-                interests = [interests stringByAppendingFormat:@" %@",interest];
-            }
-            cell.detailTextLabel.text = interests;
-            break;
+    else if (indexPath.section == 1) {
+        static NSString *CellIdentifier = @"SaveProfileCell";
+        UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        return cell;
     }
-    return cell;
+    return nil;
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0:
-            myNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"NicknameVC"];
-            [self.navigationController pushViewController:myNVC animated:YES];
-            break;
-        case 1:
-            myAVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AgeVC"];
-            [self.navigationController pushViewController:myAVC animated:YES];
-            break;
-        case 2:
-            myGTVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GenderTVC"];
-            [self.navigationController pushViewController:myGTVC animated:YES];
-            break;
-        case 3:
-            myWVC = [self.storyboard instantiateViewControllerWithIdentifier:@"WhatsupVC"];
-            [self.navigationController pushViewController:myWVC animated:YES];
-            break;
-        case 4:
-            myITVC = [self.storyboard instantiateViewControllerWithIdentifier:@"InterestsTVC"];
-            [self.navigationController pushViewController:myITVC animated:YES];
-            break;
-        default:
-            break;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:
+                myNVC = [self.storyboard instantiateViewControllerWithIdentifier:@"NicknameVC"];
+                [self.navigationController pushViewController:myNVC animated:YES];
+                break;
+            case 1:
+                myAVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AgeVC"];
+                [self.navigationController pushViewController:myAVC animated:YES];
+                break;
+            case 2:
+                myGTVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GenderTVC"];
+                [self.navigationController pushViewController:myGTVC animated:YES];
+                break;
+            case 3:
+                myWVC = [self.storyboard instantiateViewControllerWithIdentifier:@"WhatsupVC"];
+                [self.navigationController pushViewController:myWVC animated:YES];
+                break;
+            case 4:
+                myITVC = [self.storyboard instantiateViewControllerWithIdentifier:@"InterestsTVC"];
+                [self.navigationController pushViewController:myITVC animated:YES];
+                break;
+            default:
+                break;
+        }
     }
+    else if(indexPath.section == 1) {
+        self.user.nickname = [self.usrDefault objectForKey:@"nickname"];
+        self.user.age = [self.usrDefault objectForKey:@"age"];
+        self.user.gender = [self.usrDefault objectForKey:@"gender"];
+        self.user.whatsup = [self.usrDefault objectForKey:@"whatsup"];
+        self.user.interests = [self.usrDefault objectForKey:@"interests"];
+        
+        if (didFetchUser) {
+            didFetchUser = NO;
+            [MyDataManager updateUser:self.user];
+        }
+    }
+    [self.myTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 /*

@@ -9,6 +9,7 @@
 #import "MyEventDetailViewController.h"
 #import "HideAndShowTabbarFunction.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "MyHelpFunction.h"
 
 @interface MyEventDetailViewController () <GMSMapViewDelegate>
 
@@ -39,10 +40,11 @@
     self.myNGIT.title = self.event.nameOfEvent;
     self.authorOfEvent.text = self.event.authorName;
     self.nameOfEvent.text = self.event.nameOfEvent;
-    self.startingTime.text = [self.event.startingTime stringValue];
-    self.endingTime.text = [self.event.endingTime stringValue];
+    self.startingTime.text = [MyHelpFunction parseTimeFromOrigin:self.event.startingTime];
+    self.endingTime.text = [MyHelpFunction parseTimeFromOrigin:self.event.endingTime];
     self.locationOfEvent.text = self.event.locationOfEvent;
     self.introOfEvent.text = self.event.introOfEvent;
+    self.timeOfPost.text = [MyHelpFunction parseTimeFromOrigin:self.event.postTime];
     NSString *string = self.event.primaryTag;
     for (NSString *str in self.event.secondaryTag) {
         string = [string stringByAppendingFormat:@", %@", str];
@@ -79,6 +81,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    
     [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
 }
 

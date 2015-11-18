@@ -14,6 +14,7 @@
 #import "HideAndShowTabbarFunction.h"
 #import "MyDataManager.h"
 #import "MyEventTableViewAddCell.h"
+#import "MyHelpFunction.h"
 
 @interface MySearchViewController () {
 
@@ -181,9 +182,10 @@
         }
         
         cell.nameOfEvent.text = event.nameOfEvent;
+        cell.timeOfPost.text = [MyHelpFunction parseTimeFromOrigin:event.postTime];
         if (event.imageOfEvent != nil)
             cell.imgviewOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
-        cell.timeOfEvent.text = [[event.startingTime stringValue] stringByAppendingString:[event.endingTime stringValue]];
+        cell.timeOfEvent.text = [[MyHelpFunction parseTimeFromOrigin:event.startingTime] stringByAppendingFormat:@" ~ %@",[MyHelpFunction parseTimeFromOrigin:event.endingTime]];
         cell.locationOfEvent.text = event.locationOfEvent;
         if (event.authorProfileImg != nil)
             cell.authorProfileImgView.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:event.authorProfileImg options:NSDataBase64DecodingIgnoreUnknownCharacters]];
@@ -254,7 +256,10 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText
 {
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"nameOfEvent contains[c] %@", searchText];
+    NSPredicate *resultPredicate1 = [NSPredicate predicateWithFormat:@"nameOfEvent contains[c] %@", searchText];
+    NSPredicate *resultPredicate2 = [NSPredicate predicateWithFormat:@"introOfEvent contains[c] %@", searchText];
+    NSArray *subPredicates = @[resultPredicate1,resultPredicate2];
+    NSCompoundPredicate *resultPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:subPredicates];
     searchResults = [events filteredArrayUsingPredicate:resultPredicate];
 }
 

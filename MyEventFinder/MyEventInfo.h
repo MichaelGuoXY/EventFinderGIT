@@ -36,11 +36,12 @@
 @property (nonatomic, strong) NSArray *secondaryTag;
 @property (nonatomic, strong) NSString *restricttionOfEvent;
 @property (nonatomic, strong) NSDictionary *participantsOfEvent;
-@property (nonatomic, strong) NSNumber *postDate;
 @property (nonatomic, strong) NSNumber *postTime;
 @property (nonatomic, strong) NSString *authorName;
 @property (nonatomic, strong) NSString *authorProfileImg;
 @property (nonatomic, strong) NSNumber *numberOfViewed;
+@property (nonatomic, strong) NSString *startingTimeString;
+@property (nonatomic, strong) NSString *endingTimeString;
 
 /*
  events {

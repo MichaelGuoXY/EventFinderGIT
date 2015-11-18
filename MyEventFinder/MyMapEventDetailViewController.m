@@ -8,6 +8,8 @@
 
 #import "MyMapEventDetailViewController.h"
 #import "HideAndShowTabbarFunction.h"
+#import "MyHelpFunction.h"
+
 @interface MyMapEventDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *myNI;
@@ -22,10 +24,11 @@
     self.myNI.title = self.event.nameOfEvent;
     self.authorOfEvent.text = self.event.authorName;
     self.nameOfEvent.text = self.event.nameOfEvent;
-    self.startingTime.text = [self.event.startingTime stringValue];
-    self.endingTime.text = [self.event.endingTime stringValue];
+    self.startingTime.text = [MyHelpFunction parseTimeFromOrigin:self.event.startingTime];
+    self.endingTime.text = [MyHelpFunction parseTimeFromOrigin:self.event.endingTime];
     self.locationOfEvent.text = self.event.locationOfEvent;
     self.introOfEvent.text = self.event.introOfEvent;
+    self.timeOfPost.text = [MyHelpFunction parseTimeFromOrigin:self.event.postTime];
     NSString *string = self.event.primaryTag;
     for (NSString *str in self.event.secondaryTag) {
         string = [string stringByAppendingFormat:@", %@", str];
@@ -37,7 +40,7 @@
     self.authorProfileImg.layer.cornerRadius = 27;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     
-    self.myNI.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStylePlain target:self action:@selector(returnMap:)];
+    self.myNI.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"< Map" style:UIBarButtonItemStylePlain target:self action:@selector(returnMap:)];
 }
 
 - (void)didReceiveMemoryWarning {
