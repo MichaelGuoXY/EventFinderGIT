@@ -50,12 +50,14 @@
         string = [string stringByAppendingFormat:@", %@", str];
     }
     self.tagOfEvent.text = string;
-    self.imgviewOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[self.event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+    
+    [self didImgviewOfEventLoad];
+    
     self.authorProfileImg.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:self.event.authorProfileImg options:NSDataBase64DecodingIgnoreUnknownCharacters]];
     self.authorProfileImg.clipsToBounds = YES;
     self.authorProfileImg.layer.cornerRadius = 27;
     // set background
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     // init camera with google map
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.event.latOfEvent doubleValue]
                                                             longitude:[self.event.lngOfEvent doubleValue]
@@ -83,6 +85,27 @@
     [super viewWillAppear:YES];
     
     [HideAndShowTabbarFunction hideTabBar:self.tabBarController];
+}
+
+- (void)didImgviewOfEventLoad {
+    
+    CGRect workingFrame = self.imgviewOfEvent.frame;
+    workingFrame.origin.x = 0;
+    
+    for (NSString *imgString in _event.imageOfEvent) {
+        UIImage *imgOfEvent = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:imgString options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+        
+        UIImageView *imageview = [[UIImageView alloc] initWithImage:imgOfEvent];
+        [imageview setContentMode:UIViewContentModeScaleAspectFill];
+        imageview.frame = workingFrame;
+        
+        [_imgviewOfEvent addSubview:imageview];
+        
+        workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
+    }
+    
+    [_imgviewOfEvent setPagingEnabled:YES];
+    [_imgviewOfEvent setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
 }
 
 - (void)didReceiveMemoryWarning {

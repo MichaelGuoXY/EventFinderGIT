@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    didFetchUser = false;
+    didFetchUser = NO;
     self.usrDefault = [NSUserDefaults standardUserDefaults];
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
@@ -175,7 +175,6 @@
         self.user.interests = [self.usrDefault objectForKey:@"interests"];
         
         if (didFetchUser) {
-            didFetchUser = NO;
             [MyDataManager updateUser:self.user];
         }
     }

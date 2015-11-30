@@ -90,20 +90,28 @@
      name:@"didFinishFetchUserInfo"
      object:nil];
     
+    self.user = [MyDataManager fetchUser:[usrDefault objectForKey:@"username"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    self.user = [MyDataManager fetchUser:[usrDefault objectForKey:@"username"]];
+    [profileViewButton setImage:[UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[usrDefault objectForKey:@"usrProfileImage"] options:NSDataBase64DecodingIgnoreUnknownCharacters]] forState:UIControlStateNormal];
+    LabelOfMyPostsNumber.text = [[usrDefault objectForKey:@"myPostNumber"] stringValue];
+    labelOfMyAttendanceNumber.text = [[usrDefault objectForKey:@"myAttendanceNumber"] stringValue];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
     if ([notification.name isEqualToString:@"didFinishFetchUserInfo"]) {
-        [profileViewButton setImage:[UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:self.user.usrProfileImage options:NSDataBase64DecodingIgnoreUnknownCharacters]] forState:UIControlStateNormal];
-        LabelOfMyPostsNumber.text = [self.user.myPostsNumber stringValue];
-        labelOfMyAttendanceNumber.text = [self.user.myAttendanceNumber stringValue];
+        [usrDefault setObject:self.user.myPostsNumber forKey:@"myPostNumber"];
+        [usrDefault setObject:self.user.myAttendanceNumber forKey:@"myAttendanceNumber"];
         [usrDefault setObject:self.user.usrProfileImage forKey:@"usrProfileImage"];
+        [self viewWillAppear:YES];
     }
 }
 
@@ -150,11 +158,11 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    [profileViewButton setImage:chosenImage forState:UIControlStateNormal];
+    
     usrProfileImage = UIImageJPEGRepresentation(chosenImage, 1);
-    self.user.usrProfileImage = [usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    [usrDefault setObject:self.user.usrProfileImage forKey:@"usrProfileImage"];
-    [MyDataManager updateUser:self.user];
+//    self.user.usrProfileImage = [usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [usrDefault setObject:[usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength] forKey:@"usrProfileImage"];
+    [MyDataManager updateUser:[usrDefault objectForKey:@"username"] usrProfileImg:[usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }

@@ -191,6 +191,10 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.myTableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void)joinBtnPressed: (id)sender{
     UIButton *joinBtn = (UIButton *)sender;
     if (joinBtn.currentTitleColor == [UIColor redColor]) {

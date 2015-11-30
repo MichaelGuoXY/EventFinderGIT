@@ -134,22 +134,6 @@
     event1.postTime = @1212;
     event1.authorName = @"Yuxin";
     event1.authorProfileImg = [UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    
-    MyEventInfo *event2 = [MyEventInfo new];
-    event2.nameOfEvent = @"Hello World";
-    event2.startingTime = @201511200300;
-    event2.endingTime = @201509091200;
-    event2.latOfEvent = @42.444782;
-    event2.lngOfEvent = @(-76.484174);
-    event2.locationOfEvent = @"Uris";
-    event2.primaryTag = @"Athletic";
-    event2.secondaryTag = @[@"Free Food", @"Cornell Sponsored"];
-    event2.introOfEvent = @"GO GO GO GO GO GO GO BIG BIG BIG BIG BIG BIG RED RED RED RED RED !!!";
-    event2.restricttionOfEvent = @"restriction";
-    event2.imageOfEvent = @[[UIImageJPEGRepresentation([UIImage imageNamed:@"voiceOfCornell.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-    event2.postTime = @1212;
-    event2.authorName = @"Xiaoyu";
-    event2.authorProfileImg = [UIImageJPEGRepresentation([UIImage imageNamed:@"usrDefault.jpg"],1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 
 //    mutableDataArray = [[NSMutableArray alloc] init];
 //    [self saveEventArrayData:event1];
@@ -159,8 +143,6 @@
 //    [self saveEventArrayData:event5];
     
     [MyDataManager saveEvent:event1];
-    [MyDataManager saveEvent:event2];
-    
 }
 
 //- (void)saveEventArrayData:(MyEventInfo *)eventObject {

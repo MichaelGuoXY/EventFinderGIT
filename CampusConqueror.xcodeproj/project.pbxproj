@@ -36,7 +36,6 @@
 		E00BD0F61BF1CFCB009A47DF /* MyGenderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E00BD0F51BF1CFCB009A47DF /* MyGenderTableViewController.m */; };
 		E0183B121BFA3F1B002B12B4 /* Seminars.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0183B0C1BFA3F1B002B12B4 /* Seminars.jpg */; };
 		E0183B131BFA3F1B002B12B4 /* Social.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0183B0D1BFA3F1B002B12B4 /* Social.jpg */; };
-		E0183B141BFA3F1B002B12B4 /* Professional.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0183B0E1BFA3F1B002B12B4 /* Professional.jpg */; };
 		E0183B151BFA3F1B002B12B4 /* Athletics.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0183B0F1BFA3F1B002B12B4 /* Athletics.jpg */; };
 		E0183B161BFA3F1B002B12B4 /* Political.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0183B101BFA3F1B002B12B4 /* Political.jpg */; };
 		E0183B171BFA3F1B002B12B4 /* Performance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0183B111BFA3F1B002B12B4 /* Performance.jpg */; };
@@ -97,7 +96,6 @@
 		E0AD96541BF724FD0042A9D2 /* UIImage+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AD96501BF724FD0042A9D2 /* UIImage+CL.m */; };
 		E0AD96571BF725070042A9D2 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AD96561BF725070042A9D2 /* CLWeeklyCalendarView.m */; };
 		E0BE362F1BDF4B6100491AD5 /* MyCheckString.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BE362E1BDF4B6100491AD5 /* MyCheckString.m */; };
-		E0C258731BCB5A8D00CFF08A /* newpost.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C258721BCB5A8D00CFF08A /* newpost.m */; };
 		E0C3D0FF1BEA072F0069ECE5 /* MyHelpFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C3D0FE1BEA072F0069ECE5 /* MyHelpFunction.m */; };
 		E0C3D1011BEA0E240069ECE5 /* time.png in Resources */ = {isa = PBXBuildFile; fileRef = E0C3D1001BEA0E240069ECE5 /* time.png */; };
 		E0C4AE9C1BDC995800281FA8 /* MyDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */; };
@@ -106,6 +104,7 @@
 		E0CCB1481BCC9EE70051E303 /* MyEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CCB1471BCC9EE70051E303 /* MyEventDetailViewController.m */; };
 		E0CECB511BCA5485000E28C4 /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CECB501BCA5485000E28C4 /* MyProfileViewController.m */; };
 		E0D8C2071BD0452500BEDA42 /* MySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0D8C2061BD0452500BEDA42 /* MySearchViewController.m */; };
+		E0FC4A9F1C0C27F3004724DB /* Professional.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0FC4A9E1C0C27F3004724DB /* Professional.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,7 +157,6 @@
 		E00BD0F51BF1CFCB009A47DF /* MyGenderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGenderTableViewController.m; sourceTree = "<group>"; };
 		E0183B0C1BFA3F1B002B12B4 /* Seminars.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Seminars.jpg; sourceTree = "<group>"; };
 		E0183B0D1BFA3F1B002B12B4 /* Social.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Social.jpg; sourceTree = "<group>"; };
-		E0183B0E1BFA3F1B002B12B4 /* Professional.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Professional.jpg; sourceTree = "<group>"; };
 		E0183B0F1BFA3F1B002B12B4 /* Athletics.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Athletics.jpg; sourceTree = "<group>"; };
 		E0183B101BFA3F1B002B12B4 /* Political.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Political.jpg; sourceTree = "<group>"; };
 		E0183B111BFA3F1B002B12B4 /* Performance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Performance.jpg; sourceTree = "<group>"; };
@@ -263,8 +261,6 @@
 		E0AD96561BF725070042A9D2 /* CLWeeklyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWeeklyCalendarView.m; sourceTree = "<group>"; };
 		E0BE362D1BDF4B6100491AD5 /* MyCheckString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCheckString.h; sourceTree = "<group>"; };
 		E0BE362E1BDF4B6100491AD5 /* MyCheckString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCheckString.m; sourceTree = "<group>"; };
-		E0C258711BCB5A8D00CFF08A /* newpost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newpost.h; sourceTree = "<group>"; };
-		E0C258721BCB5A8D00CFF08A /* newpost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newpost.m; sourceTree = "<group>"; };
 		E0C3D0FD1BEA072F0069ECE5 /* MyHelpFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHelpFunction.h; sourceTree = "<group>"; };
 		E0C3D0FE1BEA072F0069ECE5 /* MyHelpFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHelpFunction.m; sourceTree = "<group>"; };
 		E0C3D1001BEA0E240069ECE5 /* time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = time.png; sourceTree = "<group>"; };
@@ -280,6 +276,7 @@
 		E0CECB501BCA5485000E28C4 /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
 		E0D8C2051BD0452500BEDA42 /* MySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySearchViewController.h; sourceTree = "<group>"; };
 		E0D8C2061BD0452500BEDA42 /* MySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySearchViewController.m; sourceTree = "<group>"; };
+		E0FC4A9E1C0C27F3004724DB /* Professional.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Professional.jpg; sourceTree = "<group>"; };
 		EF614F77D78CCE6C7915A1DA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -356,15 +353,6 @@
 			name = ProfileItemTVC;
 			sourceTree = "<group>";
 		};
-		E01AD4EA1BF5D1BC00CAB8A3 /* ThingsNoUse */ = {
-			isa = PBXGroup;
-			children = (
-				E0C258711BCB5A8D00CFF08A /* newpost.h */,
-				E0C258721BCB5A8D00CFF08A /* newpost.m */,
-			);
-			name = ThingsNoUse;
-			sourceTree = "<group>";
-		};
 		E01AD4EC1BF5D2DD00CAB8A3 /* AutoCompleteLibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,8 +402,8 @@
 			children = (
 				E0183B0C1BFA3F1B002B12B4 /* Seminars.jpg */,
 				E0183B0D1BFA3F1B002B12B4 /* Social.jpg */,
-				E0183B0E1BFA3F1B002B12B4 /* Professional.jpg */,
 				E0183B0F1BFA3F1B002B12B4 /* Athletics.jpg */,
+				E0FC4A9E1C0C27F3004724DB /* Professional.jpg */,
 				E0183B101BFA3F1B002B12B4 /* Political.jpg */,
 				E0183B111BFA3F1B002B12B4 /* Performance.jpg */,
 				E0AC1D641BE3F6440075FA94 /* Free Food.jpg */,
@@ -500,7 +488,6 @@
 				E06659401BCA351300DA92A4 /* LaunchScreen.storyboard */,
 				E06659431BCA351300DA92A4 /* Info.plist */,
 				E0AD96411BF724C40042A9D2 /* CLWeeklyCalendarViewSourceCode */,
-				E01AD4EA1BF5D1BC00CAB8A3 /* ThingsNoUse */,
 				E007FF761BF4203A0071D37E /* NewPostItems */,
 				E00BD0E11BF1CD6A009A47DF /* ProfileItemTVC */,
 				E06659321BCA351300DA92A4 /* Supporting Files */,
@@ -515,6 +502,8 @@
 				E0C3D0FE1BEA072F0069ECE5 /* MyHelpFunction.m */,
 				E01AD1831BDEB7F900D255EA /* MyUserInfo.h */,
 				E01AD1841BDEB7F900D255EA /* MyUserInfo.m */,
+				E0CCB13A1BCC8AD10051E303 /* MyEventInfo.h */,
+				E0CCB13B1BCC8AD10051E303 /* MyEventInfo.m */,
 				E0C4AE9A1BDC995800281FA8 /* MyDataManager.h */,
 				E0C4AE9B1BDC995800281FA8 /* MyDataManager.m */,
 				E0BE362D1BDF4B6100491AD5 /* MyCheckString.h */,
@@ -537,8 +526,6 @@
 				E0CCB1441BCC8BB80051E303 /* MyEventTableViewCell.m */,
 				E041F42B1BEAFF720075651E /* MyEventTableViewAddCell.h */,
 				E041F42C1BEAFF720075651E /* MyEventTableViewAddCell.m */,
-				E0CCB13A1BCC8AD10051E303 /* MyEventInfo.h */,
-				E0CCB13B1BCC8AD10051E303 /* MyEventInfo.m */,
 				E02062B41BD1018A00B1325B /* RECommonFunctions.h */,
 				E02062B51BD1018A00B1325B /* RECommonFunctions.m */,
 				E02062B61BD1018A00B1325B /* RESideMenu.h */,
@@ -641,7 +628,6 @@
 				E004AE2F1BD3F2E900808546 /* myattendance.png in Resources */,
 				E007FFAF1BF51C840071D37E /* Main.storyboard in Resources */,
 				E0AC1D651BE3F6440075FA94 /* Free Food.jpg in Resources */,
-				E0183B141BFA3F1B002B12B4 /* Professional.jpg in Resources */,
 				E0183B121BFA3F1B002B12B4 /* Seminars.jpg in Resources */,
 				E06659421BCA351300DA92A4 /* LaunchScreen.storyboard in Resources */,
 				E025336F1BD9D945006F60C2 /* bgd6.png in Resources */,
@@ -669,6 +655,7 @@
 				E05A23A31BDABB8B00CA5026 /* date.png in Resources */,
 				E05A239F1BDABA1300CA5026 /* star.png in Resources */,
 				E004AE311BD3F2E900808546 /* newpost.png in Resources */,
+				E0FC4A9F1C0C27F3004724DB /* Professional.jpg in Resources */,
 				E0AD963A1BF68E120042A9D2 /* No Charge.jpg in Resources */,
 				E004AE361BD3F5F800808546 /* homebgd.jpg in Resources */,
 				E004AE341BD3F39200808546 /* logout.png in Resources */,
@@ -740,7 +727,6 @@
 				E004AE2A1BD3EE4B00808546 /* HomeRootViewController.m in Sources */,
 				E08F52541BF5284C00C8843E /* MVPlaceSearchTextField.m in Sources */,
 				E007FF8B1BF421180071D37E /* IntroOfEventViewController.m in Sources */,
-				E0C258731BCB5A8D00CFF08A /* newpost.m in Sources */,
 				E08F525F1BF5291F00C8843E /* NSString+Levenshtein.m in Sources */,
 				E007FF7F1BF420A70071D37E /* TimeOfEventViewController.m in Sources */,
 				E00BD0F01BF1CE93009A47DF /* MyWhatsupViewController.m in Sources */,
@@ -903,8 +889,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Xiaoyu Guo (YQ39H24D22)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyu Guo (YQ39H24D22)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -914,7 +900,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.xg229.CampusConqueror;
 				PRODUCT_NAME = CampusConqueror;
-				PROVISIONING_PROFILE = "fe9835ca-3aff-483e-a569-ac1b2cb418b5";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -924,7 +910,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyu Guo (YQ39H24D22)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -934,7 +920,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.xg229.CampusConqueror;
 				PRODUCT_NAME = CampusConqueror;
-				PROVISIONING_PROFILE = "fe9835ca-3aff-483e-a569-ac1b2cb418b5";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

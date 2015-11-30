@@ -18,5 +18,7 @@
 + (void)saveParticipantToEvent:(MyEventInfo *)event withUser:(MyUserInfo *)user;
 + (void)removeParticipantFromEvent:(MyEventInfo *)event withUser:(MyUserInfo *)user;
 + (void)updateUser:(MyUserInfo *) user;
++ (void)updateUser:(NSString *) username postsNumber:(NSNumber *) myPostsNumber;
++ (void)updateUser:(NSString *) username usrProfileImg:(NSString *) usrProfileImg;
 
 @end

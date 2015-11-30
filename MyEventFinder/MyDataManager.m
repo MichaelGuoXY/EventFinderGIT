@@ -208,6 +208,34 @@
 
 }
 
++ (void)updateUser:(NSString *) username postsNumber:(NSNumber *) myPostsNumber {
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
+    FQuery *nameRef = [[userRef queryOrderedByChild:@"username"] queryEqualToValue:username];
+    
+    [nameRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (snapshot.value != [NSNull null]) {
+            NSDictionary *dict = snapshot.value;
+            NSString *keyForUser = [[dict allKeys] objectAtIndex:0];
+            [[[snapshot.ref childByAppendingPath:keyForUser] childByAppendingPath:@"myPostsNumber"] setValue:myPostsNumber];
+        }
+    }];
+}
+
++ (void)updateUser:(NSString *) username usrProfileImg:(NSString *) usrProfileImg {
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
+    FQuery *nameRef = [[userRef queryOrderedByChild:@"username"] queryEqualToValue:username];
+    
+    [nameRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (snapshot.value != [NSNull null]) {
+            NSDictionary *dict = snapshot.value;
+            NSString *keyForUser = [[dict allKeys] objectAtIndex:0];
+            [[[snapshot.ref childByAppendingPath:keyForUser] childByAppendingPath:@"usrProfileImage"] setValue:usrProfileImg];
+        }
+    }];
+}
+
 + (void)saveParticipantToEvent:(MyEventInfo *)event withUser:(MyUserInfo *)user {
     NSDictionary *usrDict =   @{@"username" : user.username,
                                 @"usrProfileImage" : user.usrProfileImage,

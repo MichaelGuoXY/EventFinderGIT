@@ -8,21 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MyEventInfo : NSObject
-//<NSCoding> {
-//    NSString *nameOfEvent;
-//    NSString *timeOfEvent;
-//    NSString *dateOfEvent;
-//    NSString *locationOfEvent;
-//    NSString *introOfEvent;
-//    NSString *posterOfEvent;
-//    NSNumber *lngOfEvent;
-//    NSNumber *latOfEvent;
-//    NSData *imageOfEvent;
-//    NSData *imageOfPoster;
-//    NSString *tagOfEvent;
-//    NSArray *participantsOfEvent;
-//}
+@interface MyEventInfo : NSObject <NSCoding> {
+    NSString *nameOfEvent;
+    NSNumber *startingTime;
+    NSNumber *endingTime;
+    NSString *locationOfEvent;
+    NSString *introOfEvent;
+    NSNumber *lngOfEvent;
+    NSNumber *latOfEvent;
+    NSArray *imageOfEvent;
+    NSString *primaryTag;
+    NSArray *secondaryTag;
+    NSString *restricttionOfEvent;
+    NSDictionary *participantsOfEvent;
+    NSNumber *postTime;
+    NSString *authorName;
+    NSString *authorProfileImg;
+    NSNumber *numberOfViewed;
+    NSString *startingTimeString;
+    NSString *endingTimeString;
+}
 
 @property (nonatomic, strong) NSString *nameOfEvent;
 @property (nonatomic, strong) NSNumber *startingTime;

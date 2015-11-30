@@ -43,7 +43,7 @@
     self.usrDefault = [NSUserDefaults standardUserDefaults];
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
-    self.user = [MyDataManager fetchUser:[self.usrDefault objectForKey:@"username"]];
+//    self.user = [MyDataManager fetchUser:[self.usrDefault objectForKey:@"username"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -225,11 +225,13 @@
                 [self.usrDefault removeObjectForKey:@"secondaryTag"];
                 [self.usrDefault removeObjectForKey:@"longtitude"];
                 [self.usrDefault removeObjectForKey:@"latitude"];
-                if (self.user != nil) {
-                    int i = [self.user.myPostsNumber intValue];
-                    self.user.myPostsNumber = [NSNumber numberWithInt:i+1];
-                    [MyDataManager updateUser:self.user];
-                }
+                
+                int i = [[self.usrDefault objectForKey:@"myPostNumber"] intValue];
+                [self.usrDefault setObject:[NSNumber numberWithInt:i+1] forKey:@"myPostNumber"];
+                [MyDataManager updateUser:[self.usrDefault objectForKey:@"username"] postsNumber:[NSNumber numberWithInt:i+1]];
+            }
+            else {
+                
             }
         }
     }

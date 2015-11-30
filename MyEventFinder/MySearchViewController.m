@@ -54,7 +54,7 @@
     
     // Initialize the refresh control.
     self.myRC = [[UIRefreshControl alloc] init];
-    self.myRC.backgroundColor = [UIColor purpleColor];
+    self.myRC.backgroundColor = [UIColor whiteColor];
     self.myRC.tintColor = [UIColor whiteColor];
     [self.myRC addTarget:self
                   action:@selector(reloadView)

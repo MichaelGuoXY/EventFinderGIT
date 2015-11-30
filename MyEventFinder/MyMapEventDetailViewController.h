@@ -10,7 +10,7 @@
 #import "MyEventInfo.h"
 @interface MyMapEventDetailViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIImageView *imgviewOfEvent;
+@property (weak, nonatomic) IBOutlet UIScrollView *imgviewOfEvent;
 @property (weak, nonatomic) IBOutlet UIImageView *authorProfileImg;
 @property (weak, nonatomic) IBOutlet UILabel *timeOfPost;
 @property (weak, nonatomic) IBOutlet UILabel *nameOfEvent;
