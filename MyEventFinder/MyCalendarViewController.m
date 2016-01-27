@@ -26,7 +26,7 @@
 static CGFloat CALENDER_VIEW_HEIGHT = 150.f;
 
 @implementation MyCalendarViewController {
-    NSMutableArray *events;
+    NSArray *events;
     NSArray *dateEvents;
 }
 
@@ -34,11 +34,11 @@ static CGFloat CALENDER_VIEW_HEIGHT = 150.f;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.calendarView];
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(useNotificationWithString:)
-     name:@"didFinishFetchEvents"
-     object:nil];
+//    [[NSNotificationCenter defaultCenter]
+//     addObserver:self
+//     selector:@selector(useNotificationWithString:)
+//     name:@"didFinishFetchEvents"
+//     object:nil];
     
     
 }
@@ -46,7 +46,11 @@ static CGFloat CALENDER_VIEW_HEIGHT = 150.f;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     //    [self reloadView];
-    events = [MyDataManager fetchEvent];
+//    events = [MyDataManager fetchEvent];
+    events = [[NSArray alloc] init];
+    events = [MyDataManager extractEventsFromUsrDefaults];
+    [self dailyCalendarViewDidSelect:self.date];
+    [self.myTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,13 +68,13 @@ static CGFloat CALENDER_VIEW_HEIGHT = 150.f;
     return _calendarView;
 }
 
-- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
-{
-    if ([notification.name isEqual:@"didFinishFetchEvents"]) {
-        [self dailyCalendarViewDidSelect:self.date];
-        [self.myTableView reloadData];
-    }
-}
+//- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
+//{
+//    if ([notification.name isEqual:@"didFinishFetchEvents"]) {
+//        [self dailyCalendarViewDidSelect:self.date];
+//        [self.myTableView reloadData];
+//    }
+//}
 
 #pragma mark - CLWeeklyCalendarViewDelegate
 -(NSDictionary *)CLCalendarBehaviorAttributes

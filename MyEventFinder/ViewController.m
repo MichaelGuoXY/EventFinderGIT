@@ -24,7 +24,6 @@
 @end
 
 @implementation ViewController {
-    NSMutableArray *mutableDataArray;
     bool isSignIn;
     MyEventInfo *event1;
 }
@@ -73,7 +72,9 @@
     }
     if ([notification.name isEqualToString:@"didFinishFetchUserInfo"]) {
         if (isSignIn) {
-            if (self.myPasswordTextField.text == self.user.password) {
+            NSLog(@"password text: %@, mem addr: %p",self.myPasswordTextField.text,self.myPasswordTextField.text);
+            NSLog(@"password from database: %@, mem addr: %p", self.user.password,self.user.password);
+            if ([self.myPasswordTextField.text isEqualToString:self.user.password]) {
                 [self.usrDefault setObject:self.user.username forKey:@"username"];
                 self.myTRC = [self.storyboard instantiateViewControllerWithIdentifier:@"tabbarRootViewController"];
                 [self presentViewController:self.myTRC animated:YES completion:nil];
@@ -142,20 +143,8 @@
 //    [self saveEventArrayData:event4];
 //    [self saveEventArrayData:event5];
     
-    [MyDataManager saveEvent:event1];
+    [MyDataManager saveEvent:event1 withUIViewController:self];
 }
-
-//- (void)saveEventArrayData:(MyEventInfo *)eventObject {
-//    
-//    [mutableDataArray addObject:eventObject];
-//    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:mutableDataArray.count];
-//    for (MyEventInfo *eventObject in mutableDataArray) {
-//        NSData *eventEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:eventObject];
-//        [archiveArray addObject:eventEncodedObject];
-//    }
-//    
-//    [self.usrDefault setObject:archiveArray forKey:@"eventDataArray"];
-//}
 
 - (IBAction)mySignInButtonPressed:(id)sender {
     isSignIn = true;

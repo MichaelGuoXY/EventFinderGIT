@@ -1,0 +1,46 @@
+events {
+	String (timestamp): {
+		nameOfEvent: String,
+		startingDate: Number, // year + month + day
+		endingDate: Number,
+		startingTime: Number, // hour + minute
+		endingTime: Number,
+		latOfEvent: Number,
+		lngOfEvent: Number,
+		locationOfEvent: String,
+		primaryTag: String,
+		secondaryTag: [0: String, 1: String, ...],
+		introOfEvent: String,
+		restrictionOfEvent: String,
+		imageOfEvent: [0: String, 1: String, ...],
+
+		postDate: Number,
+		postTime: Number,
+		authorName: String,
+		authorProfileImg: String,
+		participantsOfEvent: [String (timestamp) {
+			username: String,
+			usrProfileImage: String
+		}, ...]
+	}
+}
+
+users {
+	String (timestamp): {
+		username: String,
+		passworld: String,
+		age: Number,
+		gender: String,
+		myAttendanceNumber: Number,
+		myPostNumber: Number,
+		nickName: String,
+		usrProfileImage: String,
+		whatsup: String,
+		interests: [0: String, 1: String, ...],
+
+		incomeMsg: [String(timestamp): {
+			sender: String (username),
+			msg: String 
+		}, ...]
+	}
+}

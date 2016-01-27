@@ -13,5 +13,6 @@
 
 + (void) segueModalWithRandomTransition:(UIViewController *) thisVC viewController:(UIViewController *) nextVC;
 + (NSString *)parseTimeFromOrigin: (NSNumber *) inputTime;
++ (void)presentAlertViewWithoutAction: (UIViewController *)thisVC withTitle: (NSString *)title withMessage: (NSString *)message withActionTitle: (NSString *)actionTitle;
 
 @end

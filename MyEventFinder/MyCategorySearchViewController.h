@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyCategorySearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MyCategorySearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic, strong) NSString *tag;

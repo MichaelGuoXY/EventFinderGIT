@@ -70,4 +70,11 @@
     }
 }
 
++ (void)presentAlertViewWithoutAction: (UIViewController *)thisVC withTitle: (NSString *)title withMessage: (NSString *)message withActionTitle: (NSString *)actionTitle {
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* alertAction = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction* action) {}];
+    [alertController addAction:alertAction];
+    [thisVC presentViewController:alertController animated:YES completion:nil];
+}
+
 @end

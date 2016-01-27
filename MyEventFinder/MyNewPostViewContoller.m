@@ -194,7 +194,34 @@
             BOOL b9 = ([self.usrDefault objectForKey:@"imagesOfEvent"] != nil);
             BOOL b10 = ([self.usrDefault objectForKey:@"longtitude"] != nil);
             BOOL b11 = ([self.usrDefault objectForKey:@"latitude"] != nil);
-            if (b1 && b2 && b3 && b4 && b5 && b6 && b7 && b8 && b9 && b10 && b11) {
+            if (!b1) {
+                [MyHelpFunction presentAlertViewWithoutAction:self withTitle:@"Alert !!!" withMessage:@"What is the title of the event?" withActionTitle:@"Got it"];
+            }
+            else if (!b2 || !b10 || !b11) {
+                [MyHelpFunction presentAlertViewWithoutAction:self withTitle:@"Alert !!!" withMessage:@"What is the location of the event?" withActionTitle:@"Got it"];
+            }
+            else if (!b3) {
+                [MyHelpFunction presentAlertViewWithoutAction:self withTitle:@"Alert !!!" withMessage:@"What is the introduction of the event?" withActionTitle:@"Got it"];
+            }
+            else if (!b4) {
+                [MyHelpFunction presentAlertViewWithoutAction:self withTitle:@"Alert !!!" withMessage:@"What is the starting time of the event?" withActionTitle:@"Got it"];
+            }
+            else if (!b5) {
+                [MyHelpFunction presentAlertViewWithoutAction:self withTitle:@"Alert !!!" withMessage:@"What is the ending time of the event?" withActionTitle:@"Got it"];
+            }
+            else if (!b6) {
+                [MyHelpFunction presentAlertViewWithoutAction:self withTitle:@"Alert !!!" withMessage:@"What is the restriction of the event?" withActionTitle:@"Got it"];
+            }
+            else if (!b7) {
+                [MyHelpFunction presentAlertViewWithoutAction:self withTitle:@"Alert !!!" withMessage:@"What is the primary tag of the event?" withActionTitle:@"Got it"];
+            }
+            else if (!b8) {
+                [MyHelpFunction presentAlertViewWithoutAction:self withTitle:@"Alert !!!" withMessage:@"What is the secondary tag of the event?" withActionTitle:@"Got it"];
+            }
+            else if (!b9) {
+                [MyHelpFunction presentAlertViewWithoutAction:self withTitle:@"Alert !!!" withMessage:@"What is the image of the event?" withActionTitle:@"Got it"];
+            }
+            else {
                 MyEventInfo *event = [MyEventInfo new];
                 event.nameOfEvent = [self.usrDefault objectForKey:@"nameOfEvent"];
                 event.locationOfEvent = [self.usrDefault objectForKey:@"locationOfEvent"];
@@ -209,11 +236,14 @@
                 event.latOfEvent = [self.usrDefault objectForKey:@"latitude"];
                 event.authorName = [self.usrDefault objectForKey:@"username"];
                 event.authorProfileImg = [self.usrDefault objectForKey:@"usrProfileImage"];
+                // get current time on device
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"yyyyMMddHHmm"];
                 NSNumber *postTime = [NSNumber numberWithInteger:[[formatter stringFromDate:[NSDate date]] integerValue]];
                 event.postTime = postTime;
-                [MyDataManager saveEvent:event];
+                // update this new event to the database
+                [MyDataManager saveEvent:event withUIViewController:self];
+                
                 [self.usrDefault removeObjectForKey:@"nameOfEvent"];
                 [self.usrDefault removeObjectForKey:@"locationOfEvent"];
                 [self.usrDefault removeObjectForKey:@"startingTime"];
@@ -225,13 +255,11 @@
                 [self.usrDefault removeObjectForKey:@"secondaryTag"];
                 [self.usrDefault removeObjectForKey:@"longtitude"];
                 [self.usrDefault removeObjectForKey:@"latitude"];
-                
+                [self.myTableView reloadData];
+                // update post number of the current user to database
                 int i = [[self.usrDefault objectForKey:@"myPostNumber"] intValue];
                 [self.usrDefault setObject:[NSNumber numberWithInt:i+1] forKey:@"myPostNumber"];
                 [MyDataManager updateUser:[self.usrDefault objectForKey:@"username"] postsNumber:[NSNumber numberWithInt:i+1]];
-            }
-            else {
-                
             }
         }
     }

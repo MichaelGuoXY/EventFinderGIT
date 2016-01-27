@@ -15,15 +15,19 @@
 #import "MyDataManager.h"
 #import "MyEventTableViewAddCell.h"
 #import "MyHelpFunction.h"
+#import "GiFHUD.h"
+#import "CBStoreHouseRefreshControl.h"
+#import "RESideMenu.h"
 
-@interface MySearchViewController () {
+@interface MySearchViewController () <UIScrollViewDelegate>{
 
 }
 
 @property NSUserDefaults *usrDefault;
-@property UIRefreshControl *myRC;
+//@property UIRefreshControl *myRC;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *myMenuButton;
 @property MyUserInfo *user;
+@property CBStoreHouseRefreshControl *myRefreshControl;
 
 @end
 
@@ -47,20 +51,21 @@
 //    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bgd6.png"]];
     
     // set delegate and dataSource
+    
     self.searchDisplayController.searchResultsTableView.delegate = self;
     self.searchDisplayController.searchResultsTableView.dataSource = self;
 
     self.usrDefault = [NSUserDefaults standardUserDefaults];
     
     // Initialize the refresh control.
-    self.myRC = [[UIRefreshControl alloc] init];
-    self.myRC.backgroundColor = [UIColor whiteColor];
-    self.myRC.tintColor = [UIColor whiteColor];
-    [self.myRC addTarget:self
-                  action:@selector(reloadView)
-        forControlEvents:UIControlEventValueChanged];
-    [self.myTableView addSubview:self.myRC];
-
+//    self.myRC = [[UIRefreshControl alloc] init];
+//    self.myRC.backgroundColor = [UIColor whiteColor];
+//    self.myRC.tintColor = [UIColor blackColor];
+//    [self.myRC addTarget:self
+//                  action:@selector(reloadView)
+//        forControlEvents:UIControlEventValueChanged];
+//    [self.myTableView addSubview:self.myRC];
+    
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(useNotificationWithString:)
@@ -73,7 +78,23 @@
      name:@"didFinishFetchUserInfo"
      object:nil];
     
+    self.myRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:self.myTableView
+                                                                    target:self
+                                                             refreshAction:@selector(refreshTriggered:)
+                                                                     plist:@"storehouse"
+                                                                     color:[UIColor blackColor]
+                                                                 lineWidth:2.0
+                                                                dropHeight:80
+                                                                     scale:1
+                                                      horizontalRandomness:150
+                                                   reverseLoadingAnimation:NO
+                                                   internalAnimationFactor:0.8];
+    
+    [GiFHUD setGifWithImageName:@"loading.gif"];
+    
     [self reloadView];
+    
+    [GiFHUD show];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -87,11 +108,23 @@
     events = [MyDataManager fetchEvent];
 }
 
+- (void)refreshTriggered:(id)sender
+{
+    //call your loading method here
+    [self reloadView];
+    //Finshed loading the data, reset the refresh control
+//    [self.myRefreshControl finishingLoading];
+}
+
 - (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
 {
     if ([notification.name isEqualToString:@"didFinishFetchEvents"]) {
+        [MyDataManager saveEventsToUsrDefaults:events];
+
+        [self.myRefreshControl finishingLoading];
         [self.myTableView reloadData];
-        [self.myRC endRefreshing];
+        //[self.myRC endRefreshing];
+        [GiFHUD dismiss];
     }
     if ([notification.name isEqualToString:@"didFinishFetchUserInfo"]) {
         if (flag == 1) {
@@ -106,19 +139,20 @@
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.myRefreshControl scrollViewDidScroll];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self.myRefreshControl scrollViewDidEndDragging];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//- (void)extractEventArrayData {
-//    NSArray *dataArray = [[NSArray alloc] initWithArray:[self.usrDefault objectForKey:@"eventDataArray"]];
-//    
-//    for (NSData *dataObject in dataArray) {
-//        MyEventInfo *eventDecodedObject = [NSKeyedUnarchiver unarchiveObjectWithData:dataObject];
-//        [events addObject:eventDecodedObject];
-//    }
-//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (tableView == self.myTableView) {
@@ -176,9 +210,13 @@
         // Display MyEventTableViewCell in the table cell
         MyEventInfo *event = nil;
         if (tableView == self.myTableView) {
-            event = [events objectAtIndex:indexPath.section];
+            if (events.count > 0) {
+                event = [events objectAtIndex:indexPath.section];
+            }
         } else {
-            event = [searchResults objectAtIndex:indexPath.section];
+            if (searchResults.count > 0) {
+                event = [searchResults objectAtIndex:indexPath.section];
+            }
         }
         
         cell.nameOfEvent.text = event.nameOfEvent;
@@ -204,9 +242,13 @@
         // Display MyEventTableViewCell in the table cell
         MyEventInfo *event = nil;
         if (tableView == self.myTableView) {
-            event = [events objectAtIndex:indexPath.section];
+            if (events.count > 0) {
+                event = [events objectAtIndex:indexPath.section];
+            }
         } else {
-            event = [searchResults objectAtIndex:indexPath.section];
+            if (searchResults.count > 0) {
+                event = [searchResults objectAtIndex:indexPath.section];
+            }
         }
         
         cell.joinBtn.tag = indexPath.section;

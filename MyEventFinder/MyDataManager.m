@@ -10,10 +10,11 @@
 #import "MyEventInfo.h"
 #import <Firebase/Firebase.h>
 #import "MyUserInfo.h"
+#import "MyHelpFunction.h"
 
 @implementation MyDataManager
 
-+ (void)saveEvent:(MyEventInfo *) event {
++ (void)saveEvent:(MyEventInfo *) event withUIViewController:(UIViewController *) thisVC {
     /*
      nameOfEvent: String,
      startingTime: Number, // hour + minute
@@ -56,7 +57,28 @@
     Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
     Firebase *eventRef = [myRootRef childByAppendingPath:@"events"];
     Firebase *timestampRef = [eventRef childByAutoId];
-    [timestampRef setValue: eventDict];
+    @try {
+        [timestampRef setValue:eventDict withCompletionBlock:^(NSError *error, Firebase *ref) {
+            if (error) {
+                UIAlertController* failToPostEvent = [UIAlertController alertControllerWithTitle:@"Alert !!!" message:@"Fail To Post This Event !!!" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* alertAction = [UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action) {}];
+                [failToPostEvent addAction:alertAction];
+                [thisVC presentViewController:failToPostEvent animated:YES completion:nil];
+            } else {
+                UIAlertController* succeedToPostEvent = [UIAlertController alertControllerWithTitle:@"Cool !!!" message:@"Event Has Been Successfully Posted !!!" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* alertAction = [UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action) {}];
+                [succeedToPostEvent addAction:alertAction];
+                [thisVC presentViewController:succeedToPostEvent animated:YES completion:nil];
+            }
+        }];
+    }
+    @catch (NSException *exception) {
+        [MyHelpFunction presentAlertViewWithoutAction:thisVC withTitle:@"Alert !!!" withMessage:exception.description withActionTitle:@"Got it"];
+    }
+    @finally {
+        
+    }
+    
 }
 
 + (NSMutableArray *)fetchEvent{
@@ -272,6 +294,28 @@
             }];
         }
     }];
+}
+
++ (void)saveEventsToUsrDefaults:(NSArray *)events {
+    
+    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:events.count];
+    for (MyEventInfo *event in events) {
+        NSData *eventEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:event];
+        [archiveArray addObject:eventEncodedObject];
+    }
+    NSUserDefaults *usrDefault = [NSUserDefaults standardUserDefaults];
+    [usrDefault setObject:archiveArray forKey:@"events"];
+}
+
++ (NSMutableArray *)extractEventsFromUsrDefaults {
+    NSMutableArray *events = [[NSMutableArray alloc] init];
+    NSUserDefaults *usrDefault = [NSUserDefaults standardUserDefaults];
+    NSArray *dataArray = [[NSArray alloc] initWithArray:[usrDefault objectForKey:@"events"]];
+    for (NSData *dataObject in dataArray) {
+        MyEventInfo *eventDecodedObject = [NSKeyedUnarchiver unarchiveObjectWithData:dataObject];
+        [events addObject:eventDecodedObject];
+    }
+    return events;
 }
 
 //+ (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic

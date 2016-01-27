@@ -25,7 +25,7 @@
 @end
 
 @implementation MyMapViewController {
-    NSMutableArray *events;
+    NSArray *events;
     MyEventInfo *filterResult;
 }
 
@@ -61,12 +61,12 @@
     }
 #endif
     
-    // init notification
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(useNotificationWithString:)
-     name:@"didFinishFetchEvents"
-     object:nil];
+//    // init notification
+//    [[NSNotificationCenter defaultCenter]
+//     addObserver:self
+//     selector:@selector(useNotificationWithString:)
+//     name:@"didFinishFetchEvents"
+//     object:nil];
 }
 
 - (BOOL)didTapMyLocationButtonForMapView:(GMSMapView *)mapView {
@@ -90,16 +90,19 @@
     [HideAndShowTabbarFunction showTabBar:self.tabBarController];
     // load events
     [self.mapView clear];
-    events = [MyDataManager fetchEvent];
+//    events = [MyDataManager fetchEvent];
+    events = [MyDataManager extractEventsFromUsrDefaults];
+    [self setupMarkers];
+    [self drawMarkers];
 }
 
-- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
-{
-    if ([notification.name isEqualToString:@"didFinishFetchEvents"]) {
-        [self setupMarkers];
-        [self drawMarkers];
-    }
-}
+//- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
+//{
+//    if ([notification.name isEqualToString:@"didFinishFetchEvents"]) {
+//        [self setupMarkers];
+//        [self drawMarkers];
+//    }
+//}
 
 - (void)setupMarkers {
     self.markers = [[NSMutableSet alloc] init];
@@ -119,26 +122,26 @@
     }
 }
 
-- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker {
-    UIView *infoWindow = [[UIView alloc] init];
-    infoWindow.frame = CGRectMake(0, 0, 200, 70);
-    infoWindow.backgroundColor = [UIColor whiteColor];
-    
-//    UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"infoWindow"]];
-//    [infoWindow addSubview:backgroundImage];
-    
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.frame = CGRectMake(14, 11, 175, 16);
-    [infoWindow addSubview:titleLabel];
-    titleLabel.text = marker.title;
-    
-    UILabel *snippetLabel = [[UILabel alloc] init];
-    snippetLabel.frame = CGRectMake(14, 42, 175, 16);
-    [infoWindow addSubview:snippetLabel];
-    snippetLabel.text = marker.snippet;
-    
-    return infoWindow;
-}
+//- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker {
+//    UIView *infoWindow = [[UIView alloc] init];
+//    infoWindow.frame = CGRectMake(0, 0, 200, 70);
+//    infoWindow.backgroundColor = [UIColor whiteColor];
+//    
+////    UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"infoWindow"]];
+////    [infoWindow addSubview:backgroundImage];
+//    
+//    UILabel *titleLabel = [[UILabel alloc] init];
+//    titleLabel.frame = CGRectMake(14, 11, 175, 16);
+//    [infoWindow addSubview:titleLabel];
+//    titleLabel.text = marker.title;
+//    
+//    UILabel *snippetLabel = [[UILabel alloc] init];
+//    snippetLabel.frame = CGRectMake(14, 42, 175, 16);
+//    [infoWindow addSubview:snippetLabel];
+//    snippetLabel.text = marker.snippet;
+//    
+//    return infoWindow;
+//}
 
 - (void)filterEvensToMarker:(NSString *)searchText {
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"nameOfEvent == %@", searchText];

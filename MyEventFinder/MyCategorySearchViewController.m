@@ -24,7 +24,7 @@
 @end
 
 @implementation MyCategorySearchViewController {
-    NSMutableArray *events;
+    NSArray *events;
     NSArray *searchResults;
     NSArray *tagEvents;
 }
@@ -48,14 +48,18 @@
     
     self.usrDefault = [NSUserDefaults standardUserDefaults];
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(useNotificationWithString:)
-     name:@"didFinishFetchEvents"
-     object:nil];
+//    [[NSNotificationCenter defaultCenter]
+//     addObserver:self
+//     selector:@selector(useNotificationWithString:)
+//     name:@"didFinishFetchEvents"
+//     object:nil];
     
     events = [[NSMutableArray alloc] init];
-    events = [MyDataManager fetchEvent];
+//    events = [MyDataManager fetchEvent];
+    events = [MyDataManager extractEventsFromUsrDefaults];
+    tagEvents = [[NSArray alloc] init];
+    [self filterEvensToTag];
+    [self.myTableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,14 +76,14 @@
     tagEvents = [events filteredArrayUsingPredicate:resultPredicate];
 }
 
-- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
-{
-    if ([notification.name isEqual:@"didFinishFetchEvents"]) {
-        tagEvents = [[NSArray alloc] init];
-        [self filterEvensToTag];
-        [self.myTableView reloadData];
-    }
-}
+//- (void)useNotificationWithString:(NSNotification *)notification //use notification method and logic
+//{
+//    if ([notification.name isEqual:@"didFinishFetchEvents"]) {
+//        tagEvents = [[NSArray alloc] init];
+//        [self filterEvensToTag];
+//        [self.myTableView reloadData];
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
