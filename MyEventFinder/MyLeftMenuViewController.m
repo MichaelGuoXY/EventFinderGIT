@@ -159,7 +159,7 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     
-    usrProfileImage = UIImageJPEGRepresentation(chosenImage, 1);
+    usrProfileImage = UIImageJPEGRepresentation(chosenImage, 0.1);
 //    self.user.usrProfileImage = [usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     [usrDefault setObject:[usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength] forKey:@"usrProfileImage"];
     [MyDataManager updateUser:[usrDefault objectForKey:@"username"] usrProfileImg:[usrProfileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];

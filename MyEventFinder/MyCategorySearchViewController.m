@@ -163,8 +163,19 @@
         
         cell.nameOfEvent.text = event.nameOfEvent;
         cell.timeOfPost.text = [MyHelpFunction parseTimeFromOrigin:event.postTime];
-        if (event.imageOfEvent != nil)
-            cell.imgviewOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+        if (event.imageOfEvent != nil) {
+            @try {
+                if ([[event.imageOfEvent objectAtIndex:0] containsString:@"http"]) {
+                    NSURL *url = [NSURL URLWithString:[event.imageOfEvent objectAtIndex:0]];
+                    NSData *data = [NSData dataWithContentsOfURL:url];
+                    UIImage *img = [[UIImage alloc] initWithData:data];
+                    cell.imgviewOfEvent.image = img;
+                } else {
+                    cell.imgviewOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+                }
+            }
+            @catch (NSException *exception){}
+        }
         cell.timeOfEvent.text = [[MyHelpFunction parseTimeFromOrigin:event.startingTime] stringByAppendingFormat:@" ~ %@",[MyHelpFunction parseTimeFromOrigin:event.endingTime]];
         cell.locationOfEvent.text = event.locationOfEvent;
         if (event.authorProfileImg != nil)

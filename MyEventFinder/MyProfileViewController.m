@@ -20,6 +20,7 @@
 
 @property NSUserDefaults *usrDefault;
 @property MyUserInfo *user;
+@property (weak, nonatomic) IBOutlet UILabel *saveProfileLabel;
 
 @end
 
@@ -97,6 +98,12 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
+        
+        cell.clipsToBounds = YES;
+        cell.layer.cornerRadius = 30;
+        cell.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+        cell.layer.borderWidth = 1.6;
+        
         switch (indexPath.row) {
             case 0:
                 cell.textLabel.text = @"Nickname";
@@ -135,6 +142,10 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
+        
+        cell.contentView.subviews[0].clipsToBounds = YES;
+        cell.contentView.subviews[0].layer.cornerRadius = 30;
+        
         return cell;
     }
     return nil;

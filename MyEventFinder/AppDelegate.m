@@ -18,6 +18,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [GMSServices provideAPIKey:@"AIzaSyD6VwUA46rDOPemWVQYspoAbj94pETCneg"];
+//    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1
+//                                                                                                    identityPoolId:CognitoPoolID];
+//    
+//    AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1
+//                                                                         credentialsProvider:credentialsProvider];
+//    
+//    AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
     // Override point for customization after application launch.
     return YES;
 }

@@ -135,7 +135,22 @@
 //    }
     
     cell.lNameOfEvent.text = event.nameOfEvent;
-    cell.imageOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+    
+    if (event.imageOfEvent != nil) {
+        @try {
+            if ([[event.imageOfEvent objectAtIndex:0] containsString:@"http"]) {
+                NSURL *url = [NSURL URLWithString:[event.imageOfEvent objectAtIndex:0]];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                UIImage *img = [[UIImage alloc] initWithData:data];
+                cell.imageOfEvent.image = img;
+            } else {
+                cell.imageOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+            }
+        }
+        @catch (NSException *exception){}
+    }
+
+//    cell.imageOfEvent.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:[event.imageOfEvent objectAtIndex:0] options:NSDataBase64DecodingIgnoreUnknownCharacters]];
     cell.lTimeOfEvent.text = [MyHelpFunction parseTimeFromOrigin:event.startingTime];
     cell.lLocationOfEvent.text = event.locationOfEvent;
     cell.lDateOfEvent.text = [MyHelpFunction parseTimeFromOrigin:event.endingTime];

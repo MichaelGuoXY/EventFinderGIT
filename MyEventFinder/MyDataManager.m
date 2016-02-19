@@ -12,7 +12,11 @@
 #import "MyUserInfo.h"
 #import "MyHelpFunction.h"
 
-@implementation MyDataManager
+#define FIREBASEURL @"https://event-finder-test.firebaseio.com"
+
+@implementation MyDataManager {
+    
+}
 
 + (void)saveEvent:(MyEventInfo *) event withUIViewController:(UIViewController *) thisVC {
     /*
@@ -54,7 +58,7 @@
                                 @"numberOfViewed" : @0
                                 };
     // Create a reference to a Firebase database URL
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *eventRef = [myRootRef childByAppendingPath:@"events"];
     Firebase *timestampRef = [eventRef childByAutoId];
     @try {
@@ -82,7 +86,7 @@
 }
 
 + (NSMutableArray *)fetchEvent{
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *eventRef = [myRootRef childByAppendingPath:@"events"];
     NSMutableArray *events = [[NSMutableArray alloc] init];
     [eventRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -114,7 +118,6 @@
                 // dictionary
                 if ([event_dict objectForKey:@"participantsOfEvent"] != nil)
                     event.participantsOfEvent = [event_dict objectForKey:@"participantsOfEvent"];
-                
                 [events addObject:event];
             }
             [self postNotificationFinishFetchEvents];
@@ -125,7 +128,7 @@
 
 + (void)hasViewedThisEvent:(MyEventInfo *)event {
     // Create a reference to a Firebase database URL
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *eventRef = [myRootRef childByAppendingPath:@"events"];
     FQuery *nameRef = [[eventRef queryOrderedByChild:@"nameOfEvent"] queryEqualToValue:event.nameOfEvent];
     [nameRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -169,7 +172,7 @@
                                 @"interests" : user.interests
                                 };
     // Create a reference to a Firebase database URL
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
     Firebase *timestampRef = [userRef childByAutoId];
     [timestampRef setValue: usrDict];
@@ -177,7 +180,7 @@
 }
 
 + (MyUserInfo *)fetchUser:(NSString *) username{
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
     FQuery *nameRef = [[userRef queryOrderedByChild:@"username"] queryEqualToValue:username];
     MyUserInfo *user = [MyUserInfo new];
@@ -216,7 +219,7 @@
                                 @"myAttendanceNumber" : user.myAttendanceNumber,
                                 @"interests" : user.interests
                                 };
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
     FQuery *nameRef = [[userRef queryOrderedByChild:@"username"] queryEqualToValue:user.username];
     
@@ -231,7 +234,7 @@
 }
 
 + (void)updateUser:(NSString *) username postsNumber:(NSNumber *) myPostsNumber {
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
     FQuery *nameRef = [[userRef queryOrderedByChild:@"username"] queryEqualToValue:username];
     
@@ -245,7 +248,7 @@
 }
 
 + (void)updateUser:(NSString *) username usrProfileImg:(NSString *) usrProfileImg {
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *userRef = [myRootRef childByAppendingPath:@"users"];
     FQuery *nameRef = [[userRef queryOrderedByChild:@"username"] queryEqualToValue:username];
     
@@ -263,7 +266,7 @@
                                 @"usrProfileImage" : user.usrProfileImage,
                                 };
     // Create a reference to a Firebase database URL
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *eventRef = [myRootRef childByAppendingPath:@"events"];
     FQuery *nameRef = [[eventRef queryOrderedByChild:@"nameOfEvent"] queryEqualToValue:event.nameOfEvent];
     [nameRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -277,7 +280,7 @@
 
 + (void)removeParticipantFromEvent:(MyEventInfo *)event withUser:(MyUserInfo *)user {
     // Create a reference to a Firebase database URL
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://event-finder.firebaseio.com"];
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:FIREBASEURL];
     Firebase *eventRef = [myRootRef childByAppendingPath:@"events"];
     FQuery *nameRef = [[eventRef queryOrderedByChild:@"nameOfEvent"] queryEqualToValue:event.nameOfEvent];
     

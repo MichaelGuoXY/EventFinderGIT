@@ -34,7 +34,7 @@
     if (self.chosenImages != nil) {
         NSMutableArray *imageArray = [[NSMutableArray alloc] init];
         for (UIImage *image in self.chosenImages) {
-            NSData *imageData = UIImageJPEGRepresentation(image, 1);
+            NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
             NSString *imageString = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
             [imageArray addObject:imageString];
         }

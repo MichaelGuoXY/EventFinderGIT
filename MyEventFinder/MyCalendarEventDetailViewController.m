@@ -94,17 +94,29 @@
     CGRect workingFrame = self.imgviewOfEvent.frame;
     workingFrame.origin.x = 0;
     
-    for (NSString *imgString in _event.imageOfEvent) {
-        UIImage *imgOfEvent = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:imgString options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+    @try {
+        for (NSString *imgString in _event.imageOfEvent) {
+            UIImage *imgOfEvent = [UIImage alloc];
+            if ([[_event.imageOfEvent objectAtIndex:0] containsString:@"http"]) {
+                NSURL *url = [NSURL URLWithString:[_event.imageOfEvent objectAtIndex:0]];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                imgOfEvent = [[UIImage alloc] initWithData:data];
+                
+            } else {
+                imgOfEvent = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:imgString options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+            }
+            
+            UIImageView *imageview = [[UIImageView alloc] initWithImage:imgOfEvent];
+            [imageview setContentMode:UIViewContentModeScaleAspectFill];
+            imageview.frame = workingFrame;
+            
+            [_imgviewOfEvent addSubview:imageview];
+            
+            workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
+        }
         
-        UIImageView *imageview = [[UIImageView alloc] initWithImage:imgOfEvent];
-        [imageview setContentMode:UIViewContentModeScaleAspectFill];
-        imageview.frame = workingFrame;
-        
-        [_imgviewOfEvent addSubview:imageview];
-        
-        workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
     }
+    @catch (NSException *exception){}
     
     [_imgviewOfEvent setPagingEnabled:YES];
     [_imgviewOfEvent setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];

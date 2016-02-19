@@ -23,6 +23,7 @@
 @interface MyNewPostViewContoller ()
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property NSUserDefaults *usrDefault;
+@property (weak, nonatomic) IBOutlet UILabel *postThisEventLabel;
 @property MyUserInfo *user;
 @end
 
@@ -82,6 +83,10 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
+        cell.clipsToBounds = YES;
+        cell.layer.cornerRadius = 20;
+        cell.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+        cell.layer.borderWidth = 1.2;
         switch (indexPath.row) {
             case 0:
                 cell.textLabel.text = @"Event Name";
@@ -136,6 +141,10 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
+        
+        cell.contentView.subviews[0].clipsToBounds = YES;
+        cell.contentView.subviews[0].layer.cornerRadius = 20;
+        
         return cell;
     }
     return nil;

@@ -109,7 +109,7 @@
     for (MyEventInfo *event in events) {
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.title = event.nameOfEvent;
-        marker.snippet = [event.locationOfEvent stringByAppendingString:@"TAP"];
+        marker.snippet = event.locationOfEvent;
         marker.appearAnimation = kGMSMarkerAnimationPop;
         marker.position = CLLocationCoordinate2DMake([event.latOfEvent doubleValue], [event.lngOfEvent doubleValue]);
         [self.markers addObject:marker];
